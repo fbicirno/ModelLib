@@ -18,3 +18,5 @@
 *.mdx
 *.mdl
 *.obj
+*.tlog
+*.log
