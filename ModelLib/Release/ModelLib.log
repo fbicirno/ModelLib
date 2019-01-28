@@ -1,97 +1,18 @@
-﻿生成启动时间为 2019/1/28 18:07:41。
-     1>项目“D:\ModelLib\ModelLib\ModelLib.vcxproj”在节点 2 上(Build 个目标)。
+﻿生成启动时间为 2019/1/28 22:08:36。
+     1>项目“D:\ModelLib_git\ModelLib\ModelLib.vcxproj”在节点 2 上(Build 个目标)。
      1>ClCompile:
-         D:\vs2013\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /Od /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _LIB /D _WINDOWS_MBCS /Gm- /EHsc /MT /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp ModelEditor\Buffer2.cpp ModelEditor\Camera.cpp ModelEditor\Common.cpp ModelEditor\ConstantTable.cpp ModelEditor\DataInStream.cpp ModelEditor\DataOutStream.cpp ModelEditor\Error.cpp ModelEditor\FileLoader.cpp ModelEditor\FlashingGeoset.cpp ModelEditor\Font.cpp ModelEditor\Graphics.cpp ModelEditor\Icon.cpp ModelEditor\Interpolator.cpp ModelEditor\Jpeg2.cpp ModelEditor\Keyboard.cpp ModelEditor\Mesh.cpp ModelEditor\Model.cpp ModelEditor\ModelAttachment.cpp ModelEditor\ModelBase.cpp ModelEditor\ModelBone.cpp ModelEditor\ModelBuilder.cpp ModelEditor\ModelCamera.cpp ModelEditor\ModelCollisionShape.cpp ModelEditor\ModelEventObject.cpp ModelEditor\ModelGeoset.cpp ModelEditor\ModelGeosetAnimation.cpp ModelEditor\ModelGeosetFace.cpp ModelEditor\ModelGeosetGroup.cpp ModelEditor\ModelGeosetVertex.cpp ModelEditor\ModelGlobalSequence.cpp ModelEditor\ModelHelper.cpp ModelEditor\ModelHistory.cpp ModelEditor\ModelImporter.cpp ModelEditor\ModelLight.cpp ModelEditor\ModelLoader.cpp ModelEditor\ModelLoaderMdl.cpp ModelEditor\ModelLoaderMdx.cpp ModelEditor\ModelMaterial.cpp ModelEditor\ModelMaterialLayer.cpp ModelEditor\ModelModel.cpp ModelEditor\ModelParticleEmitter.cpp ModelEditor\ModelParticleEmitter2.cpp ModelEditor\ModelRibbonEmitter.cpp ModelEditor\ModelSequence.cpp ModelEditor\ModelTexture.cpp ModelEditor\ModelTextureAnimation.cpp ModelEditor\Mouse.cpp ModelEditor\Mpq.cpp ModelEditor\NodeIcon.cpp ModelEditor\ObjectIdManager.cpp ModelEditor\Particle.cpp ModelEditor\ParticleManager.cpp ModelEditor\PixelShader.cpp ModelEditor\Properties.cpp ModelEditor\Random.cpp ModelEditor\Register.cpp ModelEditor\ResourceLoader.cpp ModelEditor\Ribbon.cpp ModelEditor\RibbonManager.cpp ModelEditor\TeamColor.cpp ModelEditor\TemporaryFile.cpp ModelEditor\Texture2.cpp ModelEditor\TextureLoader.cpp ModelEditor\TextureLoaderBasic.cpp ModelEditor\TextureLoaderBlp.cpp ModelEditor\TextureLoaderPcx.cpp ModelEditor\TextureManager.cpp ModelEditor\Timer.cpp ModelEditor\TokenInStream.cpp ModelEditor\TokenOutStream.cpp ModelEditor\VertexShader.cpp
+         D:\vs2013\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /Od /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _LIB /D _WINDOWS_MBCS /Gm- /EHsc /MT /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp
          main.cpp
-     1>main.cpp(80): warning C4244: “初始化”: 从“lua_Integer”转换到“int”，可能丢失数据
-     1>main.cpp(97): warning C4244: “初始化”: 从“lua_Integer”转换到“int”，可能丢失数据
-     1>main.cpp(131): warning C4244: “初始化”: 从“lua_Integer”转换到“int”，可能丢失数据
-     1>main.cpp(150): warning C4244: “参数”: 从“FLOAT”转换到“lua_Integer”，可能丢失数据
-     1>main.cpp(153): warning C4244: “参数”: 从“FLOAT”转换到“lua_Integer”，可能丢失数据
-     1>main.cpp(140): warning C4101: “buffer”: 未引用的局部变量
-         Buffer2.cpp
-         Camera.cpp
-         Common.cpp
-         ConstantTable.cpp
-         DataInStream.cpp
-         DataOutStream.cpp
-         Error.cpp
-         FileLoader.cpp
-     1>ModelEditor\FileLoader.cpp(84): warning C4244: “=”: 从“std::streamoff”转换到“INT”，可能丢失数据
-         FlashingGeoset.cpp
-         Font.cpp
-     1>ModelEditor\Font.cpp(65): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 D:\vs2013\VC\include\string.h(112) : 参见“strcpy”的声明
-         Graphics.cpp
-         Icon.cpp
-         Interpolator.cpp
-         Jpeg2.cpp
-         Keyboard.cpp
-         Mesh.cpp
-         Model.cpp
-         ModelAttachment.cpp
-         ModelBase.cpp
-         正在编译...
-         ModelBone.cpp
-         ModelBuilder.cpp
-         ModelCamera.cpp
-         ModelCollisionShape.cpp
-         ModelEventObject.cpp
-         ModelGeoset.cpp
-         ModelGeosetAnimation.cpp
-         ModelGeosetFace.cpp
-         ModelGeosetGroup.cpp
-         ModelGeosetVertex.cpp
-         ModelGlobalSequence.cpp
-         ModelHelper.cpp
-         ModelHistory.cpp
-         ModelImporter.cpp
-         ModelLight.cpp
-         ModelLoader.cpp
-         ModelLoaderMdl.cpp
-         ModelLoaderMdx.cpp
-         ModelMaterial.cpp
-         ModelMaterialLayer.cpp
-         正在编译...
-         ModelModel.cpp
-         ModelParticleEmitter.cpp
-         ModelParticleEmitter2.cpp
-         ModelRibbonEmitter.cpp
-         ModelSequence.cpp
-         ModelTexture.cpp
-         ModelTextureAnimation.cpp
-         Mouse.cpp
-         Mpq.cpp
-         NodeIcon.cpp
-         ObjectIdManager.cpp
-         Particle.cpp
-         ParticleManager.cpp
-         PixelShader.cpp
-         Properties.cpp
-         Random.cpp
-         Register.cpp
-         ResourceLoader.cpp
-         Ribbon.cpp
-         RibbonManager.cpp
-         正在编译...
-         TeamColor.cpp
-         TemporaryFile.cpp
-         Texture2.cpp
-         TextureLoader.cpp
-         TextureLoaderBasic.cpp
-         TextureLoaderBlp.cpp
-         TextureLoaderPcx.cpp
-         TextureManager.cpp
-         Timer.cpp
-         TokenInStream.cpp
-         TokenOutStream.cpp
-         VertexShader.cpp
-         D:\vs2013\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /Od /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _LIB /D _WINDOWS_MBCS /Gm- /EHsc /MT /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt ModelEditor\GraphicsWindow.cpp
-         GraphicsWindow.cpp
-     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(1193,5): warning MSB8012: TargetPath(D:\ModelLib\Release\ModelLib.exe) does not match the Linker's OutputFile property value (D:\ModelLib\ModelEditor\ModelEditor.exe). This may cause your project to build incorrectly. To correct this, please make sure that $(OutDir), $(TargetName) and $(TargetExt) property values match the value specified in %(Link.OutputFile).
+     1>main.cpp(81): warning C4244: “初始化”: 从“lua_Integer”转换到“int”，可能丢失数据
+     1>main.cpp(98): warning C4244: “初始化”: 从“lua_Integer”转换到“int”，可能丢失数据
+     1>main.cpp(132): warning C4244: “初始化”: 从“lua_Integer”转换到“int”，可能丢失数据
+     1>main.cpp(151): warning C4244: “参数”: 从“FLOAT”转换到“lua_Integer”，可能丢失数据
+     1>main.cpp(154): warning C4244: “参数”: 从“FLOAT”转换到“lua_Integer”，可能丢失数据
+     1>main.cpp(141): warning C4101: “buffer”: 未引用的局部变量
+     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(1193,5): warning MSB8012: TargetPath(D:\ModelLib_git\Release\ModelLib.exe) does not match the Linker's OutputFile property value (D:\ModelLib_git\ModelEditor\ModelEditor.exe). This may cause your project to build incorrectly. To correct this, please make sure that $(OutDir), $(TargetName) and $(TargetExt) property values match the value specified in %(Link.OutputFile).
      1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(1195,5): warning MSB8012: TargetName(ModelLib) does not match the Linker's OutputFile property value (ModelEditor). This may cause your project to build incorrectly. To correct this, please make sure that $(OutDir), $(TargetName) and $(TargetExt) property values match the value specified in %(Link.OutputFile).
        Link:
-         D:\vs2013\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"..\ModelEditor\ModelEditor.exe" /INCREMENTAL:NO /NOLOGO d3d9.lib d3dx9.lib dinput8.lib jpeg.lib stormlibstatic.lib winmm.lib dxguid.lib odbc32.lib odbccp32.lib comctl32.lib luacore.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\ModelLib\Release\ModelLib.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\ModelLib\Release\ModelLib.lib" /MACHINE:X86 /SAFESEH /SAFESEH:NO Release\main.obj
+         D:\vs2013\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"..\ModelEditor\ModelEditor.exe" /INCREMENTAL:NO /NOLOGO d3d9.lib d3dx9.lib dinput8.lib jpeg.lib stormlibstatic.lib winmm.lib dxguid.lib odbc32.lib odbccp32.lib comctl32.lib luacore.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\ModelLib_git\Release\ModelLib.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\ModelLib_git\Release\ModelLib.lib" /MACHINE:X86 /SAFESEH /SAFESEH:NO Release\main.obj
          Release\Buffer2.obj
          Release\Camera.obj
          Release\Common.obj
@@ -164,87 +85,87 @@
          Release\TokenOutStream.obj
          Release\VertexShader.obj
          Release\GraphicsWindow.obj
-            正在创建库 D:\ModelLib\Release\ModelLib.lib 和对象 D:\ModelLib\Release\ModelLib.exp
+            正在创建库 D:\ModelLib_git\Release\ModelLib.lib 和对象 D:\ModelLib_git\Release\ModelLib.exp
          正在生成代码
-     1>d:\modellib\modellib\main.cpp(232): warning C4715: “InitEditor”: 不是所有的控件路径都返回值
+     1>d:\modellib_git\modellib\main.cpp(260): warning C4715: “InitEditor”: 不是所有的控件路径都返回值
          已完成代码的生成
-     1>jpeg.lib(jdapistd.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jdapistd.obj)”或在“D:\ModelLib\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-     1>jpeg.lib(jdapimin.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jdapimin.obj)”或在“D:\ModelLib\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-     1>jpeg.lib(jcparam.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jcparam.obj)”或在“D:\ModelLib\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-     1>jpeg.lib(jcapimin.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jcapimin.obj)”或在“D:\ModelLib\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-     1>jpeg.lib(jdmarker.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jdmarker.obj)”或在“D:\ModelLib\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-     1>jpeg.lib(jcapistd.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jcapistd.obj)”或在“D:\ModelLib\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-     1>jpeg.lib(jerror.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jerror.obj)”或在“D:\ModelLib\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-     1>jpeg.lib(jdmaster.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jdmaster.obj)”或在“D:\ModelLib\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-     1>jpeg.lib(jcomapi.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jcomapi.obj)”或在“D:\ModelLib\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-     1>jpeg.lib(jdinput.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jdinput.obj)”或在“D:\ModelLib\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-     1>jpeg.lib(jmemmgr.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jmemmgr.obj)”或在“D:\ModelLib\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-     1>jpeg.lib(jutils.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jutils.obj)”或在“D:\ModelLib\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-     1>jpeg.lib(jcmarker.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jcmarker.obj)”或在“D:\ModelLib\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-     1>jpeg.lib(jcinit.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jcinit.obj)”或在“D:\ModelLib\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-     1>jpeg.lib(jdhuff.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jdhuff.obj)”或在“D:\ModelLib\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-     1>jpeg.lib(jquant1.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jquant1.obj)”或在“D:\ModelLib\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-     1>jpeg.lib(jddctmgr.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jddctmgr.obj)”或在“D:\ModelLib\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-     1>jpeg.lib(jdsample.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jdsample.obj)”或在“D:\ModelLib\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-     1>jpeg.lib(jdarith.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jdarith.obj)”或在“D:\ModelLib\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-     1>jpeg.lib(jdcolor.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jdcolor.obj)”或在“D:\ModelLib\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-     1>jpeg.lib(jdcoefct.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jdcoefct.obj)”或在“D:\ModelLib\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-     1>jpeg.lib(jquant2.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jquant2.obj)”或在“D:\ModelLib\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-     1>jpeg.lib(jdmerge.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jdmerge.obj)”或在“D:\ModelLib\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-     1>jpeg.lib(jdmainct.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jdmainct.obj)”或在“D:\ModelLib\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-     1>jpeg.lib(jdpostct.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jdpostct.obj)”或在“D:\ModelLib\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-     1>jpeg.lib(jmemnobs.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jmemnobs.obj)”或在“D:\ModelLib\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-     1>jpeg.lib(jccolor.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jccolor.obj)”或在“D:\ModelLib\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-     1>jpeg.lib(jcarith.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jcarith.obj)”或在“D:\ModelLib\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-     1>jpeg.lib(jcmainct.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jcmainct.obj)”或在“D:\ModelLib\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-     1>jpeg.lib(jcmaster.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jcmaster.obj)”或在“D:\ModelLib\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-     1>jpeg.lib(jccoefct.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jccoefct.obj)”或在“D:\ModelLib\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-     1>jpeg.lib(jcprepct.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jcprepct.obj)”或在“D:\ModelLib\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-     1>jpeg.lib(jcdctmgr.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jcdctmgr.obj)”或在“D:\ModelLib\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-     1>jpeg.lib(jcsample.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jcsample.obj)”或在“D:\ModelLib\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-     1>jpeg.lib(jchuff.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jchuff.obj)”或在“D:\ModelLib\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-     1>jpeg.lib(jidctint.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jidctint.obj)”或在“D:\ModelLib\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-     1>jpeg.lib(jidctflt.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jidctflt.obj)”或在“D:\ModelLib\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-     1>jpeg.lib(jidctfst.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jidctfst.obj)”或在“D:\ModelLib\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-     1>jpeg.lib(jaricom.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jaricom.obj)”或在“D:\ModelLib\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-     1>jpeg.lib(jfdctint.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jfdctint.obj)”或在“D:\ModelLib\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-     1>jpeg.lib(jfdctflt.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jfdctflt.obj)”或在“D:\ModelLib\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-     1>jpeg.lib(jfdctfst.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jfdctfst.obj)”或在“D:\ModelLib\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-     1>luacore.lib(lapi.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“luacore.lib(lapi.obj)”或在“D:\ModelLib\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-     1>luacore.lib(lauxlib.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“luacore.lib(lauxlib.obj)”或在“D:\ModelLib\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-     1>luacore.lib(linit.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“luacore.lib(linit.obj)”或在“D:\ModelLib\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-     1>luacore.lib(ldebug.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“luacore.lib(ldebug.obj)”或在“D:\ModelLib\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-     1>luacore.lib(lvm.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“luacore.lib(lvm.obj)”或在“D:\ModelLib\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-     1>luacore.lib(ldump.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“luacore.lib(ldump.obj)”或在“D:\ModelLib\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-     1>luacore.lib(ltable.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“luacore.lib(ltable.obj)”或在“D:\ModelLib\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-     1>luacore.lib(lstring.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“luacore.lib(lstring.obj)”或在“D:\ModelLib\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-     1>luacore.lib(lstate.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“luacore.lib(lstate.obj)”或在“D:\ModelLib\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-     1>luacore.lib(lfunc.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“luacore.lib(lfunc.obj)”或在“D:\ModelLib\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-     1>luacore.lib(lobject.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“luacore.lib(lobject.obj)”或在“D:\ModelLib\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-     1>luacore.lib(ldo.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“luacore.lib(ldo.obj)”或在“D:\ModelLib\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-     1>luacore.lib(lgc.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“luacore.lib(lgc.obj)”或在“D:\ModelLib\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-     1>luacore.lib(lzio.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“luacore.lib(lzio.obj)”或在“D:\ModelLib\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-     1>luacore.lib(ltm.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“luacore.lib(ltm.obj)”或在“D:\ModelLib\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-     1>luacore.lib(ldblib.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“luacore.lib(ldblib.obj)”或在“D:\ModelLib\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-     1>luacore.lib(lutf8lib.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“luacore.lib(lutf8lib.obj)”或在“D:\ModelLib\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-     1>luacore.lib(lcorolib.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“luacore.lib(lcorolib.obj)”或在“D:\ModelLib\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-     1>luacore.lib(lmathlib.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“luacore.lib(lmathlib.obj)”或在“D:\ModelLib\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-     1>luacore.lib(lstrlib.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“luacore.lib(lstrlib.obj)”或在“D:\ModelLib\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-     1>luacore.lib(lbaselib.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“luacore.lib(lbaselib.obj)”或在“D:\ModelLib\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-     1>luacore.lib(liolib.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“luacore.lib(liolib.obj)”或在“D:\ModelLib\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-     1>luacore.lib(loslib.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“luacore.lib(loslib.obj)”或在“D:\ModelLib\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-     1>luacore.lib(loadlib.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“luacore.lib(loadlib.obj)”或在“D:\ModelLib\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-     1>luacore.lib(ltablib.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“luacore.lib(ltablib.obj)”或在“D:\ModelLib\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-     1>luacore.lib(lopcodes.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“luacore.lib(lopcodes.obj)”或在“D:\ModelLib\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-     1>luacore.lib(lmem.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“luacore.lib(lmem.obj)”或在“D:\ModelLib\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-     1>luacore.lib(llex.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“luacore.lib(llex.obj)”或在“D:\ModelLib\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-     1>luacore.lib(lctype.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“luacore.lib(lctype.obj)”或在“D:\ModelLib\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-     1>luacore.lib(lparser.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“luacore.lib(lparser.obj)”或在“D:\ModelLib\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-     1>luacore.lib(lundump.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“luacore.lib(lundump.obj)”或在“D:\ModelLib\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-     1>luacore.lib(lcode.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“luacore.lib(lcode.obj)”或在“D:\ModelLib\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-         ModelLib.vcxproj -> D:\ModelLib\Release\ModelLib.exe
-     1>已完成生成项目“D:\ModelLib\ModelLib\ModelLib.vcxproj”(Build 个目标)的操作。
+     1>jpeg.lib(jdapistd.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jdapistd.obj)”或在“D:\ModelLib_git\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+     1>jpeg.lib(jdapimin.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jdapimin.obj)”或在“D:\ModelLib_git\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+     1>jpeg.lib(jcparam.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jcparam.obj)”或在“D:\ModelLib_git\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+     1>jpeg.lib(jcapimin.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jcapimin.obj)”或在“D:\ModelLib_git\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+     1>jpeg.lib(jdmarker.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jdmarker.obj)”或在“D:\ModelLib_git\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+     1>jpeg.lib(jcapistd.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jcapistd.obj)”或在“D:\ModelLib_git\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+     1>jpeg.lib(jerror.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jerror.obj)”或在“D:\ModelLib_git\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+     1>jpeg.lib(jdmaster.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jdmaster.obj)”或在“D:\ModelLib_git\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+     1>jpeg.lib(jcomapi.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jcomapi.obj)”或在“D:\ModelLib_git\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+     1>jpeg.lib(jdinput.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jdinput.obj)”或在“D:\ModelLib_git\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+     1>jpeg.lib(jmemmgr.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jmemmgr.obj)”或在“D:\ModelLib_git\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+     1>jpeg.lib(jutils.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jutils.obj)”或在“D:\ModelLib_git\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+     1>jpeg.lib(jcmarker.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jcmarker.obj)”或在“D:\ModelLib_git\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+     1>jpeg.lib(jcinit.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jcinit.obj)”或在“D:\ModelLib_git\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+     1>jpeg.lib(jdhuff.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jdhuff.obj)”或在“D:\ModelLib_git\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+     1>jpeg.lib(jquant1.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jquant1.obj)”或在“D:\ModelLib_git\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+     1>jpeg.lib(jddctmgr.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jddctmgr.obj)”或在“D:\ModelLib_git\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+     1>jpeg.lib(jdsample.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jdsample.obj)”或在“D:\ModelLib_git\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+     1>jpeg.lib(jdarith.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jdarith.obj)”或在“D:\ModelLib_git\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+     1>jpeg.lib(jdcolor.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jdcolor.obj)”或在“D:\ModelLib_git\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+     1>jpeg.lib(jdcoefct.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jdcoefct.obj)”或在“D:\ModelLib_git\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+     1>jpeg.lib(jquant2.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jquant2.obj)”或在“D:\ModelLib_git\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+     1>jpeg.lib(jdmerge.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jdmerge.obj)”或在“D:\ModelLib_git\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+     1>jpeg.lib(jdmainct.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jdmainct.obj)”或在“D:\ModelLib_git\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+     1>jpeg.lib(jdpostct.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jdpostct.obj)”或在“D:\ModelLib_git\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+     1>jpeg.lib(jmemnobs.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jmemnobs.obj)”或在“D:\ModelLib_git\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+     1>jpeg.lib(jccolor.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jccolor.obj)”或在“D:\ModelLib_git\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+     1>jpeg.lib(jcarith.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jcarith.obj)”或在“D:\ModelLib_git\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+     1>jpeg.lib(jcmainct.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jcmainct.obj)”或在“D:\ModelLib_git\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+     1>jpeg.lib(jcmaster.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jcmaster.obj)”或在“D:\ModelLib_git\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+     1>jpeg.lib(jccoefct.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jccoefct.obj)”或在“D:\ModelLib_git\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+     1>jpeg.lib(jcprepct.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jcprepct.obj)”或在“D:\ModelLib_git\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+     1>jpeg.lib(jcdctmgr.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jcdctmgr.obj)”或在“D:\ModelLib_git\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+     1>jpeg.lib(jcsample.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jcsample.obj)”或在“D:\ModelLib_git\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+     1>jpeg.lib(jchuff.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jchuff.obj)”或在“D:\ModelLib_git\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+     1>jpeg.lib(jidctint.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jidctint.obj)”或在“D:\ModelLib_git\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+     1>jpeg.lib(jidctflt.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jidctflt.obj)”或在“D:\ModelLib_git\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+     1>jpeg.lib(jidctfst.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jidctfst.obj)”或在“D:\ModelLib_git\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+     1>jpeg.lib(jaricom.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jaricom.obj)”或在“D:\ModelLib_git\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+     1>jpeg.lib(jfdctint.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jfdctint.obj)”或在“D:\ModelLib_git\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+     1>jpeg.lib(jfdctflt.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jfdctflt.obj)”或在“D:\ModelLib_git\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+     1>jpeg.lib(jfdctfst.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jfdctfst.obj)”或在“D:\ModelLib_git\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+     1>luacore.lib(lapi.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“luacore.lib(lapi.obj)”或在“D:\ModelLib_git\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+     1>luacore.lib(lauxlib.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“luacore.lib(lauxlib.obj)”或在“D:\ModelLib_git\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+     1>luacore.lib(linit.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“luacore.lib(linit.obj)”或在“D:\ModelLib_git\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+     1>luacore.lib(ldebug.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“luacore.lib(ldebug.obj)”或在“D:\ModelLib_git\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+     1>luacore.lib(lvm.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“luacore.lib(lvm.obj)”或在“D:\ModelLib_git\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+     1>luacore.lib(ldump.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“luacore.lib(ldump.obj)”或在“D:\ModelLib_git\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+     1>luacore.lib(ltable.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“luacore.lib(ltable.obj)”或在“D:\ModelLib_git\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+     1>luacore.lib(lstring.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“luacore.lib(lstring.obj)”或在“D:\ModelLib_git\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+     1>luacore.lib(lstate.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“luacore.lib(lstate.obj)”或在“D:\ModelLib_git\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+     1>luacore.lib(lfunc.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“luacore.lib(lfunc.obj)”或在“D:\ModelLib_git\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+     1>luacore.lib(lobject.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“luacore.lib(lobject.obj)”或在“D:\ModelLib_git\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+     1>luacore.lib(ldo.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“luacore.lib(ldo.obj)”或在“D:\ModelLib_git\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+     1>luacore.lib(lgc.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“luacore.lib(lgc.obj)”或在“D:\ModelLib_git\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+     1>luacore.lib(lzio.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“luacore.lib(lzio.obj)”或在“D:\ModelLib_git\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+     1>luacore.lib(ltm.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“luacore.lib(ltm.obj)”或在“D:\ModelLib_git\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+     1>luacore.lib(ldblib.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“luacore.lib(ldblib.obj)”或在“D:\ModelLib_git\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+     1>luacore.lib(lutf8lib.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“luacore.lib(lutf8lib.obj)”或在“D:\ModelLib_git\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+     1>luacore.lib(lcorolib.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“luacore.lib(lcorolib.obj)”或在“D:\ModelLib_git\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+     1>luacore.lib(lmathlib.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“luacore.lib(lmathlib.obj)”或在“D:\ModelLib_git\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+     1>luacore.lib(lstrlib.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“luacore.lib(lstrlib.obj)”或在“D:\ModelLib_git\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+     1>luacore.lib(lbaselib.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“luacore.lib(lbaselib.obj)”或在“D:\ModelLib_git\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+     1>luacore.lib(liolib.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“luacore.lib(liolib.obj)”或在“D:\ModelLib_git\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+     1>luacore.lib(loslib.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“luacore.lib(loslib.obj)”或在“D:\ModelLib_git\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+     1>luacore.lib(loadlib.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“luacore.lib(loadlib.obj)”或在“D:\ModelLib_git\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+     1>luacore.lib(ltablib.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“luacore.lib(ltablib.obj)”或在“D:\ModelLib_git\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+     1>luacore.lib(lopcodes.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“luacore.lib(lopcodes.obj)”或在“D:\ModelLib_git\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+     1>luacore.lib(lmem.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“luacore.lib(lmem.obj)”或在“D:\ModelLib_git\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+     1>luacore.lib(llex.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“luacore.lib(llex.obj)”或在“D:\ModelLib_git\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+     1>luacore.lib(lctype.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“luacore.lib(lctype.obj)”或在“D:\ModelLib_git\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+     1>luacore.lib(lparser.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“luacore.lib(lparser.obj)”或在“D:\ModelLib_git\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+     1>luacore.lib(lundump.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“luacore.lib(lundump.obj)”或在“D:\ModelLib_git\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+     1>luacore.lib(lcode.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“luacore.lib(lcode.obj)”或在“D:\ModelLib_git\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+         ModelLib.vcxproj -> D:\ModelLib_git\Release\ModelLib.exe
+     1>已完成生成项目“D:\ModelLib_git\ModelLib\ModelLib.vcxproj”(Build 个目标)的操作。
 
 生成成功。
 
-已用时间 00:01:00.20
+已用时间 00:00:12.08

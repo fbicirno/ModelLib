@@ -23,6 +23,8 @@ str:gsub('(.-)=(.-)\n',function (name,path)
     table.insert(model_list,{name = name,path = path})
 end)
 
+local s = {}
+
 for index,info in ipairs(model_list) do 
     local path = info.path
     local model = core.open_model(path)
@@ -38,16 +40,27 @@ for index,info in ipairs(model_list) do
     end 
     if model then 
         local list = core.load_animate(model)
+        local out_path = 'model\\' .. path:gsub('.+\\','')
         if list then 
+            s[#s + 1] = "['" .. info.name .. ']\n'
+            s[#s + 1] = 'path = [[' .. out_path .. ']]\n'
+            s[#s + 1] = 'animation = {\n'
             for i,data in ipairs(list) do 
-                for name,value in pairs(data) do 
-                    print(info.name,'index',i,name,value)
-                end  
+                s[#s + 1] = "   '".. data.name .. "' = {\n"
+                s[#s + 1] = '       index = ' .. i ..',\n'
+                s[#s + 1] = '       start = ' .. data.start ..',\n'
+                s[#s + 1] = '       end = ' .. data['end'] ..',\n'
+                s[#s + 1] = '   },\n'
             end 
+            s[#s + 1] = '}\n\n'
         end 
-        core.save_model(model,path)
+        core.load_mpq_file(path,out_path)
         core.close_model(model)
     end
 end 
+
+local file = io.open('ModelData.ini','w')
+file:write(table.concat(s))
+file:close()
 
 print('end')

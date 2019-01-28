@@ -66,6 +66,7 @@ int open_model(lua_State* L)
 		lua_pushnil(L);
 		return 1;
 	}
+	//model->CalculateBoundsRadius();
 	int id = (int)model;
 	model_addr_map[id] = model;
 	
@@ -158,7 +159,33 @@ int load_model_animate(lua_State* L)
 	return 1;
 }
 
+int load_mpq_file(lua_State* L)
+{
+	if (!lua_isstring(L, 1))
+		return 0;
+	if (!lua_isstring(L, 2))
+		return 0;
+	string path = lua_tostring(L, 1);
+	string path2 = lua_tostring(L, 2);
+	string out_path = Common.GetProgramDirectory() + "\\" + path2;
+	CreateDir(out_path);
 
+	BUFFER Buffer;
+
+	if (!FileLoader.Load(path, Buffer))
+	{
+		printf("save write error %s\n", path);
+		return 0;
+	}
+	if (!FileLoader.SaveToFile(out_path, Buffer))
+	{
+		printf("save write error %s\n", path);
+		return 0;
+	}
+
+
+	return 0;
+}
 
 int open(lua_State* L)
 {
@@ -176,6 +203,7 @@ int open(lua_State* L)
 				{ "close_model", close_model },
 				{ "load_animate", load_model_animate },
 				{ "save_model", save_model },
+				{ "load_mpq_file", load_mpq_file },
 				{ NULL, NULL },
 			};
 			luaL_setfuncs(L, func, 0);
