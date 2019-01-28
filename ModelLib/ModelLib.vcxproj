@@ -1,0 +1,325 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{05CCC80E-8F6A-4CBE-B1DB-EE18CCA66DF5}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>ModelLib</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(SolutionDir)ThirdParty\DxSdk\Include;$(SolutionDir)ThirdParty\jpeg\Include;$(SolutionDir)ThirdParty\stormlib\Include;$(SolutionDir)ThirdParty\lua\Include;$(SolutionDir)ModelLib\ModelEditor;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)ThirdParty\dxsdk\lib;$(SolutionDir)ThirdParty\jpeg\lib;$(SolutionDir)ThirdParty\stormlib\lib;$(SolutionDir)ThirdParty\lua\lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>Disabled</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_LIB;_WINDOWS%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>d3d9.lib;d3dx9.lib;dinput8.lib;jpeg.lib;stormlibstatic.lib;winmm.lib;dxguid.lib;odbc32.lib;odbccp32.lib;comctl32.lib;luacore.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalOptions>/SAFESEH:NO %(AdditionalOptions)</AdditionalOptions>
+      <OutputFile>..\ModelEditor\ModelEditor.exe</OutputFile>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="ModelEditor\AnimationWindow.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\Buffer2.cpp" />
+    <ClCompile Include="ModelEditor\Camera.cpp" />
+    <ClCompile Include="ModelEditor\CameraManagerWindow.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\Common.cpp" />
+    <ClCompile Include="ModelEditor\ConstantTable.cpp" />
+    <ClCompile Include="ModelEditor\DataInStream.cpp" />
+    <ClCompile Include="ModelEditor\DataOutStream.cpp" />
+    <ClCompile Include="ModelEditor\Error.cpp" />
+    <ClCompile Include="ModelEditor\FileLoader.cpp" />
+    <ClCompile Include="ModelEditor\FlashingGeoset.cpp" />
+    <ClCompile Include="ModelEditor\Font.cpp" />
+    <ClCompile Include="ModelEditor\GeosetAnimationManagerWindow.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\GeosetManagerWindow.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\GlobalSequenceManagerWindow.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\Graphics.cpp" />
+    <ClCompile Include="ModelEditor\GraphicsWindow.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\Icon.cpp" />
+    <ClCompile Include="ModelEditor\Interpolator.cpp" />
+    <ClCompile Include="ModelEditor\Jpeg2.cpp" />
+    <ClCompile Include="ModelEditor\Keyboard.cpp" />
+    <ClCompile Include="ModelEditor\MainWindow.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\ManagerWindow.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\MaterialManagerWindow.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\Mesh.cpp" />
+    <ClCompile Include="ModelEditor\Model.cpp" />
+    <ClCompile Include="ModelEditor\ModelAttachment.cpp" />
+    <ClCompile Include="ModelEditor\ModelBase.cpp" />
+    <ClCompile Include="ModelEditor\ModelBone.cpp" />
+    <ClCompile Include="ModelEditor\ModelBuilder.cpp" />
+    <ClCompile Include="ModelEditor\ModelCamera.cpp" />
+    <ClCompile Include="ModelEditor\ModelCollisionShape.cpp" />
+    <ClCompile Include="ModelEditor\ModelEventObject.cpp" />
+    <ClCompile Include="ModelEditor\ModelGeoset.cpp" />
+    <ClCompile Include="ModelEditor\ModelGeosetAnimation.cpp" />
+    <ClCompile Include="ModelEditor\ModelGeosetFace.cpp" />
+    <ClCompile Include="ModelEditor\ModelGeosetGroup.cpp" />
+    <ClCompile Include="ModelEditor\ModelGeosetVertex.cpp" />
+    <ClCompile Include="ModelEditor\ModelGlobalSequence.cpp" />
+    <ClCompile Include="ModelEditor\ModelHelper.cpp" />
+    <ClCompile Include="ModelEditor\ModelHistory.cpp" />
+    <ClCompile Include="ModelEditor\ModelImporter.cpp" />
+    <ClCompile Include="ModelEditor\ModelLight.cpp" />
+    <ClCompile Include="ModelEditor\ModelLoader.cpp" />
+    <ClCompile Include="ModelEditor\ModelLoaderMdl.cpp" />
+    <ClCompile Include="ModelEditor\ModelLoaderMdx.cpp" />
+    <ClCompile Include="ModelEditor\ModelMaterial.cpp" />
+    <ClCompile Include="ModelEditor\ModelMaterialLayer.cpp" />
+    <ClCompile Include="ModelEditor\ModelModel.cpp" />
+    <ClCompile Include="ModelEditor\ModelParticleEmitter.cpp" />
+    <ClCompile Include="ModelEditor\ModelParticleEmitter2.cpp" />
+    <ClCompile Include="ModelEditor\ModelRibbonEmitter.cpp" />
+    <ClCompile Include="ModelEditor\ModelSequence.cpp" />
+    <ClCompile Include="ModelEditor\ModelTexture.cpp" />
+    <ClCompile Include="ModelEditor\ModelTextureAnimation.cpp" />
+    <ClCompile Include="ModelEditor\Mouse.cpp" />
+    <ClCompile Include="ModelEditor\Mpq.cpp" />
+    <ClCompile Include="ModelEditor\NodeIcon.cpp" />
+    <ClCompile Include="ModelEditor\NodeManagerWindow.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\ObjectIdManager.cpp" />
+    <ClCompile Include="ModelEditor\Particle.cpp" />
+    <ClCompile Include="ModelEditor\ParticleManager.cpp" />
+    <ClCompile Include="ModelEditor\PixelShader.cpp" />
+    <ClCompile Include="ModelEditor\Properties.cpp" />
+    <ClCompile Include="ModelEditor\Random.cpp" />
+    <ClCompile Include="ModelEditor\Register.cpp" />
+    <ClCompile Include="ModelEditor\ResourceLoader.cpp" />
+    <ClCompile Include="ModelEditor\Ribbon.cpp" />
+    <ClCompile Include="ModelEditor\RibbonManager.cpp" />
+    <ClCompile Include="ModelEditor\SequenceManagerWindow.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\TeamColor.cpp" />
+    <ClCompile Include="ModelEditor\TemporaryFile.cpp" />
+    <ClCompile Include="ModelEditor\Texture2.cpp" />
+    <ClCompile Include="ModelEditor\TextureAnimationManagerWindow.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\TextureLoader.cpp" />
+    <ClCompile Include="ModelEditor\TextureLoaderBasic.cpp" />
+    <ClCompile Include="ModelEditor\TextureLoaderBlp.cpp" />
+    <ClCompile Include="ModelEditor\TextureLoaderPcx.cpp" />
+    <ClCompile Include="ModelEditor\TextureManager.cpp" />
+    <ClCompile Include="ModelEditor\TextureManagerWindow.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\Timer.cpp" />
+    <ClCompile Include="ModelEditor\TokenInStream.cpp" />
+    <ClCompile Include="ModelEditor\TokenOutStream.cpp" />
+    <ClCompile Include="ModelEditor\VertexShader.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ModelEditor\AnimationWindow.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\Buffer2.h" />
+    <ClInclude Include="ModelEditor\Camera.h" />
+    <ClInclude Include="ModelEditor\CameraManagerWindow.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\Common.h" />
+    <ClInclude Include="ModelEditor\Constants.h" />
+    <ClInclude Include="ModelEditor\ConstantTable.h" />
+    <ClInclude Include="ModelEditor\Container.h" />
+    <ClInclude Include="ModelEditor\DataInStream.h" />
+    <ClInclude Include="ModelEditor\DataOutStream.h" />
+    <ClInclude Include="ModelEditor\Definitions.h" />
+    <ClInclude Include="ModelEditor\Error.h" />
+    <ClInclude Include="ModelEditor\Extent.h" />
+    <ClInclude Include="ModelEditor\FileLoader.h" />
+    <ClInclude Include="ModelEditor\FlashingGeoset.h" />
+    <ClInclude Include="ModelEditor\Font.h" />
+    <ClInclude Include="ModelEditor\GeosetAnimationManagerWindow.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\GeosetManagerWindow.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\GlobalSequenceManagerWindow.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\Graphics.h" />
+    <ClInclude Include="ModelEditor\GraphicsInfo.h" />
+    <ClInclude Include="ModelEditor\GraphicsWindow.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\Icon.h" />
+    <ClInclude Include="ModelEditor\Interpolator.h" />
+    <ClInclude Include="ModelEditor\Jpeg2.h" />
+    <ClInclude Include="ModelEditor\Keyboard.h" />
+    <ClInclude Include="ModelEditor\MainWindow.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\ManagerWindow.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\MaterialManagerWindow.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\Mesh.h" />
+    <ClInclude Include="ModelEditor\Misc.h" />
+    <ClInclude Include="ModelEditor\Model.h" />
+    <ClInclude Include="ModelEditor\ModelAttachment.h" />
+    <ClInclude Include="ModelEditor\ModelBase.h" />
+    <ClInclude Include="ModelEditor\ModelBone.h" />
+    <ClInclude Include="ModelEditor\ModelBuilder.h" />
+    <ClInclude Include="ModelEditor\ModelCamera.h" />
+    <ClInclude Include="ModelEditor\ModelCollisionShape.h" />
+    <ClInclude Include="ModelEditor\ModelEventObject.h" />
+    <ClInclude Include="ModelEditor\ModelGeoset.h" />
+    <ClInclude Include="ModelEditor\ModelGeosetAnimation.h" />
+    <ClInclude Include="ModelEditor\ModelGeosetFace.h" />
+    <ClInclude Include="ModelEditor\ModelGeosetGroup.h" />
+    <ClInclude Include="ModelEditor\ModelGeosetVertex.h" />
+    <ClInclude Include="ModelEditor\ModelGlobalSequence.h" />
+    <ClInclude Include="ModelEditor\ModelHelper.h" />
+    <ClInclude Include="ModelEditor\ModelHistory.h" />
+    <ClInclude Include="ModelEditor\ModelImporter.h" />
+    <ClInclude Include="ModelEditor\ModelLight.h" />
+    <ClInclude Include="ModelEditor\ModelLoader.h" />
+    <ClInclude Include="ModelEditor\ModelLoaderMdl.h" />
+    <ClInclude Include="ModelEditor\ModelLoaderMdx.h" />
+    <ClInclude Include="ModelEditor\ModelMaterial.h" />
+    <ClInclude Include="ModelEditor\ModelMaterialLayer.h" />
+    <ClInclude Include="ModelEditor\ModelModel.h" />
+    <ClInclude Include="ModelEditor\ModelParticleEmitter.h" />
+    <ClInclude Include="ModelEditor\ModelParticleEmitter2.h" />
+    <ClInclude Include="ModelEditor\ModelRibbonEmitter.h" />
+    <ClInclude Include="ModelEditor\ModelSequence.h" />
+    <ClInclude Include="ModelEditor\ModelTexture.h" />
+    <ClInclude Include="ModelEditor\ModelTextureAnimation.h" />
+    <ClInclude Include="ModelEditor\Mouse.h" />
+    <ClInclude Include="ModelEditor\Mpq.h" />
+    <ClInclude Include="ModelEditor\NodeIcon.h" />
+    <ClInclude Include="ModelEditor\NodeManagerWindow.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\ObjectIdManager.h" />
+    <ClInclude Include="ModelEditor\Particle.h" />
+    <ClInclude Include="ModelEditor\ParticleManager.h" />
+    <ClInclude Include="ModelEditor\PixelShader.h" />
+    <ClInclude Include="ModelEditor\Properties.h" />
+    <ClInclude Include="ModelEditor\Random.h" />
+    <ClInclude Include="ModelEditor\Reference.h" />
+    <ClInclude Include="ModelEditor\ReferenceObject.h" />
+    <ClInclude Include="ModelEditor\Register.h" />
+    <ClInclude Include="ModelEditor\Resource.h" />
+    <ClInclude Include="ModelEditor\ResourceLoader.h" />
+    <ClInclude Include="ModelEditor\Ribbon.h" />
+    <ClInclude Include="ModelEditor\RibbonManager.h" />
+    <ClInclude Include="ModelEditor\SequenceManagerWindow.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\SequenceTime.h" />
+    <ClInclude Include="ModelEditor\SimpleContainer.h" />
+    <ClInclude Include="ModelEditor\StdAfx.h" />
+    <ClInclude Include="ModelEditor\TeamColor.h" />
+    <ClInclude Include="ModelEditor\TemporaryFile.h" />
+    <ClInclude Include="ModelEditor\Texture2.h" />
+    <ClInclude Include="ModelEditor\TextureAnimationManagerWindow.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\TextureLoader.h" />
+    <ClInclude Include="ModelEditor\TextureLoaderBasic.h" />
+    <ClInclude Include="ModelEditor\TextureLoaderBlp.h" />
+    <ClInclude Include="ModelEditor\TextureLoaderPcx.h" />
+    <ClInclude Include="ModelEditor\TextureManager.h" />
+    <ClInclude Include="ModelEditor\TextureManagerWindow.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\Timer.h" />
+    <ClInclude Include="ModelEditor\TokenInStream.h" />
+    <ClInclude Include="ModelEditor\TokenOutStream.h" />
+    <ClInclude Include="ModelEditor\Vertex.h" />
+    <ClInclude Include="ModelEditor\VertexShader.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

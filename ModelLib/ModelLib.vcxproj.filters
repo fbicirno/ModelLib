@@ -1,0 +1,582 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="ModelEditor">
+      <UniqueIdentifier>{f81f47f9-3680-48b5-88e6-4d620d732927}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ModelEditor\File">
+      <UniqueIdentifier>{ef6b6cfe-5595-4ab6-a071-7854d9d7503e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ModelEditor\Window">
+      <UniqueIdentifier>{a7bc7875-1fe5-4e5f-82ed-9f4621ca4eb6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ModelEditor\Model">
+      <UniqueIdentifier>{c959a6ed-19cc-4388-b792-0d3d5395ae36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ModelEditor\Render">
+      <UniqueIdentifier>{f482eeec-b9d3-4af0-ab36-37d072daa793}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\Common.cpp">
+      <Filter>ModelEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\ConstantTable.cpp">
+      <Filter>ModelEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\Error.cpp">
+      <Filter>ModelEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\Font.cpp">
+      <Filter>ModelEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\Icon.cpp">
+      <Filter>ModelEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\Interpolator.cpp">
+      <Filter>ModelEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\Keyboard.cpp">
+      <Filter>ModelEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\Mouse.cpp">
+      <Filter>ModelEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\NodeIcon.cpp">
+      <Filter>ModelEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\ObjectIdManager.cpp">
+      <Filter>ModelEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\Particle.cpp">
+      <Filter>ModelEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\ParticleManager.cpp">
+      <Filter>ModelEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\Properties.cpp">
+      <Filter>ModelEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\Random.cpp">
+      <Filter>ModelEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\Register.cpp">
+      <Filter>ModelEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\Ribbon.cpp">
+      <Filter>ModelEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\RibbonManager.cpp">
+      <Filter>ModelEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\TeamColor.cpp">
+      <Filter>ModelEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\Timer.cpp">
+      <Filter>ModelEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\AnimationWindow.cpp">
+      <Filter>ModelEditor\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\Buffer2.cpp">
+      <Filter>ModelEditor\File</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\CameraManagerWindow.cpp">
+      <Filter>ModelEditor\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\DataOutStream.cpp">
+      <Filter>ModelEditor\File</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\DataInStream.cpp">
+      <Filter>ModelEditor\File</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\FileLoader.cpp">
+      <Filter>ModelEditor\File</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\GeosetAnimationManagerWindow.cpp">
+      <Filter>ModelEditor\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\GlobalSequenceManagerWindow.cpp">
+      <Filter>ModelEditor\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\GeosetManagerWindow.cpp">
+      <Filter>ModelEditor\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\GraphicsWindow.cpp">
+      <Filter>ModelEditor\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\ManagerWindow.cpp">
+      <Filter>ModelEditor\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\MaterialManagerWindow.cpp">
+      <Filter>ModelEditor\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\MainWindow.cpp">
+      <Filter>ModelEditor\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\SequenceManagerWindow.cpp">
+      <Filter>ModelEditor\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\TextureAnimationManagerWindow.cpp">
+      <Filter>ModelEditor\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\TextureManagerWindow.cpp">
+      <Filter>ModelEditor\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\Camera.cpp">
+      <Filter>ModelEditor\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\FlashingGeoset.cpp">
+      <Filter>ModelEditor\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\Graphics.cpp">
+      <Filter>ModelEditor\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\Jpeg2.cpp">
+      <Filter>ModelEditor\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\Model.cpp">
+      <Filter>ModelEditor\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\ModelAttachment.cpp">
+      <Filter>ModelEditor\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\ModelBase.cpp">
+      <Filter>ModelEditor\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\ModelBone.cpp">
+      <Filter>ModelEditor\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\ModelBuilder.cpp">
+      <Filter>ModelEditor\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\ModelCamera.cpp">
+      <Filter>ModelEditor\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\ModelCollisionShape.cpp">
+      <Filter>ModelEditor\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\ModelEventObject.cpp">
+      <Filter>ModelEditor\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\ModelGeoset.cpp">
+      <Filter>ModelEditor\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\ModelGeosetAnimation.cpp">
+      <Filter>ModelEditor\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\ModelGeosetFace.cpp">
+      <Filter>ModelEditor\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\ModelGeosetGroup.cpp">
+      <Filter>ModelEditor\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\ModelGeosetVertex.cpp">
+      <Filter>ModelEditor\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\ModelGlobalSequence.cpp">
+      <Filter>ModelEditor\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\ModelHelper.cpp">
+      <Filter>ModelEditor\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\ModelHistory.cpp">
+      <Filter>ModelEditor\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\ModelImporter.cpp">
+      <Filter>ModelEditor\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\ModelLight.cpp">
+      <Filter>ModelEditor\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\ModelLoader.cpp">
+      <Filter>ModelEditor\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\ModelLoaderMdl.cpp">
+      <Filter>ModelEditor\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\ModelLoaderMdx.cpp">
+      <Filter>ModelEditor\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\ModelMaterial.cpp">
+      <Filter>ModelEditor\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\ModelMaterialLayer.cpp">
+      <Filter>ModelEditor\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\ModelModel.cpp">
+      <Filter>ModelEditor\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\ModelParticleEmitter.cpp">
+      <Filter>ModelEditor\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\ModelParticleEmitter2.cpp">
+      <Filter>ModelEditor\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\ModelRibbonEmitter.cpp">
+      <Filter>ModelEditor\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\ModelSequence.cpp">
+      <Filter>ModelEditor\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\ModelTexture.cpp">
+      <Filter>ModelEditor\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\ModelTextureAnimation.cpp">
+      <Filter>ModelEditor\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\NodeManagerWindow.cpp">
+      <Filter>ModelEditor\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\Texture2.cpp">
+      <Filter>ModelEditor\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\TextureLoader.cpp">
+      <Filter>ModelEditor\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\TextureLoaderBasic.cpp">
+      <Filter>ModelEditor\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\TextureLoaderBlp.cpp">
+      <Filter>ModelEditor\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\TextureLoaderPcx.cpp">
+      <Filter>ModelEditor\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\TextureManager.cpp">
+      <Filter>ModelEditor\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\TokenInStream.cpp">
+      <Filter>ModelEditor\File</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\TokenOutStream.cpp">
+      <Filter>ModelEditor\File</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\TemporaryFile.cpp">
+      <Filter>ModelEditor\File</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\ResourceLoader.cpp">
+      <Filter>ModelEditor\File</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\VertexShader.cpp">
+      <Filter>ModelEditor\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\PixelShader.cpp">
+      <Filter>ModelEditor\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\Mpq.cpp">
+      <Filter>ModelEditor\File</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\Mesh.cpp">
+      <Filter>ModelEditor\Model</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ModelEditor\Common.h">
+      <Filter>ModelEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\Constants.h">
+      <Filter>ModelEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\ConstantTable.h">
+      <Filter>ModelEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\Container.h">
+      <Filter>ModelEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\Definitions.h">
+      <Filter>ModelEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\Error.h">
+      <Filter>ModelEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\Extent.h">
+      <Filter>ModelEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\Font.h">
+      <Filter>ModelEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\Icon.h">
+      <Filter>ModelEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\Interpolator.h">
+      <Filter>ModelEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\Keyboard.h">
+      <Filter>ModelEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\Misc.h">
+      <Filter>ModelEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\Mouse.h">
+      <Filter>ModelEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\NodeIcon.h">
+      <Filter>ModelEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\ObjectIdManager.h">
+      <Filter>ModelEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\Particle.h">
+      <Filter>ModelEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\ParticleManager.h">
+      <Filter>ModelEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\Properties.h">
+      <Filter>ModelEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\Random.h">
+      <Filter>ModelEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\Reference.h">
+      <Filter>ModelEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\ReferenceObject.h">
+      <Filter>ModelEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\Register.h">
+      <Filter>ModelEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\Resource.h">
+      <Filter>ModelEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\Ribbon.h">
+      <Filter>ModelEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\RibbonManager.h">
+      <Filter>ModelEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\SequenceTime.h">
+      <Filter>ModelEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\SimpleContainer.h">
+      <Filter>ModelEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\StdAfx.h">
+      <Filter>ModelEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\TeamColor.h">
+      <Filter>ModelEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\Timer.h">
+      <Filter>ModelEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\AnimationWindow.h">
+      <Filter>ModelEditor\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\Buffer2.h">
+      <Filter>ModelEditor\File</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\CameraManagerWindow.h">
+      <Filter>ModelEditor\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\DataOutStream.h">
+      <Filter>ModelEditor\File</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\DataInStream.h">
+      <Filter>ModelEditor\File</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\GeosetAnimationManagerWindow.h">
+      <Filter>ModelEditor\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\GlobalSequenceManagerWindow.h">
+      <Filter>ModelEditor\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\GeosetManagerWindow.h">
+      <Filter>ModelEditor\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\GraphicsWindow.h">
+      <Filter>ModelEditor\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\MainWindow.h">
+      <Filter>ModelEditor\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\ManagerWindow.h">
+      <Filter>ModelEditor\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\MaterialManagerWindow.h">
+      <Filter>ModelEditor\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\SequenceManagerWindow.h">
+      <Filter>ModelEditor\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\TextureAnimationManagerWindow.h">
+      <Filter>ModelEditor\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\TextureManagerWindow.h">
+      <Filter>ModelEditor\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\Camera.h">
+      <Filter>ModelEditor\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\FlashingGeoset.h">
+      <Filter>ModelEditor\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\FileLoader.h">
+      <Filter>ModelEditor\File</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\Graphics.h">
+      <Filter>ModelEditor\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\GraphicsInfo.h">
+      <Filter>ModelEditor\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\Jpeg2.h">
+      <Filter>ModelEditor\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\Model.h">
+      <Filter>ModelEditor\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\ModelAttachment.h">
+      <Filter>ModelEditor\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\ModelBase.h">
+      <Filter>ModelEditor\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\ModelBone.h">
+      <Filter>ModelEditor\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\ModelBuilder.h">
+      <Filter>ModelEditor\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\ModelCamera.h">
+      <Filter>ModelEditor\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\ModelCollisionShape.h">
+      <Filter>ModelEditor\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\ModelEventObject.h">
+      <Filter>ModelEditor\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\ModelGeoset.h">
+      <Filter>ModelEditor\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\ModelGeosetAnimation.h">
+      <Filter>ModelEditor\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\ModelGeosetFace.h">
+      <Filter>ModelEditor\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\ModelGeosetGroup.h">
+      <Filter>ModelEditor\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\ModelGeosetVertex.h">
+      <Filter>ModelEditor\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\ModelGlobalSequence.h">
+      <Filter>ModelEditor\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\ModelHelper.h">
+      <Filter>ModelEditor\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\ModelHistory.h">
+      <Filter>ModelEditor\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\ModelImporter.h">
+      <Filter>ModelEditor\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\ModelLight.h">
+      <Filter>ModelEditor\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\ModelLoader.h">
+      <Filter>ModelEditor\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\ModelLoaderMdl.h">
+      <Filter>ModelEditor\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\ModelLoaderMdx.h">
+      <Filter>ModelEditor\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\ModelMaterial.h">
+      <Filter>ModelEditor\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\ModelMaterialLayer.h">
+      <Filter>ModelEditor\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\ModelModel.h">
+      <Filter>ModelEditor\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\ModelParticleEmitter.h">
+      <Filter>ModelEditor\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\ModelParticleEmitter2.h">
+      <Filter>ModelEditor\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\ModelRibbonEmitter.h">
+      <Filter>ModelEditor\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\ModelSequence.h">
+      <Filter>ModelEditor\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\ModelTexture.h">
+      <Filter>ModelEditor\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\ModelTextureAnimation.h">
+      <Filter>ModelEditor\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\NodeManagerWindow.h">
+      <Filter>ModelEditor\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\TextureManager.h">
+      <Filter>ModelEditor\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\Texture2.h">
+      <Filter>ModelEditor\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\TextureLoader.h">
+      <Filter>ModelEditor\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\TextureLoaderBasic.h">
+      <Filter>ModelEditor\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\TextureLoaderBlp.h">
+      <Filter>ModelEditor\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\TextureLoaderPcx.h">
+      <Filter>ModelEditor\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\TokenOutStream.h">
+      <Filter>ModelEditor\File</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\TokenInStream.h">
+      <Filter>ModelEditor\File</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\TemporaryFile.h">
+      <Filter>ModelEditor\File</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\ResourceLoader.h">
+      <Filter>ModelEditor\File</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\VertexShader.h">
+      <Filter>ModelEditor\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\Vertex.h">
+      <Filter>ModelEditor\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\PixelShader.h">
+      <Filter>ModelEditor\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\Mpq.h">
+      <Filter>ModelEditor\File</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\Mesh.h">
+      <Filter>ModelEditor\Model</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
