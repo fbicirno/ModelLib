@@ -40,22 +40,34 @@ for index,info in ipairs(model_list) do
     end 
     if model then 
         local list = core.load_animate(model)
-        local out_path = 'model\\' .. path:gsub('.+\\','')
+        local out_path = 'screen\\' .. path:gsub('.+\\','')
         if list then 
-            s[#s + 1] = "['" .. info.name .. ']\n'
+            s[#s + 1] = "['" .. info.name .. "']\n"
             s[#s + 1] = 'path = [[' .. out_path .. ']]\n'
             s[#s + 1] = 'animation = {\n'
             for i,data in ipairs(list) do 
-                s[#s + 1] = "   '".. data.name .. "' = {\n"
-                s[#s + 1] = '       index = ' .. i ..',\n'
-                s[#s + 1] = '       start = ' .. data.start ..',\n'
-                s[#s + 1] = '       end = ' .. data['end'] ..',\n'
-                s[#s + 1] = '   },\n'
+                s[#s + 1] = "'".. data.name:lower() .. "' = {\n"
+                s[#s + 1] = ' index = ' .. i ..',\n'
+                s[#s + 1] = ' start = ' .. data.start ..',\n'
+                s[#s + 1] = ' end = ' .. data['end'] ..',\n'
+                s[#s + 1] = '},\n'
             end 
             s[#s + 1] = '}\n\n'
         end 
         core.load_mpq_file(path,out_path)
+        local texture_list = core.load_texture_list(model)
+        if texture_list then 
+            for index,name in ipairs(texture_list) do 
+                if name and name:len() > 0 then 
+                    core.load_mpq_file(name,'screen\\' .. name)
+                end
+            end 
+        end 
+
+
         core.close_model(model)
+
+       
     end
 end 
 

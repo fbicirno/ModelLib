@@ -159,6 +159,35 @@ int load_model_animate(lua_State* L)
 	return 1;
 }
 
+int load_model_texture_list(lua_State* L)
+{
+	if (!lua_isinteger(L, 1))
+	{
+		lua_pushnil(L);
+		return 1;
+	}
+
+	int id = lua_tointeger(L, 1);
+	auto it = model_addr_map.find(id);
+	if (it == model_addr_map.end())
+	{
+		lua_pushnil(L);
+		return 1;
+	}
+
+	MODEL* model = it->second;;
+	auto& container = model->Data().TextureContainer;
+	char buffer[0x100];
+	lua_newtable(L);
+	for (int i = 0; i < container.GetTotalSize(); i++)
+	{
+		auto& data = container[i]->Data();
+		lua_pushstring(L, data.FileName.c_str());
+		lua_rawseti(L, -2, i +1);
+	}
+	return 1;
+}
+
 int load_mpq_file(lua_State* L)
 {
 	if (!lua_isstring(L, 1))
@@ -202,8 +231,11 @@ int open(lua_State* L)
 				{ "open_model", open_model },
 				{ "close_model", close_model },
 				{ "load_animate", load_model_animate },
+				{ "load_texture_list", load_model_texture_list },
 				{ "save_model", save_model },
 				{ "load_mpq_file", load_mpq_file },
+
+				
 				{ NULL, NULL },
 			};
 			luaL_setfuncs(L, func, 0);
