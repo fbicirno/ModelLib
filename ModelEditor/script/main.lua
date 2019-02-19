@@ -44,6 +44,7 @@ for index,info in ipairs(model_list) do
         if list then 
             s[#s + 1] = "['" .. info.name .. "']\n"
             s[#s + 1] = 'path = [[' .. out_path .. ']]\n'
+            s[#s + 1] = 'model = [[sc2_model\\' .. path:gsub('.+\\','') .. ']]\n'
             s[#s + 1] = 'animation = {\n'
             for i,data in ipairs(list) do 
                 s[#s + 1] = "'".. data.name:lower() .. "' = {\n"
