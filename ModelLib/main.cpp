@@ -127,15 +127,15 @@ int save_model(lua_State* L)
 	
 	auto& particle_list = model->Data().ParticleEmitter2Container;
 
-	//遍历所有节点 将粒子发射器 缩小1000倍
+	//遍历所有节点 将粒子发射器 缩小2000倍
 	for (int i = 0; i < particle_list.GetTotalSize(); i++)
 	{
 		auto& particle = particle_list[i];
 
 		auto& scale = particle->Data().ParticleScaling;
-		scale.x /= 1000;
-		scale.y /= 1000;
-		scale.z /= 1000;
+		scale.x /= 2000;
+		scale.y /= 2000;
+		scale.z /= 2000;
 
 	}
 
@@ -147,6 +147,10 @@ int save_model(lua_State* L)
 		//auto& camera = camera_list[i];
 		camera_list.Remove(i);
 	}
+
+
+	//模型重算点范围
+	model->CalculateBoundsRadius();
 
 
 	if (!ResourceLoader.SaveModel(*model, out_path, Buffer))

@@ -1,16 +1,16 @@
-﻿生成启动时间为 2019/2/20 14:20:01。
+﻿生成启动时间为 2019/2/20 17:33:16。
      1>项目“D:\ModelLib\ModelLib\ModelLib.vcxproj”在节点 2 上(Build 个目标)。
      1>ClCompile:
          D:\vs2013\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /Od /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _LIB /D _WINDOWS_MBCS /Gm- /EHsc /MT /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp
          main.cpp
      1>main.cpp(81): warning C4244: “初始化”: 从“lua_Integer”转换到“int”，可能丢失数据
      1>main.cpp(98): warning C4244: “初始化”: 从“lua_Integer”转换到“int”，可能丢失数据
-     1>main.cpp(174): warning C4244: “初始化”: 从“lua_Integer”转换到“int”，可能丢失数据
-     1>main.cpp(193): warning C4244: “参数”: 从“FLOAT”转换到“lua_Integer”，可能丢失数据
-     1>main.cpp(196): warning C4244: “参数”: 从“FLOAT”转换到“lua_Integer”，可能丢失数据
-     1>main.cpp(183): warning C4101: “buffer”: 未引用的局部变量
-     1>main.cpp(212): warning C4244: “初始化”: 从“lua_Integer”转换到“int”，可能丢失数据
-     1>main.cpp(222): warning C4101: “buffer”: 未引用的局部变量
+     1>main.cpp(178): warning C4244: “初始化”: 从“lua_Integer”转换到“int”，可能丢失数据
+     1>main.cpp(197): warning C4244: “参数”: 从“FLOAT”转换到“lua_Integer”，可能丢失数据
+     1>main.cpp(200): warning C4244: “参数”: 从“FLOAT”转换到“lua_Integer”，可能丢失数据
+     1>main.cpp(187): warning C4101: “buffer”: 未引用的局部变量
+     1>main.cpp(216): warning C4244: “初始化”: 从“lua_Integer”转换到“int”，可能丢失数据
+     1>main.cpp(226): warning C4101: “buffer”: 未引用的局部变量
      1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(1193,5): warning MSB8012: TargetPath(D:\ModelLib\Release\ModelLib.exe) does not match the Linker's OutputFile property value (D:\ModelLib\ModelEditor\ModelEditor.exe). This may cause your project to build incorrectly. To correct this, please make sure that $(OutDir), $(TargetName) and $(TargetExt) property values match the value specified in %(Link.OutputFile).
      1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(1195,5): warning MSB8012: TargetName(ModelLib) does not match the Linker's OutputFile property value (ModelEditor). This may cause your project to build incorrectly. To correct this, please make sure that $(OutDir), $(TargetName) and $(TargetExt) property values match the value specified in %(Link.OutputFile).
        Link:
@@ -90,7 +90,7 @@
             正在创建库 D:\ModelLib\Release\ModelLib.lib 和对象 D:\ModelLib\Release\ModelLib.exp
          正在生成代码
      1>d:\modellib\modellib\modeleditor\textureloaderbasic.cpp(64): warning C4700: 使用了未初始化的局部变量“TempBuffer”
-     1>d:\modellib\modellib\main.cpp(334): warning C4715: “InitEditor”: 不是所有的控件路径都返回值
+     1>d:\modellib\modellib\main.cpp(338): warning C4715: “InitEditor”: 不是所有的控件路径都返回值
          已完成代码的生成
      1>jpeg.lib(jdapistd.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jdapistd.obj)”或在“D:\ModelLib\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
      1>jpeg.lib(jdapimin.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“jpeg.lib(jdapimin.obj)”或在“D:\ModelLib\Release\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
@@ -171,4 +171,4 @@
 
 生成成功。
 
-已用时间 00:00:08.03
+已用时间 00:00:08.66
