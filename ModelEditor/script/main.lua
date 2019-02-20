@@ -23,7 +23,7 @@ str:gsub('(.-)=(.-)\n',function (name,path)
     table.insert(model_list,{name = name,path = path})
 end)
 
-local s = {}
+local s = {'\n'}
 
 for index,info in ipairs(model_list) do 
     local path = info.path
@@ -51,7 +51,7 @@ for index,info in ipairs(model_list) do
             s[#s + 1] = 'animation = {\n'
             for i,data in ipairs(list) do 
                 s[#s + 1] = "'".. data.name:lower() .. "' = {\n"
-                s[#s + 1] = ' index = ' .. i ..',\n'
+                s[#s + 1] = ' index = ' .. tostring(i - 1) ..',\n'
                 s[#s + 1] = ' start = ' .. data.start ..',\n'
                 s[#s + 1] = ' end = ' .. data['end'] ..',\n'
                 s[#s + 1] = '},\n'

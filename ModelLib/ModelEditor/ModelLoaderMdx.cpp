@@ -1768,6 +1768,7 @@ BOOL MODEL_LOADER_MDX::LoadSequences(MODEL& Model, DATA_IN_STREAM& DataStream, I
 			return FALSE;
 		}
 
+
 		if(!LoadSequence((*Sequence), DataStream, 0))
 		{
 			delete Sequence;

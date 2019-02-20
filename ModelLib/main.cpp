@@ -130,13 +130,22 @@ int save_model(lua_State* L)
 	//遍历所有节点 将粒子发射器 缩小1000倍
 	for (int i = 0; i < particle_list.GetTotalSize(); i++)
 	{
-		auto particle = particle_list[i];
+		auto& particle = particle_list[i];
 
 		auto& scale = particle->Data().ParticleScaling;
 		scale.x /= 1000;
 		scale.y /= 1000;
 		scale.z /= 1000;
 
+	}
+
+	auto& camera_list = model->Data().CameraContainer;
+
+	//删除所有镜头
+	for (int i = 0; i < camera_list.GetTotalSize(); i++)
+	{
+		//auto& camera = camera_list[i];
+		camera_list.Remove(i);
 	}
 
 
@@ -176,18 +185,18 @@ int load_model_animate(lua_State* L)
 	for (int i = 0; i < sequences.GetTotalSize(); i++)
 	{
 		auto& data = sequences[i]->Data();
-
 		lua_newtable(L);
+		
 		lua_pushstring(L, data.Name.c_str());
 		lua_setfield(L, -2, "name");
-
+		
 		lua_pushinteger(L, data.Interval.x);
 		lua_setfield(L, -2, "start");
-
+		
 		lua_pushinteger(L, data.Interval.y);
 		lua_setfield(L, -2, "end");
-
-		lua_rawseti(L, -2, i);
+		
+		lua_rawseti(L, -2, i + 1);
 	}
 	return 1;
 }
