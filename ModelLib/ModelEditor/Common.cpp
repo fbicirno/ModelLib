@@ -304,7 +304,7 @@ std::string COMMON::GetProgramDirectory() CONST
 	{
 		Directory = Directory.substr(0, i);
 	}
-	//Directory = "D:\\war3\\War3ModelEditor";
+
 	return Directory;
 }
 

@@ -204,15 +204,13 @@ BOOL GRAPHICS_WINDOW::Acquire()
 		Error.SetMessage("Unable to create a new swap chain!");
 		return FALSE;
 	}
-	
 
-	
 	if(FAILED(SwapChain->GetBackBuffer(0, D3DBACKBUFFER_TYPE_MONO, &BackBuffer)))
 	{
 		Error.SetMessage("Unable to retrieve the swap chain back buffer!");
 		return FALSE;
 	}
-	
+
 	if(Width <= 0) return TRUE;
 	if(Height <= 0) return TRUE;
 

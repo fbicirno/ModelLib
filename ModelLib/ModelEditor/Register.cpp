@@ -333,38 +333,22 @@ BOOL REGISTER::FindWarcraftDirectory()
 
 	while(TRUE)
 	{
-		if (!OpenKey(SoftwareKey, HKEY_CURRENT_USER, "Software"))
-		{
-			printf("key1 error\n");
-			break;
-		}
-		if (!OpenKey(SoftwareBlizzardKey, SoftwareKey, "Blizzard Entertainment"))
-		{
-			printf("key2 error\n");
-			break;
-		}
+		if(!OpenKey(SoftwareKey, HKEY_CURRENT_USER, "Software")) break;
+		if(!OpenKey(SoftwareBlizzardKey, SoftwareKey, "Blizzard Entertainment")) break;
+		if(!OpenKey(SoftwareBlizzardWarcraftKey, SoftwareBlizzardKey, "Warcraft III")) break;
 
-		if (!OpenKey(SoftwareBlizzardWarcraftKey, SoftwareBlizzardKey, "Warcraft III"))
-		{
-			printf("key3 error\n");
-			break;
-		}
-
-		if (!GetStringValue(SoftwareBlizzardWarcraftKey, "InstallPath", WarcraftDirectory)) 
-		{
-			printf("key4 error\n");
-			break;
-		}
+		if(!GetStringValue(SoftwareBlizzardWarcraftKey, "InstallPath", WarcraftDirectory)) break;
 
 		Result = TRUE;
 		break;
 	}
+
 	CloseKey(SoftwareBlizzardWarcraftKey);
 	CloseKey(SoftwareBlizzardKey);
 	CloseKey(SoftwareKey);
-	
+
 	if(!Result) WarcraftDirectory = Common.GetProgramDirectory();
-	//WarcraftDirectory ="D:\\War3";
+
 	return TRUE;
 }
 

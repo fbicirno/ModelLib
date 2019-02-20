@@ -9,7 +9,6 @@
 //| Included files
 //+-----------------------------------------------------------------------------
 #include "GraphicsWindow.h"
-#include "Camera.h"
 #include "TextureManager.h"
 #include "ConstantTable.h"
 #include "GraphicsInfo.h"
@@ -79,10 +78,7 @@ class GRAPHICS
 		CONST D3DXMATRIX& GetWorldMatrix() CONST;
 
 		VOID BuildRay(CONST POINT& ScreenPosition, INT Width, INT Height, D3DXVECTOR3& RayPosition, D3DXVECTOR3& RayDirection);
-		
-		BOOL CreateObjects();
 
-		LPDIRECT3DDEVICE9 Direct3DDevice;
 	protected:
 		VOID SetConstantTableConstants(CONSTANT_TABLE& ConstantTable);
 
@@ -94,7 +90,7 @@ class GRAPHICS
 		BOOL CreateDirect3D();
 		BOOL CheckCapabilities();
 		BOOL CreateDirect3DDevice();
-		
+		BOOL CreateObjects();
 
 		VOID SetRenderStates();
 		VOID SetProjection();
@@ -104,7 +100,7 @@ class GRAPHICS
 
 		HWND Window;
 		LPDIRECT3D9 Direct3D;
-		
+		LPDIRECT3DDEVICE9 Direct3DDevice;
 		LPDIRECT3DVERTEXBUFFER9 LineVertexBuffer;
 		LPDIRECT3DVERTEXBUFFER9 ParticleVertexBuffer;
 		LPDIRECT3DVERTEXBUFFER9 GroundVertexBuffer;

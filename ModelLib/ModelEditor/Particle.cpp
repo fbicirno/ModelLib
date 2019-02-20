@@ -208,7 +208,7 @@ VOID PARTICLE::Render()
 
 	switch(FilterMode)
 	{
-	case FILTER_MODE_NONE:
+		case FILTER_MODE_NONE:
 		{
 			Direct3DDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
 			Direct3DDevice->SetRenderState(D3DRS_ALPHATESTENABLE, FALSE);
@@ -216,7 +216,7 @@ VOID PARTICLE::Render()
 			break;
 		}
 
-	case FILTER_MODE_TRANSPARENT:
+		case FILTER_MODE_TRANSPARENT:
 		{
 			Direct3DDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
 			Direct3DDevice->SetRenderState(D3DRS_ALPHATESTENABLE, TRUE);
@@ -230,7 +230,7 @@ VOID PARTICLE::Render()
 			break;
 		}
 
-	case FILTER_MODE_BLEND:
+		case FILTER_MODE_BLEND:
 		{
 			Direct3DDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
 			Direct3DDevice->SetRenderState(D3DRS_ALPHATESTENABLE, FALSE);
@@ -241,7 +241,7 @@ VOID PARTICLE::Render()
 			break;
 		}
 
-	case FILTER_MODE_ADDITIVE:
+		case FILTER_MODE_ADDITIVE:
 		{
 			Direct3DDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
 			Direct3DDevice->SetRenderState(D3DRS_ALPHATESTENABLE, FALSE);
@@ -252,7 +252,7 @@ VOID PARTICLE::Render()
 			break;
 		}
 
-	case FILTER_MODE_ADD_ALPHA:
+		case FILTER_MODE_ADD_ALPHA:
 		{
 			Direct3DDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
 			Direct3DDevice->SetRenderState(D3DRS_ALPHATESTENABLE, FALSE);
@@ -263,7 +263,7 @@ VOID PARTICLE::Render()
 			break;
 		}
 
-	case FILTER_MODE_MODULATE:
+		case FILTER_MODE_MODULATE:
 		{
 			Direct3DDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
 			Direct3DDevice->SetRenderState(D3DRS_ALPHATESTENABLE, FALSE);

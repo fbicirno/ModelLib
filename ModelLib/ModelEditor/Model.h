@@ -212,7 +212,7 @@ extern MODEL Model;
 #include "ModelBone.h"
 #include "ModelGeoset.h"
 #include "ModelGeosetAnimation.h"
-#include "Modeltexture.h"
+#include "ModelTexture.h"
 #include "ModelTextureAnimation.h"
 #include "ModelMaterial.h"
 #include "ModelSequence.h"

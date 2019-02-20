@@ -46,9 +46,6 @@ VOID ERROR_HANDLER::SetMessage(CONST std::string& NewMessage)
 {
 	MessageSet = TRUE;
 	Message = NewMessage;
-	printf("%s\n", NewMessage.c_str());
-
-	//MessageBox(0, NewMessage.c_str(), "", MB_OK);
 }
 
 

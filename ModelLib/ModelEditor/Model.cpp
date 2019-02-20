@@ -3,18 +3,17 @@
 //+-----------------------------------------------------------------------------
 #include "StdAfx.h"
 #include "Model.h"
-/*
-#include "AnimationWindow.h"
-#include "NodeManagerWindow.h"
-#include "CameraManagerWindow.h"
-#include "GeosetManagerWindow.h"
-#include "GeosetAnimationManagerWindow.h"
-#include "TextureManagerWindow.h"
-#include "TextureAnimationManagerWindow.h"
-#include "MaterialManagerWindow.h"
-#include "SequenceManagerWindow.h"
-#include "GlobalSequenceManagerWindow.h"
-*/
+//#include "AnimationWindow.h"
+//#include "NodeManagerWindow.h"
+//#include "CameraManagerWindow.h"
+//#include "GeosetManagerWindow.h"
+//#include "GeosetAnimationManagerWindow.h"
+//#include "TextureManagerWindow.h"
+//#include "TextureAnimationManagerWindow.h"
+//#include "MaterialManagerWindow.h"
+//#include "SequenceManagerWindow.h"
+//#include "GlobalSequenceManagerWindow.h"
+
 
 //+-----------------------------------------------------------------------------
 //| Global objects
@@ -51,15 +50,15 @@ MODEL::~MODEL()
 //+-----------------------------------------------------------------------------
 VOID MODEL::Clear()
 {
-	//ParticleManager.Clear();
-	//RibbonManager.Clear();
+	ParticleManager.Clear();
+	RibbonManager.Clear();
 
-	//ObjectIdManager.ClearAllObjectIds();
+	ObjectIdManager.ClearAllObjectIds();
 
 	ModelData.BaseContainer.Clear();
 
 	SAFE_CLEAR(ModelData.AttachmentContainer);
-
+	/*
 	SAFE_CLEAR(ModelData.BoneContainer);
 	SAFE_CLEAR(ModelData.CollisionShapeContainer);
 	SAFE_CLEAR(ModelData.EventObjectContainer);
@@ -78,7 +77,7 @@ VOID MODEL::Clear()
 	SAFE_CLEAR(ModelData.TextureContainer);
 	SAFE_CLEAR(ModelData.PivotPointContainer);
 	SAFE_CLEAR(ModelData.TextureAnimationContainer);
-
+	*/
 
 	BoundsRadius = 0.0f;
 	BoundsCenter = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
@@ -127,7 +126,7 @@ VOID MODEL::Render(INT TimeDifference)
 	MODEL_SEQUENCE* Sequence;
 	MODEL_GLOBAL_SEQUENCE* GlobalSequence;
 	std::list<INT> RenderOrderList1;
- 	std::list<INT> RenderOrderList2;
+	std::list<INT> RenderOrderList2;
 	std::list<INT> RenderOrderList3;
 	std::list<INT> RenderOrderList4;
 	std::list<INT>::iterator j;
@@ -182,8 +181,8 @@ VOID MODEL::Render(INT TimeDifference)
 			}
 		}
 
-		//ParticleManager.Update(AnimationTime, RealTimeDifference, (TimeDifference > 0));
-		//RibbonManager.Update(AnimationTime, RealTimeDifference, (TimeDifference > 0));
+		ParticleManager.Update(AnimationTime, RealTimeDifference, (TimeDifference > 0));
+		RibbonManager.Update(AnimationTime, RealTimeDifference, (TimeDifference > 0));
 
 		Root->BuildMatrix(AnimationTime);
 
@@ -226,7 +225,6 @@ VOID MODEL::Render(INT TimeDifference)
 	Animated = SequenceNode.IsAttached();
 
 	j = RenderOrderList1.begin();
-	
 	while(j != RenderOrderList1.end())
 	{
 		ModelData.GeosetContainer[*j]->Render(AnimationTime, Animated);
@@ -256,18 +254,11 @@ VOID MODEL::Render(INT TimeDifference)
 
 	Graphics.PrepareForLines();
 
-	if(Properties().ShowBones) 
-		RenderBones();
-	if(Properties().ShowLights) 
-		RenderLights();
-	if(Properties().ShowCameras)
-		RenderCameras();
-	if(Properties().ShowAttachments)
-		RenderAttachments();
-	if(Properties().ShowCollisionShapes)
-		RenderCollisionShapes();
-
-
+	if(Properties().ShowBones) RenderBones();
+	if(Properties().ShowLights) RenderLights();
+	if(Properties().ShowCameras) RenderCameras();
+	if(Properties().ShowAttachments) RenderAttachments();
+	if(Properties().ShowCollisionShapes) RenderCollisionShapes();
 }
 
 
@@ -290,8 +281,8 @@ VOID MODEL::PlayAnimation(MODEL_SEQUENCE* Sequence)
 
 	SequenceNode.Detach();
 
-	//ParticleManager.Clear();
-	//RibbonManager.Clear();
+	ParticleManager.Clear();
+	RibbonManager.Clear();
 
 	if(Sequence == NULL) return;
 
@@ -1657,7 +1648,7 @@ VOID MODEL::GenerateObjectIds()
 	ObjectIdManager.ClearAllObjectIds();
 
 	CONTAINER_GENERATE_ID(ModelData.BoneContainer);
-	CONTAINER_GENERATE_ID(ModelData.BoneContainer);
+	/*
 	CONTAINER_GENERATE_ID(ModelData.LightContainer);
 	CONTAINER_GENERATE_ID(ModelData.HelperContainer);
 	CONTAINER_GENERATE_ID(ModelData.AttachmentContainer);
@@ -1666,6 +1657,7 @@ VOID MODEL::GenerateObjectIds()
 	CONTAINER_GENERATE_ID(ModelData.RibbonEmitterContainer);
 	CONTAINER_GENERATE_ID(ModelData.EventObjectContainer);
 	CONTAINER_GENERATE_ID(ModelData.CollisionShapeContainer);
+	*/
 
 	for(i = 0; i < ModelData.BaseContainer.GetTotalSize(); i++)
 	{
@@ -1690,6 +1682,7 @@ VOID MODEL::GenerateObjectIds()
 	CONTAINER_ASSIGN_ID(ModelData.TextureContainer, InternalTextureId);
 	CONTAINER_ASSIGN_ID(ModelData.TextureAnimationContainer, InternalTextureAnimationId);
 
+	/*
 	CONTAINER_RETRIEVE_ID(ModelData.GeosetContainer, MaterialNode, MaterialId, InternalMaterialId);
 	CONTAINER_RETRIEVE_ID(ModelData.EventObjectContainer, GlobalSequenceNode, GlobalSequenceId, InternalGlobalSequenceId);
 	CONTAINER_RETRIEVE_ID(ModelData.BoneContainer, GeosetNode, GeosetId, InternalGeosetId);
@@ -1697,6 +1690,7 @@ VOID MODEL::GenerateObjectIds()
 	CONTAINER_RETRIEVE_ID(ModelData.GeosetAnimationContainer, GeosetNode, GeosetId, InternalGeosetId);
 	CONTAINER_RETRIEVE_ID(ModelData.ParticleEmitter2Container, TextureNode, TextureId, InternalTextureId);
 	CONTAINER_RETRIEVE_ID(ModelData.RibbonEmitterContainer, MaterialNode, MaterialId, InternalMaterialId);
+	*/
 
 	for(i = 0; i < ModelData.GeosetContainer.GetTotalSize(); i++)
 	{
@@ -1842,7 +1836,7 @@ VOID MODEL::ConnectNodes()
 			Material = ModelData.MaterialContainer[i];
 
 			CONTAINER_CONNECT_NODES(Material->Data().LayerContainer, ModelData.TextureContainer, TextureNode, MaterialLayerNodes, TextureId);
-			CONTAINER_CONNECT_NODES(Material->Data().LayerContainer, ModelData.TextureAnimationContainer, TextureAnimationNode, MaterialLayerNodes, TextureAnimationId);
+			//CONTAINER_CONNECT_NODES(Material->Data().LayerContainer, ModelData.TextureAnimationContainer, TextureAnimationNode, MaterialLayerNodes, TextureAnimationId);
 		}
 	}
 
@@ -1861,14 +1855,14 @@ VOID MODEL::ConnectNodes()
 	}
 
 	CONTAINER_CONNECT_NODES(ModelData.GeosetContainer, ModelData.MaterialContainer, MaterialNode, GeosetNodes, MaterialId);
-
+	/*
 	CONTAINER_CONNECT_NODES(ModelData.EventObjectContainer, ModelData.GlobalSequenceContainer, GlobalSequenceNode, EventObjectNodes, GlobalSequenceId);
 	CONTAINER_CONNECT_NODES(ModelData.BoneContainer, ModelData.GeosetContainer, GeosetNode, BoneNodes, GeosetId);
 	CONTAINER_CONNECT_NODES(ModelData.BoneContainer, ModelData.GeosetAnimationContainer, GeosetAnimationNode, BoneNodes, GeosetAnimationId);
 	CONTAINER_CONNECT_NODES(ModelData.GeosetAnimationContainer, ModelData.GeosetContainer, GeosetNode, GeosetAnimationNodes, GeosetId);
 	CONTAINER_CONNECT_NODES(ModelData.ParticleEmitter2Container, ModelData.TextureContainer, TextureNode, ParticleEmitter2Nodes, TextureId);
 	CONTAINER_CONNECT_NODES(ModelData.RibbonEmitterContainer, ModelData.MaterialContainer, MaterialNode, RibbonEmitterNodes, MaterialId);
-
+	*/
 
 	//NodeManagerWindow.ClearAllNodes();
 	InsertNode(Root);
@@ -1925,7 +1919,6 @@ VOID MODEL::UnwrapPivotPoints()
 //+-----------------------------------------------------------------------------
 BOOL MODEL::AddBaseNode(MODEL_BASE* Node, MODEL_BASE* ParentNode)
 {
-	
 	if(Node->BaseData()->ObjectId == INVALID_INDEX)
 	{
 		Node->BaseData()->ObjectId = ObjectIdManager.GetNewObjectId();
@@ -1947,7 +1940,7 @@ BOOL MODEL::AddBaseNode(MODEL_BASE* Node, MODEL_BASE* ParentNode)
 	}
 
 	//NodeManagerWindow.AddNode(Node);
-	
+
 	return TRUE;
 }
 
@@ -1977,7 +1970,7 @@ BOOL MODEL::RemoveBaseNode(MODEL_BASE* Node, HWND Window)
 	}
 
 	ObjectIdManager.RemoveObjectId(Node->BaseData()->ObjectId);
-//	NodeManagerWindow.RemoveNode(Node);
+	//NodeManagerWindow.RemoveNode(Node);
 
 	for(i = 0; i < ModelData.BaseContainer.GetTotalSize(); i++)
 	{

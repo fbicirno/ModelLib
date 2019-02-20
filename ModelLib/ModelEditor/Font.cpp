@@ -62,13 +62,15 @@ BOOL FONT::Setup()
 	FontDescription.OutputPrecision = OUT_DEFAULT_PRECIS;
 	FontDescription.Quality = DEFAULT_QUALITY;
 	FontDescription.PitchAndFamily = DEFAULT_PITCH;
-	strcpy(FontDescription.FaceName, "Fixedsys");
+	//strcpy(FontDescription.FaceName, "Fixedsys");
 
+	/*
 	if(FAILED(D3DXCreateFontIndirect(Direct3DDevice, &FontDescription, &Font)))
 	{
 		Error.SetMessage("Unable to create font!");
 		return FALSE;
 	}
+	*/
 
 	return TRUE;
 }

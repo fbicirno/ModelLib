@@ -14,21 +14,20 @@
 //+-----------------------------------------------------------------------------
 //| Font class
 //+-----------------------------------------------------------------------------
-/*
 
-typedef struct 
-{    
-    LONG Width;
-	LONG Height;
-	LONG Weight;
-	LONG MipLevels;
-	BOOL Italic;
-	BYTE CharSet;
-	BYTE OutputPrecision;
-	BYTE Quality;
-	BYTE PitchAndFamily;
-	CHAR *FaceName;
-} D3DXFONT_DESC;*/
+//typedef struct 
+//{    
+//    LONG Width;
+//	LONG Height;
+//	LONG Weight;
+//	LONG MipLevels;
+//	BOOL Italic;
+//	BYTE CharSet;
+//	BYTE OutputPrecision;
+//	BYTE Quality;
+//	BYTE PitchAndFamily;
+//	CHAR *FaceName;
+//} D3DXFONT_DESC;
 
 class FONT
 {

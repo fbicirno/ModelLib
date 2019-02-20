@@ -3,7 +3,7 @@
 //+-----------------------------------------------------------------------------
 #include "StdAfx.h"
 #include "Graphics.h"
-//#include "MainWindow.h"
+#include "MainWindow.h"
 
 
 //+-----------------------------------------------------------------------------
@@ -120,12 +120,11 @@ CONST D3DXMATRIX& GRAPHICS::GetBillboardMatrix() CONST
 //+-----------------------------------------------------------------------------
 BOOL GRAPHICS::SetupShaders()
 {
-	//if(!Properties.ShadersAvailable()) return TRUE;
+	if(!Properties.ShadersAvailable()) return TRUE;
 
-	if (!VertexShader.Setup(PATH_VERTEX_SHADER)) return FALSE;;
-	if (!PixelShaderShaded.Setup(PATH_PIXEL_SHADER_SHADED)) return FALSE;
-	if (!PixelShaderUnshaded.Setup(PATH_PIXEL_SHADER_UNSHADED)) return FALSE;
-
+	if(!VertexShader.Setup(PATH_VERTEX_SHADER)) return FALSE;;
+	if(!PixelShaderShaded.Setup(PATH_PIXEL_SHADER_SHADED)) return FALSE;
+	if(!PixelShaderUnshaded.Setup(PATH_PIXEL_SHADER_UNSHADED)) return FALSE;
 
 	return TRUE;
 }
@@ -314,50 +313,49 @@ BOOL GRAPHICS::CheckLostState()
 BOOL GRAPHICS::BeginRender(GRAPHICS_WINDOW& GraphicsWindow)
 {
 	LPDIRECT3DSWAPCHAIN9 SwapChain;
-	/*
+
 	if(!Initialized)
 	{
 		Error.SetMessage("The Direct3D device is not initialized!");
 		return FALSE;
-	}*/
+	}
 
 	if(!CheckLostState()) return FALSE;
 
 	CurrentGraphicsWindow = &GraphicsWindow;
-	
+
 	SwapChain = CurrentGraphicsWindow->GetSwapChain();
 	if(SwapChain == NULL)
 	{
 		Error.SetMessage("Unable to retrieve the swap chain from the graphics window!");
 		return FALSE;
 	}
-	
+
 	if(FAILED(Direct3DDevice->SetRenderTarget(0, CurrentGraphicsWindow->GetBackBuffer())))
 	{
 		Error.SetMessage("Unable to set the swap chain back buffer as a render target!");
 		return FALSE;
 	}
-	
-	//if(FAILED(Direct3DDevice->SetDepthStencilSurface(CurrentGraphicsWindow->GetZBuffer())))
-	/*if (FAILED(Direct3DDevice->SetDepthStencilSurface(CurrentGraphicsWindow->GetBackBuffer())))
+
+	if(FAILED(Direct3DDevice->SetDepthStencilSurface(CurrentGraphicsWindow->GetZBuffer())))
 	{
 		Error.SetMessage("XXXXXXXXXXXX!");
 		return FALSE;
-	}*/
+	}
 
 	ScreenWidth = CurrentGraphicsWindow->GetWidth();
 	ScreenHeight = CurrentGraphicsWindow->GetHeight();
 	ScreenAspect = CurrentGraphicsWindow->GetScreenAspect();
 
-	//SetProjection();
+	SetProjection();
 
-	//Direct3DDevice->Clear(0, NULL, D3DCLEAR_ZBUFFER, 0, 1.0f, 0);
+	Direct3DDevice->Clear(0, NULL, D3DCLEAR_ZBUFFER, 0, 1.0f, 0);
 
-	//if(FAILED(Direct3DDevice->BeginScene()))
-	//{
-	//	Error.SetMessage("Unable to begin a new scene!");
-	//	return FALSE;
-	//}
+	if(FAILED(Direct3DDevice->BeginScene()))
+	{
+		Error.SetMessage("Unable to begin a new scene!");
+		return FALSE;
+	}
 
 	SetShader();
 	SetShaderConstants();
@@ -371,10 +369,10 @@ BOOL GRAPHICS::BeginRender(GRAPHICS_WINDOW& GraphicsWindow)
 //+-----------------------------------------------------------------------------
 VOID GRAPHICS::EndRender()
 {
-	//Direct3DDevice->EndScene();
+	Direct3DDevice->EndScene();
 
-	//CurrentGraphicsWindow->GetSwapChain()->Present(NULL, NULL, CurrentGraphicsWindow->GetWindow(), NULL, 0);
-	//CurrentGraphicsWindow = NULL;
+	CurrentGraphicsWindow->GetSwapChain()->Present(NULL, NULL, CurrentGraphicsWindow->GetWindow(), NULL, 0);
+	CurrentGraphicsWindow = NULL;
 
 	ScreenWidth = 0;
 	ScreenHeight = 0;
@@ -394,8 +392,8 @@ VOID GRAPHICS::RenderDebug()
 
 	Position = Camera.GetTarget();
 
-//	Stream << "Width:     " << MainWindow.GetWidth() << "\n";
-//	Stream << "Height:    " << MainWindow.GetHeight() << "\n";
+	//Stream << "Width:     " << MainWindow.GetWidth() << "\n";
+	//Stream << "Height:    " << MainWindow.GetHeight() << "\n";
 	Stream << "Pitch:     " << Camera.GetPitch() << "\n";
 	Stream << "Yaw:       " << Camera.GetYaw() << "\n";
 	Stream << "Distance:  " << Camera.GetDistance() << "\n";
@@ -449,9 +447,9 @@ VOID GRAPHICS::RenderAxises()
 	CameraYaw = Camera.GetYaw();
 	CameraDistance = 10.0f;
 
-	CameraPosition.x = CameraDistance * std::cos(CameraPitch) * std::cos(CameraYaw);
-	CameraPosition.y = CameraDistance * std::cos(CameraPitch) * std::sin(CameraYaw);
-	CameraPosition.z = CameraDistance * std::sin(CameraPitch);
+	CameraPosition.x = CameraDistance * cos(CameraPitch) * cos(CameraYaw);
+	CameraPosition.y = CameraDistance * cos(CameraPitch) * sin(CameraYaw);
+	CameraPosition.z = CameraDistance * sin(CameraPitch);
 
 	TempViewMatrix = ViewMatrix;
 	SetCamera(CameraPosition, D3DXVECTOR3(0.0f, 0.0f, 0.0f));
@@ -572,9 +570,9 @@ VOID GRAPHICS::RenderBox(CONST D3DXVECTOR3& Corner1, CONST D3DXVECTOR3& Corner2,
 	DWORD OldCullMode;
 	DWORD OldFillMode;
 
-	Width = std::abs(Corner1.x - Corner2.x);
-	Height = std::abs(Corner1.y - Corner2.y);
-	Depth = std::abs(Corner1.z - Corner2.z);
+	Width = abs(Corner1.x - Corner2.x);
+	Height = abs(Corner1.y - Corner2.y);
+	Depth = abs(Corner1.z - Corner2.z);
 
 	if(FAILED(D3DXCreateBox(Direct3DDevice, Width, Height, Depth, &Mesh, NULL))) return;
 
@@ -649,6 +647,7 @@ VOID GRAPHICS::RenderSphere(CONST D3DXVECTOR3& Center, FLOAT Radius, D3DCOLOR Co
 VOID GRAPHICS::RenderParticle(D3DCOLOR Color, FLOAT Left, FLOAT Top, FLOAT Right, FLOAT Bottom)
 {
 	PARTICLE_VERTEX* VertexPointer;
+	PARTICLE_VERTEX Particle_Vertex;
 
 	if(FAILED(ParticleVertexBuffer->Lock(0, 0, reinterpret_cast<VOID**>(&VertexPointer), 0))) return;
 
@@ -663,8 +662,8 @@ VOID GRAPHICS::RenderParticle(D3DCOLOR Color, FLOAT Left, FLOAT Top, FLOAT Right
 
 	ParticleVertexBuffer->Unlock();
 
-	Direct3DDevice->SetFVF(PARTICLE_VERTEX::FORMAT);
-	Direct3DDevice->SetStreamSource(0, ParticleVertexBuffer, 0, sizeof(PARTICLE_VERTEX));
+	Direct3DDevice->SetFVF(Particle_Vertex.FORMAT);
+	Direct3DDevice->SetStreamSource(0, ParticleVertexBuffer, 0, sizeof(Particle_Vertex));
 	Direct3DDevice->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2);
 }
 
@@ -676,6 +675,7 @@ VOID GRAPHICS::RenderGroundTexture()
 {
 	FLOAT Scale;
 	TEXTURE* Texture;
+	GROUND_VERTEX Ground_Vertex;
 
 	if(!Properties().UseGroundTexture) return;
 
@@ -702,8 +702,8 @@ VOID GRAPHICS::RenderGroundTexture()
 	Direct3DDevice->SetRenderState(D3DRS_ZWRITEENABLE, TRUE);
 
 	Direct3DDevice->SetTexture(0, Texture->GetTexture());
-	Direct3DDevice->SetFVF(GROUND_VERTEX::FORMAT);
-	Direct3DDevice->SetStreamSource(0, GroundVertexBuffer, 0, sizeof(GROUND_VERTEX));
+	Direct3DDevice->SetFVF(Ground_Vertex.FORMAT);
+	Direct3DDevice->SetStreamSource(0, GroundVertexBuffer, 0, sizeof(Ground_Vertex));
 	Direct3DDevice->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2);
 }
 
@@ -724,9 +724,9 @@ VOID GRAPHICS::RenderTexture(TEXTURE* Texture, RECT* SourceRect, INT X, INT Y, D
 	D3DXMatrixIdentity(&WorldMatrix);
 	Direct3DDevice->SetTransform(D3DTS_WORLD, &WorldMatrix);
 
-	Sprite->SetTransform(&WorldMatrix);
-	Sprite->Begin(D3DXSPRITE_ALPHABLEND);
-	Sprite->Draw(Texture->GetTexture(), SourceRect, NULL, &Position, Color);
+	//Sprite->SetTransform(&WorldMatrix);
+	//Sprite->Begin(D3DXSPRITE_ALPHABLEND);
+	//Sprite->Draw(Texture->GetTexture(), SourceRect, NULL, &Position, Color);
 	Sprite->End();
 }
 
@@ -768,9 +768,9 @@ VOID GRAPHICS::RenderTexture(TEXTURE* Texture, RECT* SourceRect, RECT* TargetRec
 	D3DXMatrixScaling(&WorldMatrix, ScaleX, ScaleY, 1.0f);
 	Direct3DDevice->SetTransform(D3DTS_WORLD, &WorldMatrix);
 
-	Sprite->SetTransform(&WorldMatrix);
-	Sprite->Begin(D3DXSPRITE_ALPHABLEND);
-	Sprite->Draw(Texture->GetTexture(), SourceRect, NULL, &Position, Color);
+	//Sprite->SetTransform(&WorldMatrix);
+	//Sprite->Begin(D3DXSPRITE_ALPHABLEND);
+	//Sprite->Draw(Texture->GetTexture(), SourceRect, NULL, &Position, Color);
 	Sprite->End();
 }
 
@@ -790,9 +790,9 @@ VOID GRAPHICS::RenderText(CONST std::string& Text, INT X, INT Y, D3DCOLOR Color)
 	D3DXMatrixIdentity(&WorldMatrix);
 	Direct3DDevice->SetTransform(D3DTS_WORLD, &WorldMatrix);
 
-	Sprite->SetTransform(&WorldMatrix);
-	Sprite->Begin(D3DXSPRITE_ALPHABLEND);
-	Font.GetFont()->DrawText(Sprite, Text.c_str(), static_cast<INT>(Text.size()), &Rect, DT_LEFT | DT_WORDBREAK, Color);
+	//Sprite->SetTransform(&WorldMatrix);
+	//Sprite->Begin(D3DXSPRITE_ALPHABLEND);
+	//Font.GetFont()->DrawText(Sprite, Text.c_str(), static_cast<INT>(Text.size()), &Rect, DT_LEFT | DT_WORDBREAK, Color);
 	Sprite->End();
 }
 
@@ -805,9 +805,9 @@ VOID GRAPHICS::RenderText(CONST std::string& Text, RECT* Rect, D3DCOLOR Color)
 	D3DXMatrixIdentity(&WorldMatrix);
 	Direct3DDevice->SetTransform(D3DTS_WORLD, &WorldMatrix);
 
-	Sprite->SetTransform(&WorldMatrix);
-	Sprite->Begin(D3DXSPRITE_ALPHABLEND);
-	Font.GetFont()->DrawText(Sprite, Text.c_str(), static_cast<INT>(Text.size()), Rect, DT_LEFT | DT_WORDBREAK, Color);
+	//Sprite->SetTransform(&WorldMatrix);
+	//Sprite->Begin(D3DXSPRITE_ALPHABLEND);
+	//Font.GetFont()->DrawText(Sprite, Text.c_str(), static_cast<INT>(Text.size()), Rect, DT_LEFT | DT_WORDBREAK, Color);
 	Sprite->End();
 }
 
@@ -822,7 +822,7 @@ VOID GRAPHICS::SetShader()
 	EnableLights = (UseShading && Properties().UseLighting);
 	Direct3DDevice->SetRenderState(D3DRS_CULLMODE, (UseCulling ? (Properties().ClockwiseCulling ? D3DCULL_CW : D3DCULL_CCW) : D3DCULL_NONE));
 	Direct3DDevice->SetRenderState(D3DRS_FILLMODE, Properties().FillMode);
-	//Direct3DDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
+
 	if(Properties().UseShaders)
 	{
 		VertexShader.Use();
@@ -874,6 +874,8 @@ VOID GRAPHICS::SetShaderConstants()
 //+-----------------------------------------------------------------------------
 VOID GRAPHICS::PrepareForLines()
 {
+	LINE_VERTEX Line_Vertex;
+
 	Direct3DDevice->SetVertexShader(NULL);
 	Direct3DDevice->SetPixelShader(NULL);
 	Direct3DDevice->SetTexture(0, NULL);
@@ -882,7 +884,7 @@ VOID GRAPHICS::PrepareForLines()
 	Direct3DDevice->SetRenderState(D3DRS_ZWRITEENABLE, FALSE);
 	Direct3DDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
 
-	Direct3DDevice->SetFVF(LINE_VERTEX::FORMAT);
+	Direct3DDevice->SetFVF(Line_Vertex.FORMAT);
 }
 
 
@@ -1110,8 +1112,8 @@ BOOL GRAPHICS::OnResetDevice()
 BOOL GRAPHICS::CreateDummyWindow()
 {
 	Window = CreateWindowEx(0, "BUTTON", "", WS_POPUP,
-		0, 0, 1, 1,
-		NULL, NULL, GetModuleHandle(NULL), NULL);
+							0, 0, 1, 1,
+							NULL, NULL, GetModuleHandle(NULL), NULL);
 	if(Window == NULL)
 	{
 		Error.SetMessage("Unable to create a dummy window!");
@@ -1275,8 +1277,8 @@ BOOL GRAPHICS::CreateDirect3DDevice()
 	GraphicsInfo.DeviceInfo.Windowed = TRUE;
 
 	if(FAILED(Direct3D->CreateDevice(D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, Window,
-		D3DCREATE_SOFTWARE_VERTEXPROCESSING,
-		&GraphicsInfo.DeviceInfo, &Direct3DDevice)))
+									 D3DCREATE_SOFTWARE_VERTEXPROCESSING,
+									 &GraphicsInfo.DeviceInfo, &Direct3DDevice)))
 	{
 		Error.SetMessage("Unable to create a Direct3D device!");
 		return FALSE;
@@ -1293,6 +1295,9 @@ BOOL GRAPHICS::CreateObjects()
 {
 	PARTICLE_VERTEX* ParticleVertexPointer;
 	GROUND_VERTEX* GroundVertexPointer;
+	GROUND_VERTEX Ground_Vertex;
+	LINE_VERTEX Line_Vertex;
+
 
 	if(FAILED(D3DXCreateSprite(Direct3DDevice, &Sprite)))
 	{
@@ -1300,13 +1305,13 @@ BOOL GRAPHICS::CreateObjects()
 		return FALSE;
 	}
 
-	if(FAILED(Direct3DDevice->CreateVertexBuffer(sizeof(LINE_VERTEX) * 2, 0, LINE_VERTEX::FORMAT, D3DPOOL_MANAGED, &LineVertexBuffer, NULL)))
+	if(FAILED(Direct3DDevice->CreateVertexBuffer(sizeof(LINE_VERTEX) * 2, 0, Line_Vertex.FORMAT, D3DPOOL_MANAGED, &LineVertexBuffer, NULL)))
 	{
 		Error.SetMessage("Unable to create a line vertex buffer!");
 		return FALSE;
 	}
 
-	if(FAILED(Direct3DDevice->CreateVertexBuffer(sizeof(PARTICLE_VERTEX) * 4, 0, PARTICLE_VERTEX::FORMAT, D3DPOOL_MANAGED, &ParticleVertexBuffer, NULL)))
+	if(FAILED(Direct3DDevice->CreateVertexBuffer(sizeof(PARTICLE_VERTEX) * 4, 0, Ground_Vertex.FORMAT ,D3DPOOL_MANAGED, &ParticleVertexBuffer, NULL)))
 	{
 		Error.SetMessage("Unable to create a particle vertex buffer!");
 		return FALSE;
@@ -1336,7 +1341,7 @@ BOOL GRAPHICS::CreateObjects()
 
 	ParticleVertexBuffer->Unlock();
 
-	if(FAILED(Direct3DDevice->CreateVertexBuffer(sizeof(GROUND_VERTEX) * 4, 0, GROUND_VERTEX::FORMAT, D3DPOOL_MANAGED, &GroundVertexBuffer, NULL)))
+	if(FAILED(Direct3DDevice->CreateVertexBuffer(sizeof(GROUND_VERTEX) * 4, 0, Ground_Vertex.FORMAT, D3DPOOL_MANAGED, &GroundVertexBuffer, NULL)))
 	{
 		Error.SetMessage("Unable to create a ground vertex buffer!");
 		return FALSE;

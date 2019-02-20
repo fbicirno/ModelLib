@@ -3,7 +3,7 @@
 //+-----------------------------------------------------------------------------
 #include "StdAfx.h"
 #include "ModelGeoset.h"
-#include "FlashingGeoset.h"
+
 
 //+-----------------------------------------------------------------------------
 //| Constructor
@@ -46,10 +46,11 @@ VOID MODEL_GEOSET::Clear()
 	}
 
 	SAFE_CLEAR(GeosetData.VertexContainer);
+	/*
 	SAFE_CLEAR(GeosetData.FaceContainer);
 	SAFE_CLEAR(GeosetData.GroupContainer);
 	SAFE_CLEAR(GeosetData.ExtentContainer);
-
+	*/
 
 
 	MeshBuildt = TRUE;
@@ -100,9 +101,7 @@ MODEL_GEOSET_DATA& MODEL_GEOSET::Data()
 //+-----------------------------------------------------------------------------
 INT MODEL_GEOSET::GetRenderOrder()
 {
-	if (!MaterialNode.IsAttached())
-		return 0;
-	
+	if(!MaterialNode.IsAttached()) return 0;
 
 	return MaterialNode.GetObjectData()->GetRenderOrder();
 }
@@ -165,21 +164,21 @@ VOID MODEL_GEOSET::Render(CONST SEQUENCE_TIME& Time, BOOL Animated)
 	{
 		CurrentMesh = &Mesh;
 	}
+
 	if(!MaterialNode.IsAttached()) return;
 	Material = MaterialNode.GetObjectData();
+
 	for(i = 0; i < Material->Data().LayerContainer.GetTotalSize(); i++)
 	{
 		if(!Material->Data().LayerContainer.ValidIndex(i)) continue;
 		Layer = Material->Data().LayerContainer[i];
-		
-		
+
 		TextureAnimation = Layer->TextureAnimationNode.IsAttached() ? Layer->TextureAnimationNode.GetObjectData() : NULL;
 
 		BuildAnimatedTexture(Time, TextureAnimation, Layer->Data().Alpha.GetScalar(Time));
 		Layer->UseMaterial(Time);
 		CurrentMesh->Render();
 	}
-	
 }
 
 
@@ -216,7 +215,7 @@ BOOL MODEL_GEOSET::BuildMesh()
 
 	if(!Mesh.Create(NrOfVertices, NrOfFaces)) return FALSE;
 	if(!AnimatedMesh.Create(NrOfVertices, NrOfFaces)) return FALSE;
-	
+
 	if(!Mesh.LockVertexBuffer(&VertexPointer)) return FALSE;
 	if(!AnimatedMesh.LockVertexBuffer(&AnimatedVertexPointer))
 	{
@@ -235,7 +234,7 @@ BOOL MODEL_GEOSET::BuildMesh()
 	{
 		Color = 0xFFFFFFFF;
 	}
-	
+
 	for(i = 0; i < GeosetData.VertexContainer.GetTotalSize(); i++)
 	{
 		if(GeosetData.VertexContainer.ValidIndex(i))
@@ -264,7 +263,7 @@ BOOL MODEL_GEOSET::BuildMesh()
 		Mesh.UnlockIndexBuffer();
 		return FALSE;
 	}
-	
+
 	for(i = 0; i < GeosetData.FaceContainer.GetTotalSize(); i++)
 	{
 		if(GeosetData.FaceContainer.ValidIndex(i))
@@ -288,7 +287,7 @@ BOOL MODEL_GEOSET::BuildMesh()
 
 	AnimatedMesh.UnlockIndexBuffer();
 	Mesh.UnlockIndexBuffer();
-	
+
 	MeshBuildt = TRUE;
 
 	return TRUE;

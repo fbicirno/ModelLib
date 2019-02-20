@@ -261,7 +261,7 @@ BOOL TEXTURE_LOADER_BLP::LoadCompressed(TEXTURE& Texture, BLP_HEADER& Header, BU
 	LPDIRECT3DDEVICE9 Direct3DDevice;
 	DWORD JpegHeaderSize;
 
-	std::memcpy(reinterpret_cast<CHAR*>(&JpegHeaderSize), &Buffer[sizeof(BLP_HEADER)], sizeof(DWORD));
+	memcpy(reinterpret_cast<CHAR*>(&JpegHeaderSize), &Buffer[sizeof(BLP_HEADER)], sizeof(DWORD));
 
 	Direct3DDevice = Graphics.GetDevice();
 	if(Direct3DDevice == NULL)
@@ -271,7 +271,7 @@ BOOL TEXTURE_LOADER_BLP::LoadCompressed(TEXTURE& Texture, BLP_HEADER& Header, BU
 	}
 
 	if(FAILED(D3DXCreateTexture(Direct3DDevice, Header.Width, Header.Height, D3DX_DEFAULT, 0,
-		Graphics.GetTextureFormat(), D3DPOOL_MANAGED, &Texture.Texture)))
+								Graphics.GetTextureFormat(), D3DPOOL_MANAGED, &Texture.Texture)))
 	{
 		Error.SetMessage("Unable to load \"" + CurrentFileName + "\", texture creation failed!");
 		return FALSE;
@@ -283,14 +283,16 @@ BOOL TEXTURE_LOADER_BLP::LoadCompressed(TEXTURE& Texture, BLP_HEADER& Header, BU
 		return FALSE;
 	}
 
-	std::memcpy(&TempBuffer2[0], &Buffer[sizeof(BLP_HEADER) + sizeof(DWORD)], JpegHeaderSize);
-	std::memcpy(&TempBuffer2[JpegHeaderSize], &Buffer[Header.Offset[0]], Header.Size[0]);
+	memcpy(&TempBuffer2[0], &Buffer[sizeof(BLP_HEADER) + sizeof(DWORD)], JpegHeaderSize);
+	memcpy(&TempBuffer2[JpegHeaderSize], &Buffer[Header.Offset[0]], Header.Size[0]);
 
+	/*
 	if(!Jpeg.Read(TempBuffer2, TempBuffer))
 	{
 		Error.SetMessage("Unable to load \"" + CurrentFileName + "\", BLP reading failed!");
 		return FALSE;
 	}
+	*/
 
 	if(FAILED(Texture.Texture->LockRect(0, &LockedRect, NULL, D3DLOCK_DISCARD)))
 	{
@@ -306,10 +308,10 @@ BOOL TEXTURE_LOADER_BLP::LoadCompressed(TEXTURE& Texture, BLP_HEADER& Header, BU
 	{
 		for(X = 0; X < static_cast<INT>(Header.Width); X++)
 		{
-			Pointer[Index++] = TempBuffer[BufferIndex++];
-			Pointer[Index++] = TempBuffer[BufferIndex++];
-			Pointer[Index++] = TempBuffer[BufferIndex++];
-			Pointer[Index++] = TempBuffer[BufferIndex++];
+		//Pointer[Index++] = TempBuffer[BufferIndex++];
+		//	Pointer[Index++] = TempBuffer[BufferIndex++];
+		//	Pointer[Index++] = TempBuffer[BufferIndex++];
+		//	Pointer[Index++] = TempBuffer[BufferIndex++];
 		}
 
 		Index += LockedRect.Pitch - (Header.Width * 4);

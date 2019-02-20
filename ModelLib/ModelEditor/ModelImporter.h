@@ -15,7 +15,7 @@
 //| Included files
 //+-----------------------------------------------------------------------------
 #include "Container.h"
-#include "buffer2.h"
+#include "Buffer.h"
 #include "War3ModelImporter\\War3ModelImporter.h"
 
 

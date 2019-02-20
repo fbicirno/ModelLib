@@ -40,7 +40,7 @@ BOOL TEXTURE_LOADER_BASIC::Save(TEXTURE& Texture, CONST std::string& FileName, B
 {
 	INT BufferSize;
 	std::string Extention;
-	LPD3DXBUFFER TempBuffer = NULL;
+	LPD3DXBUFFER TempBuffer;
 	std::map<std::string, D3DXIMAGE_FILEFORMAT>::iterator i;
 
 	CurrentFileName = FileName;
@@ -53,12 +53,13 @@ BOOL TEXTURE_LOADER_BASIC::Save(TEXTURE& Texture, CONST std::string& FileName, B
 		return FALSE;
 	}
 
+	/*
 	if(FAILED(D3DXSaveTextureToFileInMemory(&TempBuffer, i->second, Texture.GetTexture(), NULL)))
 	{
 		Error.SetMessage("Unable to save \"" + FileName + "\"!");
 		return FALSE;
 	}
-	
+	*/
 
 	BufferSize = TempBuffer->GetBufferSize();
 	if(!Buffer.Resize(BufferSize))

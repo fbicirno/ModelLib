@@ -147,6 +147,5 @@ BOOL MESH::RayIntersects(CONST D3DXVECTOR3& RayPosition, CONST D3DXVECTOR3& RayD
 //+-----------------------------------------------------------------------------
 VOID MESH::Render()
 {
-	if (Mesh) Mesh->DrawSubset(0);
-	
+	if(Mesh) Mesh->DrawSubset(0);
 }

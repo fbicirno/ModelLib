@@ -8,7 +8,7 @@
 //+-----------------------------------------------------------------------------
 //| Included files
 //+-----------------------------------------------------------------------------
-#include <Window.h>
+#include "Window.h"
 #include "ResourceLoader.h"
 
 
@@ -84,7 +84,7 @@ extern MAIN_WINDOW MainWindow;
 #include "AnimationWindow.h"
 #include "TextureWindow.h"
 #include "ModelWindow.h"
-#include "MpqWindow.h"
+//#include "MpqWindow.h"
 #include "NodeManagerWindow.h"
 #include "CameraManagerWindow.h"
 #include "GeosetManagerWindow.h"

@@ -3,7 +3,7 @@
 //+-----------------------------------------------------------------------------
 #include "StdAfx.h"
 #include "ModelHistory.h"
-//#include "MainWindow.h"
+#include "MainWindow.h"
 
 
 //+-----------------------------------------------------------------------------
@@ -181,11 +181,11 @@ UINT MODEL_HISTORY::GetMaxMenuItemId() CONST
 //+-----------------------------------------------------------------------------
 VOID MODEL_HISTORY::RedrawMenu()
 {
-	/*INT Id;
+	INT Id;
 	HMENU Menu;
 	std::list<MODEL_HISTORY_NODE>::iterator i;
 
-	Menu = MainWindow.GetHistoryMenu();
+	//Menu = MainWindow.GetHistoryMenu();
 	if(Menu == NULL) return;
 
 	while(GetMenuItemCount(Menu) > 2)
@@ -203,6 +203,5 @@ VOID MODEL_HISTORY::RedrawMenu()
 		i++;
 	}
 
-	DrawMenuBar(MainWindow.GetWindow());
-	*/
+	//DrawMenuBar(MainWindow.GetWindow());
 }

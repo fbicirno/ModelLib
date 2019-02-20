@@ -86,7 +86,7 @@
     <ClCompile Include="ModelEditor\AnimationWindow.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="ModelEditor\Buffer2.cpp" />
+    <ClCompile Include="ModelEditor\Buffer.cpp" />
     <ClCompile Include="ModelEditor\Camera.cpp" />
     <ClCompile Include="ModelEditor\CameraManagerWindow.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -114,7 +114,7 @@
     </ClCompile>
     <ClCompile Include="ModelEditor\Icon.cpp" />
     <ClCompile Include="ModelEditor\Interpolator.cpp" />
-    <ClCompile Include="ModelEditor\Jpeg2.cpp" />
+    <ClCompile Include="ModelEditor\Jpeg.cpp" />
     <ClCompile Include="ModelEditor\Keyboard.cpp" />
     <ClCompile Include="ModelEditor\MainWindow.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -177,7 +177,7 @@
     </ClCompile>
     <ClCompile Include="ModelEditor\TeamColor.cpp" />
     <ClCompile Include="ModelEditor\TemporaryFile.cpp" />
-    <ClCompile Include="ModelEditor\Texture2.cpp" />
+    <ClCompile Include="ModelEditor\Texture.cpp" />
     <ClCompile Include="ModelEditor\TextureAnimationManagerWindow.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -198,7 +198,7 @@
     <ClInclude Include="ModelEditor\AnimationWindow.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="ModelEditor\Buffer2.h" />
+    <ClInclude Include="ModelEditor\Buffer.h" />
     <ClInclude Include="ModelEditor\Camera.h" />
     <ClInclude Include="ModelEditor\CameraManagerWindow.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -231,7 +231,7 @@
     </ClInclude>
     <ClInclude Include="ModelEditor\Icon.h" />
     <ClInclude Include="ModelEditor\Interpolator.h" />
-    <ClInclude Include="ModelEditor\Jpeg2.h" />
+    <ClInclude Include="ModelEditor\Jpeg.h" />
     <ClInclude Include="ModelEditor\Keyboard.h" />
     <ClInclude Include="ModelEditor\MainWindow.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -301,7 +301,7 @@
     <ClInclude Include="ModelEditor\StdAfx.h" />
     <ClInclude Include="ModelEditor\TeamColor.h" />
     <ClInclude Include="ModelEditor\TemporaryFile.h" />
-    <ClInclude Include="ModelEditor\Texture2.h" />
+    <ClInclude Include="ModelEditor\Texture.h" />
     <ClInclude Include="ModelEditor\TextureAnimationManagerWindow.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClInclude>

@@ -38,7 +38,7 @@ MPQ::~MPQ()
 //+-----------------------------------------------------------------------------
 BOOL MPQ::Open(CONST std::string& FileName)
 {
-	Close(); 
+	Close();
 
 	if(!SFileOpenArchive(FileName.c_str(), 0, 0, &MpqHandle))
 	{
@@ -156,10 +156,8 @@ BOOL MPQ::LoadFile(CONST std::string& FileName, BUFFER& Buffer)
 		return FALSE;
 	}
 
-	if (!SFileOpenFileEx(MpqHandle, FileName.c_str(), 0, &FileHandle))
-	{
-		return 0;
-	}
+	if(!SFileOpenFileEx(MpqHandle, FileName.c_str(), 0, &FileHandle)) return 0;
+
 	Size = SFileGetFileSize(FileHandle, NULL);
 	if(!Buffer.Resize(Size))
 	{

@@ -5,7 +5,6 @@
 #include "Camera.h"
 #include "Graphics.h"
 
-
 //+-----------------------------------------------------------------------------
 //| Global objects
 //+-----------------------------------------------------------------------------
@@ -99,12 +98,12 @@ VOID CAMERA::Update(HWND Window)
 
 	if(ValidMouseMove && Mouse.ButtonDown(BUTTON_RIGHT))
 	{
-		FLOAT X_X = Mouse.GetDX() * std::sin(Yaw);
-		FLOAT X_Y = -Mouse.GetDY() * std::sin(Pitch) * std::cos(Yaw);
-		FLOAT Y_X = -Mouse.GetDX() * std::cos(Yaw);
-		FLOAT Y_Y = -Mouse.GetDY() * std::sin(Pitch) * std::sin(Yaw);
+		FLOAT X_X = Mouse.GetDX() * sin(Yaw);
+		FLOAT X_Y = -Mouse.GetDY() * sin(Pitch) * cos(Yaw);
+		FLOAT Y_X = -Mouse.GetDX() * cos(Yaw);
+		FLOAT Y_Y = -Mouse.GetDY() * sin(Pitch) * sin(Yaw);
 		FLOAT Z_X = 0.0;
-		FLOAT Z_Y = Mouse.GetDY() * std::cos(Pitch);
+		FLOAT Z_Y = Mouse.GetDY() * cos(Pitch);
 		FLOAT Factor;
 
 		Factor = CAMERA_FACTOR_MOVE * (Properties().RelativeMove ? Distance : CAMERA_FACTOR_RELATIVE_MOVE);
@@ -129,8 +128,8 @@ VOID CAMERA::SetPosition(CONST D3DXVECTOR3& SourcePosition, CONST D3DXVECTOR3& T
 	D3DXVec3Subtract(&CameraView, &TargetPosition, &SourcePosition);
 
 	Distance = D3DXVec3Length(&CameraView);
-	Pitch = (Distance == 0.0f) ? 0.0f : std::asin(-CameraView.z / Distance);
-	Yaw = std::atan2((SourcePosition.y - TargetPosition.y), (SourcePosition.x - TargetPosition.x));
+	Pitch = (Distance == 0.0f) ? 0.0f : asin(-CameraView.z / Distance);
+	Yaw = atan2((SourcePosition.y - TargetPosition.y), (SourcePosition.x - TargetPosition.x));
 
 	if(Distance < CAMERA_MIN_DISTANCE) Distance = CAMERA_MIN_DISTANCE;
 	if(Distance > CAMERA_MAX_DISTANCE) Distance = CAMERA_MAX_DISTANCE;
@@ -292,7 +291,7 @@ VOID CAMERA::DisableMouseMove()
 //+-----------------------------------------------------------------------------
 VOID CAMERA::UpdateSourcePosition()
 {
-	Source.x = Target.x + Distance * std::cos(Pitch) * std::cos(Yaw);
-	Source.y = Target.y + Distance * std::cos(Pitch) * std::sin(Yaw);
-	Source.z = Target.z + Distance * std::sin(Pitch);
+	Source.x = Target.x + Distance * cos(Pitch) * cos(Yaw);
+	Source.y = Target.y + Distance * cos(Pitch) * sin(Yaw);
+	Source.z = Target.z + Distance * sin(Pitch);
 }

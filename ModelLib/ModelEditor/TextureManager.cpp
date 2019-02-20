@@ -3,7 +3,6 @@
 //+-----------------------------------------------------------------------------
 #include "StdAfx.h"
 #include "TextureManager.h"
-#include "texture2.h"
 //#include "TextureManagerWindow.h"
 
 
@@ -356,7 +355,7 @@ TEXTURE* TEXTURE_MANAGER::GetReplaceableTexture(INT ReplaceableId)
 
 	switch(ReplaceableId)
 	{
-	case 1:
+		case 1:
 		{
 			Texture = GetTeamColorTexture();
 			if(Texture == NULL) break;
@@ -364,7 +363,7 @@ TEXTURE* TEXTURE_MANAGER::GetReplaceableTexture(INT ReplaceableId)
 			return Texture;
 		}
 
-	case 2:
+		case 2:
 		{
 			Texture = GetTeamGlowTexture();
 			if(Texture == NULL) break;
@@ -372,32 +371,32 @@ TEXTURE* TEXTURE_MANAGER::GetReplaceableTexture(INT ReplaceableId)
 			return Texture;
 		}
 
-	case 11:
+		case 11:
 		{
 			return ReplaceableTexture11;
 		}
 
-	case 31:
+		case 31:
 		{
 			return ReplaceableTexture31;
 		}
 
-	case 32:
+		case 32:
 		{
 			return ReplaceableTexture32;
 		}
 
-	case 33:
+		case 33:
 		{
 			return ReplaceableTexture33;
 		}
 
-	case 34:
+		case 34:
 		{
 			return ReplaceableTexture34;
 		}
 
-	case 35:
+		case 35:
 		{
 			return ReplaceableTexture35;
 		}

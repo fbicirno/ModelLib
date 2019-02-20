@@ -8,11 +8,8 @@
 //+-----------------------------------------------------------------------------
 //| Included files
 //+-----------------------------------------------------------------------------
-
-#include "jpeg2.h"
-
-#include "Definitions.h"
-#include "buffer2.h"
+#include "Buffer.h"
+#include "Camera.h"
 #include "Container.h"
 #include "SimpleContainer.h"
 #include "DataInStream.h"
@@ -23,6 +20,7 @@
 #include "Icon.h"
 #include "NodeIcon.h"
 #include "Interpolator.h"
+#include "Jpeg.h"
 #include "Keyboard.h"
 #include "Mouse.h"
 #include "Properties.h"

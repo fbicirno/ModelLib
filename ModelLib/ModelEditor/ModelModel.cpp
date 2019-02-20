@@ -61,7 +61,7 @@ BOOL MODEL_MODEL::Save(TOKEN_OUT_STREAM& TokenStream)
 //+-----------------------------------------------------------------------------
 BOOL MODEL_MODEL::Load(TOKEN_IN_STREAM& TokenStream)
 {
-	BOOL ErrorOccured = false;
+	BOOL ErrorOccured;
 	std::string Token;
 
 	while(!TokenStream.Eof())

@@ -102,6 +102,7 @@ BOOL MODEL_LOADER_MDX::Load(MODEL& Model, CONST std::string& FileName, BUFFER& B
 
 	CurrentFileName = FileName;
 	DataStream.SetFileName(FileName);
+
 	if(!DataStream.Load(Buffer)) return FALSE;
 
 	if(ReverseDWord(DataStream.ReadDWord()) != 'MDLX')
@@ -109,6 +110,7 @@ BOOL MODEL_LOADER_MDX::Load(MODEL& Model, CONST std::string& FileName, BUFFER& B
 		Error.SetMessage("The file is not an MDX model!");
 		return FALSE;
 	}
+
 	while(!DataStream.Eof())
 	{
 		Group = ReverseDWord(DataStream.ReadDWord());
@@ -123,6 +125,7 @@ BOOL MODEL_LOADER_MDX::Load(MODEL& Model, CONST std::string& FileName, BUFFER& B
 
 		if(!(i->second(Model, DataStream, Size))) return FALSE;
 	}
+
 	Model.ConnectNodes();
 	Model.UnwrapPivotPoints();
 

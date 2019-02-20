@@ -40,11 +40,14 @@ for index,info in ipairs(model_list) do
     end 
     if model then 
         local list = core.load_animate(model)
-        local out_path = 'screen\\' .. path:gsub('.+\\','')
+        local file_name = path:gsub('.+\\','')
+        local out_screen_path = 'screen\\' .. file_name
+        local out_model_path = 'model\\' .. file_name
+
         if list then 
             s[#s + 1] = "['" .. info.name .. "']\n"
-            s[#s + 1] = 'path = [[' .. out_path .. ']]\n'
-            s[#s + 1] = 'model = [[sc2_model\\' .. path:gsub('.+\\','') .. ']]\n'
+            s[#s + 1] = 'screen = [[' .. out_screen_path .. ']]\n'
+            s[#s + 1] = 'model = [[' .. out_model_path .. ']]\n'
             s[#s + 1] = 'animation = {\n'
             for i,data in ipairs(list) do 
                 s[#s + 1] = "'".. data.name:lower() .. "' = {\n"
@@ -55,12 +58,14 @@ for index,info in ipairs(model_list) do
             end 
             s[#s + 1] = '}\n\n'
         end 
-        core.load_mpq_file(path,out_path)
+        core.load_mpq_file(path,out_model_path)
+        core.save_model(model,out_screen_path)
+
         local texture_list = core.load_texture_list(model)
         if texture_list then 
             for index,name in ipairs(texture_list) do 
                 if name and name:len() > 0 then 
-                    core.load_mpq_file(name,'screen\\' .. name)
+                    core.load_mpq_file(name,'model\\' .. name)
                 end
             end 
         end 

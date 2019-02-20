@@ -93,9 +93,6 @@
     <ClCompile Include="ModelEditor\AnimationWindow.cpp">
       <Filter>ModelEditor\Window</Filter>
     </ClCompile>
-    <ClCompile Include="ModelEditor\Buffer2.cpp">
-      <Filter>ModelEditor\File</Filter>
-    </ClCompile>
     <ClCompile Include="ModelEditor\CameraManagerWindow.cpp">
       <Filter>ModelEditor\Window</Filter>
     </ClCompile>
@@ -145,9 +142,6 @@
       <Filter>ModelEditor\Render</Filter>
     </ClCompile>
     <ClCompile Include="ModelEditor\Graphics.cpp">
-      <Filter>ModelEditor\Render</Filter>
-    </ClCompile>
-    <ClCompile Include="ModelEditor\Jpeg2.cpp">
       <Filter>ModelEditor\Render</Filter>
     </ClCompile>
     <ClCompile Include="ModelEditor\Model.cpp">
@@ -243,9 +237,6 @@
     <ClCompile Include="ModelEditor\NodeManagerWindow.cpp">
       <Filter>ModelEditor\Window</Filter>
     </ClCompile>
-    <ClCompile Include="ModelEditor\Texture2.cpp">
-      <Filter>ModelEditor\Render</Filter>
-    </ClCompile>
     <ClCompile Include="ModelEditor\TextureLoader.cpp">
       <Filter>ModelEditor\Render</Filter>
     </ClCompile>
@@ -284,6 +275,15 @@
     </ClCompile>
     <ClCompile Include="ModelEditor\Mesh.cpp">
       <Filter>ModelEditor\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\Jpeg.cpp">
+      <Filter>ModelEditor\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\Buffer.cpp">
+      <Filter>ModelEditor\File</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor\Texture.cpp">
+      <Filter>ModelEditor\Render</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -380,9 +380,6 @@
     <ClInclude Include="ModelEditor\AnimationWindow.h">
       <Filter>ModelEditor\Window</Filter>
     </ClInclude>
-    <ClInclude Include="ModelEditor\Buffer2.h">
-      <Filter>ModelEditor\File</Filter>
-    </ClInclude>
     <ClInclude Include="ModelEditor\CameraManagerWindow.h">
       <Filter>ModelEditor\Window</Filter>
     </ClInclude>
@@ -435,9 +432,6 @@
       <Filter>ModelEditor\Render</Filter>
     </ClInclude>
     <ClInclude Include="ModelEditor\GraphicsInfo.h">
-      <Filter>ModelEditor\Render</Filter>
-    </ClInclude>
-    <ClInclude Include="ModelEditor\Jpeg2.h">
       <Filter>ModelEditor\Render</Filter>
     </ClInclude>
     <ClInclude Include="ModelEditor\Model.h">
@@ -536,9 +530,6 @@
     <ClInclude Include="ModelEditor\TextureManager.h">
       <Filter>ModelEditor\Render</Filter>
     </ClInclude>
-    <ClInclude Include="ModelEditor\Texture2.h">
-      <Filter>ModelEditor\Render</Filter>
-    </ClInclude>
     <ClInclude Include="ModelEditor\TextureLoader.h">
       <Filter>ModelEditor\Render</Filter>
     </ClInclude>
@@ -577,6 +568,15 @@
     </ClInclude>
     <ClInclude Include="ModelEditor\Mesh.h">
       <Filter>ModelEditor\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\Jpeg.h">
+      <Filter>ModelEditor\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\Buffer.h">
+      <Filter>ModelEditor\File</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor\Texture.h">
+      <Filter>ModelEditor\Render</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

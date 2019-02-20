@@ -2,7 +2,7 @@
 //| Included files
 //+-----------------------------------------------------------------------------
 #include "StdAfx.h"
-#include "jpeg2.h"
+#include "jpeg.h"
 
 
 

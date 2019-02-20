@@ -87,7 +87,7 @@ int close_model(lua_State* L)
 
 	return 0;
 }
-
+ 
 int save_model(lua_State* L)
 {
 	if (!lua_isinteger(L, 1))
@@ -101,11 +101,44 @@ int save_model(lua_State* L)
 	auto it = model_addr_map.find(id);
 	if (it == model_addr_map.end())
 		return 0;
-	string out_path = Common.GetProgramDirectory() + "\\model\\" + path;
+	string out_path = Common.GetProgramDirectory() + "\\" + path;
 	CreateDir(out_path);
 
 	MODEL* model = it->second;
 	BUFFER Buffer;
+
+	auto& material_list = model->Data().MaterialContainer;
+
+	//遍历所有材质图层 将图层改为 无阴影
+	for (int i = 0; i < material_list.GetTotalSize(); i++)
+	{
+		auto& material = material_list[i]->Data();
+
+		auto& layer_list = material.LayerContainer;
+		
+		for (int i = 0; i < layer_list.GetTotalSize(); i++)
+		{
+			auto& layer = layer_list[i]->Data();
+			layer.Unshaded = true;
+		}
+	}
+
+
+	
+	auto& particle_list = model->Data().ParticleEmitter2Container;
+
+	//遍历所有节点 将粒子发射器 缩小1000倍
+	for (int i = 0; i < particle_list.GetTotalSize(); i++)
+	{
+		auto particle = particle_list[i];
+
+		auto& scale = particle->Data().ParticleScaling;
+		scale.x /= 1000;
+		scale.y /= 1000;
+		scale.z /= 1000;
+
+	}
+
 
 	if (!ResourceLoader.SaveModel(*model, out_path, Buffer))
 	{
