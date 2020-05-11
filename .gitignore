@@ -20,3 +20,6 @@
 *.obj
 *.tlog
 *.log
+*.blp
+*.tga
+*.log

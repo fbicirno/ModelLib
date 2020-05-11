@@ -44,6 +44,9 @@ VOID ERROR_HANDLER::ClearMessage()
 //+-----------------------------------------------------------------------------
 VOID ERROR_HANDLER::SetMessage(CONST std::string& NewMessage)
 {
+	printf(NewMessage.c_str());
+	printf("\n");
+
 	MessageSet = TRUE;
 	Message = NewMessage;
 }

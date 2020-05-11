@@ -28,6 +28,7 @@ local s = {'\n'}
 for index,info in ipairs(model_list) do 
     local path = info.path
     local model = core.open_model(path)
+    local has = false
     if model == nil then 
         local file_type = path:sub(path:len() - 3,path:len()):lower()
         if file_type == '.mdl' then 
@@ -42,7 +43,8 @@ for index,info in ipairs(model_list) do
         local list = core.load_animate(model)
         local file_name = path:gsub('.+\\','')
         local out_screen_path = 'screen\\' .. file_name
-        local out_model_path = 'model\\' .. file_name
+        local out_fix_path = 'model\\' .. file_name
+        local out_model_path = 'resource\\' .. file_name
 
         if list then 
             s[#s + 1] = "['" .. info.name .. "']\n"
@@ -59,7 +61,7 @@ for index,info in ipairs(model_list) do
             s[#s + 1] = '}\n\n'
         end 
         core.load_mpq_file(path,out_model_path)
-        core.save_model(model,out_screen_path)
+        core.save_model(model,out_screen_path, out_fix_path)
 
         local texture_list = core.load_texture_list(model)
         if texture_list then 
@@ -73,8 +75,14 @@ for index,info in ipairs(model_list) do
 
         core.close_model(model)
 
-       
+        has = true 
     end
+    
+    if has ~= true then 
+        print(info.name, path, has)
+    end
+   
+
 end 
 
 local file = io.open('ModelData.ini','w')

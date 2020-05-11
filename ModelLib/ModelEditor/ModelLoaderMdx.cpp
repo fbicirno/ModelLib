@@ -3302,6 +3302,11 @@ BOOL MODEL_LOADER_MDX::LoadRibbonEmitter(MODEL_RIBBON_EMITTER& RibbonEmitter, DA
 			if(!RibbonEmitter.Data().HeightBelow.Load(DataStream)) return FALSE;
 			Size -= RibbonEmitter.Data().HeightBelow.GetSize();
 		}
+		else if (Tag == 'KRAL')
+		{
+			if (!RibbonEmitter.Data().Alpha.Load(DataStream)) return FALSE;
+			Size -= RibbonEmitter.Data().Alpha.GetSize();
+		}
 		else
 		{
 			Error.SetMessage("Unknown tag \"" + GroupToString(Tag) + "\" in RibbonEmitter!");

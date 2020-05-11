@@ -98,6 +98,12 @@ int save_model(lua_State* L)
 	int id = lua_tointeger(L, 1);
 	const char* path = lua_tostring(L, 2);
 
+	const char* fix_path = NULL;
+	if (lua_isstring(L, 3)) {
+		fix_path = lua_tostring(L, 3);
+	}
+
+
 	auto it = model_addr_map.find(id);
 	if (it == model_addr_map.end())
 		return 0;
@@ -106,6 +112,22 @@ int save_model(lua_State* L)
 
 	MODEL* model = it->second;
 	BUFFER Buffer;
+
+	if (fix_path) {
+		CreateDir(Common.GetProgramDirectory() + "\\" + fix_path);
+
+		if (ResourceLoader.SaveModel(*model, fix_path, Buffer))
+		{
+			if (!FileLoader.SaveToFile(fix_path, Buffer))
+			{
+				printf("save write error %s\n", fix_path);
+			}
+		}
+		else
+		{ 
+			printf("save fix error %s\n", fix_path);
+		}
+	}
 
 	auto& material_list = model->Data().MaterialContainer;
 

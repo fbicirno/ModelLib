@@ -35,7 +35,7 @@ FILE_LOADER::~FILE_LOADER()
 BOOL FILE_LOADER::Load(CONST std::string& FileName, BUFFER& Buffer)
 {
 	if(LoadFromFile(FileName, Buffer)) return TRUE;
-	if (LoadFromFile("model\\" + FileName, Buffer)) return TRUE;
+	if (LoadFromFile("resource\\" + FileName, Buffer)) return TRUE;
 	//if(LoadFromMpq(Mpq, FileName, Buffer)) return TRUE;
 	if(LoadFromMpq(MpqWar3Patch, FileName, Buffer)) return TRUE;
 	if(LoadFromMpq(MpqWar3xLocal, FileName, Buffer)) return TRUE;
