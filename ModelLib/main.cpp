@@ -171,6 +171,14 @@ int save_model(lua_State* L)
 	}
 
 
+	auto& sequences = model->Data().SequenceContainer;
+	for (int i = 0; i < sequences.GetTotalSize(); i++)
+	{
+		auto& data = sequences[i]->Data();
+
+		data.Extent.Min = {0,0,0};
+		data.Extent.Max = { 0, 0, 0 };
+	}
 	//模型重算点范围
 	model->CalculateBoundsRadius();
 
