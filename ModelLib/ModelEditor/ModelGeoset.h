@@ -30,6 +30,22 @@ struct MODEL_GEOSET_DATA
 		InternalGeosetId = INVALID_INDEX;
 	}
 
+	MODEL_GEOSET_DATA(MODEL_GEOSET_DATA& obj)
+	{
+		MaterialId = obj.MaterialId;
+		SelectionGroup = obj.SelectionGroup;
+
+		Unselectable = obj.Unselectable;
+
+		InternalGeosetId = obj.InternalGeosetId;
+#define copy(type, container) for (int i = 0; i < obj.container.GetSize(); i++) { type* data = new type(*obj.container.Get2(i)); container.Add(data); };
+		copy(MODEL_GEOSET_VERTEX, VertexContainer);
+		copy(MODEL_GEOSET_FACE, FaceContainer);
+		copy(MODEL_GEOSET_GROUP, GroupContainer);
+		copy(EXTENT, ExtentContainer);
+#undef copy
+	}
+
 	INT MaterialId;
 	INT SelectionGroup;
 

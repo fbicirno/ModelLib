@@ -27,6 +27,9 @@ struct MODEL_MATERIAL_DATA
 		InternalMaterialId = INVALID_INDEX;
 	}
 
+
+	MODEL_MATERIAL_DATA(MODEL_MATERIAL_DATA& obj);
+
 	INT PriorityPlane;
 
 	BOOL ConstantColor;

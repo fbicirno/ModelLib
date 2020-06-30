@@ -66,7 +66,10 @@ REFERENCE<TYPE, OBJECT_TYPE>::REFERENCE(CONST REFERENCE<TYPE, OBJECT_TYPE>& Copy
 	NextReference = NULL;
 	PreviousReference = NULL;
 
-	if(CopyObject.IsAttached()) Attach(*CopyObject.GetObjectData());
+	if(CopyObject.IsAttached()) 
+		//Attach(*CopyObject.GetObjectData());
+		Attach(*CopyObject.ReferenceObject);
+		
 }
 
 

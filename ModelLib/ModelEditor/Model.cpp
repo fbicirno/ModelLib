@@ -14,6 +14,60 @@
 //#include "SequenceManagerWindow.h"
 //#include "GlobalSequenceManagerWindow.h"
 
+#include "ModelBase.h"
+#include "ModelAttachment.h"
+#include "ModelBase.h"
+#include "ModelBone.h"
+#include "ModelBuilder.h"
+#include "ModelCamera.h"
+#include "ModelCollisionShape.h"
+#include "ModelEventObject.h"
+#include "ModelGeoset.h"
+#include "ModelGeosetAnimation.h"
+#include "ModelGeosetFace.h"
+#include "ModelGeosetGroup.h"
+#include "ModelGeosetVertex.h"
+#include "ModelGlobalSequence.h"
+#include "ModelHelper.h"
+#include "ModelHistory.h"
+#include "ModelImporter.h"
+#include "ModelLight.h"
+#include "ModelMaterial.h"
+#include "ModelParticleEmitter.h"
+#include "ModelParticleEmitter2.h"
+#include "ModelRibbonEmitter.h"
+#include "ModelSequence.h"
+#include "ModelTexture.h"
+#include "ModelTextureAnimation.h"
+
+
+MODEL_DATA::MODEL_DATA(MODEL_DATA& obj)
+	: Info(obj.Info)
+{
+
+#define copy(type, container) for (int i = 0; i < obj.container.GetSize(); i++) { type* data = new type(*obj.container.Get2(i)); container.Add(data); };
+
+	copy(MODEL_BASE, BaseContainer);
+	copy(MODEL_ATTACHMENT, AttachmentContainer);
+	copy(MODEL_COLLISION_SHAPE, CollisionShapeContainer);
+	copy(MODEL_BONE, BoneContainer);
+	copy(MODEL_EVENT_OBJECT, EventObjectContainer);
+	copy(MODEL_HELPER, HelperContainer);
+	copy(MODEL_LIGHT, LightContainer);
+	copy(MODEL_PARTICLE_EMITTER, ParticleEmitterContainer);
+	copy(MODEL_PARTICLE_EMITTER_2, ParticleEmitter2Container);
+	copy(MODEL_RIBBON_EMITTER, RibbonEmitterContainer);
+	copy(MODEL_CAMERA, CameraContainer);
+	copy(MODEL_GEOSET, GeosetContainer);
+	copy(MODEL_GEOSET_ANIMATION, GeosetAnimationContainer);
+	copy(MODEL_GLOBAL_SEQUENCE, GlobalSequenceContainer);
+	copy(MODEL_MATERIAL, MaterialContainer);
+	copy(D3DXVECTOR3, PivotPointContainer);
+	copy(MODEL_SEQUENCE, SequenceContainer);
+	copy(MODEL_TEXTURE, TextureContainer);
+	copy(MODEL_TEXTURE_ANIMATION, TextureAnimationContainer);
+#undef copy
+}
 
 //+-----------------------------------------------------------------------------
 //| Global objects
@@ -35,6 +89,15 @@ MODEL::MODEL()
 	Root->BaseData()->TreeViewItem = TVI_ROOT;
 }
 
+
+MODEL::MODEL(MODEL& object)
+	:BoundsRadius(object.BoundsRadius),
+	BoundsCenter(object.BoundsCenter),
+	Root(new MODEL_BASE(*object.Root)),
+	ModelData(object.ModelData)
+{
+	SequenceNode.SetData(this);
+}
 
 //+-----------------------------------------------------------------------------
 //| Destructor

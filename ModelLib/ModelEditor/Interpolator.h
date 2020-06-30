@@ -122,7 +122,7 @@ class INTERPOLATOR
 		VOID SetStaticVector3(CONST D3DXVECTOR3& NewVector3, CONST std::string& NewName = "");
 		VOID SetStaticVector4(CONST D3DXVECTOR4& NewVector4, CONST std::string& NewName = "");
 
-	protected:
+	//protected: 公开这些属性
 		VOID GetInterpolatedValue(D3DXVECTOR4& Vector, CONST SEQUENCE_TIME& Time);
 		VOID GetQuaternionValue(D3DXVECTOR4& Vector, CONST SEQUENCE_TIME& Time);
 		VOID GetSurroundingNodes(CONST SEQUENCE_TIME& Time, std::list<INTERPOLATOR_NODE>::iterator& Node1, std::list<INTERPOLATOR_NODE>::iterator& Node2);

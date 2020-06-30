@@ -58,8 +58,8 @@ BOOL MODEL_LOADER_MDL::Save(MODEL& Model, CONST std::string& FileName, BUFFER& B
 	CurrentFileName = FileName;
 	TokenStream.SetFileName(FileName);
 
-	Model.GenerateObjectIds();
-	Model.WrapPivotPoints();
+	//Model.GenerateObjectIds();
+	//Model.WrapPivotPoints();
 
 	if(!SaveVersion(Model, TokenStream)) return FALSE;
 	if(!SaveModel(Model, TokenStream)) return FALSE;

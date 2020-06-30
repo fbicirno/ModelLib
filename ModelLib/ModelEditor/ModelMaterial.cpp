@@ -3,7 +3,24 @@
 //+-----------------------------------------------------------------------------
 #include "StdAfx.h"
 #include "ModelMaterial.h"
+#include "ModelMaterialLayer.h"
 
+
+MODEL_MATERIAL_DATA::MODEL_MATERIAL_DATA(MODEL_MATERIAL_DATA& obj)
+{
+
+	PriorityPlane = obj.PriorityPlane;
+
+	ConstantColor = obj.ConstantColor;
+	SortPrimitivesFarZ = obj.SortPrimitivesFarZ;
+	FullResolution = obj.FullResolution;
+
+	InternalMaterialId = obj.InternalMaterialId;
+
+#define copy(type, container) for (int i = 0; i < obj.container.GetSize(); i++) { type* data = new type(*obj.container.Get2(i)); container.Add(data); };
+	copy(MODEL_MATERIAL_LAYER, LayerContainer);
+#undef copy
+}
 
 //+-----------------------------------------------------------------------------
 //| Constructor

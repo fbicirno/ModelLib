@@ -58,8 +58,8 @@ BOOL MODEL_LOADER_MDX::Save(MODEL& Model, CONST std::string& FileName, BUFFER& B
 	CurrentFileName = FileName;
 	DataStream.SetFileName(FileName);
 
-	Model.GenerateObjectIds();
-	Model.WrapPivotPoints();
+	//Model.GenerateObjectIds();
+	//Model.WrapPivotPoints();
 
 	DataStream.WriteDWord(ReverseDWord('MDLX'));
 
@@ -123,11 +123,12 @@ BOOL MODEL_LOADER_MDX::Load(MODEL& Model, CONST std::string& FileName, BUFFER& B
 			return FALSE;
 		}
 
-		if(!(i->second(Model, DataStream, Size))) return FALSE;
+		if(!(i->second(Model, DataStream, Size))) 
+			return FALSE;
 	}
 
-	Model.ConnectNodes();
-	Model.UnwrapPivotPoints();
+	//Model.ConnectNodes();
+	//Model.UnwrapPivotPoints();
 
 	return TRUE;
 }
@@ -1890,11 +1891,12 @@ BOOL MODEL_LOADER_MDX::LoadTextures(MODEL& Model, DATA_IN_STREAM& DataStream, IN
 			delete Texture;
 			return FALSE;
 		}
-
-		if(Texture->Data().FileName != "")
-		{
-			if(!TextureManager.Load(Texture->Data().FileName)) return FALSE;
-		}
+		//×¢ÊÍ ¹Ø±ÕÌùÍ¼¶ÁÈ¡
+		//if(Texture->Data().FileName != "")
+		//{
+		//	if(!TextureManager.Load(Texture->Data().FileName)) 
+		//		return FALSE;
+		//}
 	}
 
 	return TRUE;

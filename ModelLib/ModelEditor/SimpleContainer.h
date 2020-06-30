@@ -37,6 +37,8 @@ class SIMPLE_CONTAINER
 		CONSTRUCTOR SIMPLE_CONTAINER(CONST SIMPLE_CONTAINER<TYPE>& CopyObject);
 		DESTRUCTOR ~SIMPLE_CONTAINER();
 
+		VOID Copy(CONST SIMPLE_CONTAINER<TYPE>& CopyObject);
+
 		VOID Clear();
 
 		VOID Reserve(INT Size);
@@ -51,6 +53,8 @@ class SIMPLE_CONTAINER
 
 		TYPE* Get(INT Index) CONST;
 
+		TYPE Get2(INT Index) CONST;
+
 		INT GetSize() CONST;
 		INT GetTotalSize() CONST;
 		INT GetLastAddedIndex() CONST;
@@ -58,7 +62,6 @@ class SIMPLE_CONTAINER
 		BOOL ValidIndex(INT Index) CONST;
 
 	protected:
-		VOID Copy(CONST SIMPLE_CONTAINER<TYPE>& CopyObject);
 
 		INT GetFreeIndex();
 
@@ -219,6 +222,15 @@ TYPE* SIMPLE_CONTAINER<TYPE>::Get(INT Index) CONST
 
 	return &(DataList[Index]->Data);
 }
+
+template <class TYPE>
+TYPE SIMPLE_CONTAINER<TYPE>::Get2(INT Index) CONST
+{
+	if (!ValidIndex(Index)) return NULL;
+
+	return (DataList[Index]->Data);
+}
+
 
 
 //+-----------------------------------------------------------------------------

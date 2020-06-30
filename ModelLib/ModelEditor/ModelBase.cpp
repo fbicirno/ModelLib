@@ -20,6 +20,13 @@ MODEL_BASE::MODEL_BASE()
 }
 
 
+MODEL_BASE::MODEL_BASE(MODEL_BASE& object)
+	:ModelBaseData(new MODEL_BASE_DATA(*object.ModelBaseData))
+{
+	ParentNode.SetData(this);
+	ChildNodes.SetData(this);
+	MatrixListNodes.SetData(this);
+}
 //+-----------------------------------------------------------------------------
 //| Destructor
 //+-----------------------------------------------------------------------------
