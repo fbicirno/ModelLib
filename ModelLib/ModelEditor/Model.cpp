@@ -1203,11 +1203,11 @@ BOOL MODEL::RemoveMaterial(MODEL_MATERIAL* Material, HWND Window)
 
 	if(Material->GeosetNodes.GetReferenceCount() > 0)
 	{
-		if(MessageBox(Window, "Some geosets still references this material! Detach?", "Message", MB_YESNO | MB_ICONQUESTION) == IDNO)
-		{
-			Error.SetMessage("Unable to remove the material!");
-			return FALSE;
-		}
+		//if(MessageBox(Window, "Some geosets still references this material! Detach?", "Message", MB_YESNO | MB_ICONQUESTION) == IDNO)
+		//{
+		//	Error.SetMessage("Unable to remove the material!");
+		//	return FALSE;
+		//}
 
 		Material->GeosetNodes.Clear();
 		//MainWindow.MakeModelUnsaved();
@@ -1215,11 +1215,11 @@ BOOL MODEL::RemoveMaterial(MODEL_MATERIAL* Material, HWND Window)
 
 	if(Material->RibbonEmitterNodes.GetReferenceCount() > 0)
 	{
-		if(MessageBox(Window, "Some ribbon emitters still references this material! Detach?", "Message", MB_YESNO | MB_ICONQUESTION) == IDNO)
-		{
-			Error.SetMessage("Unable to remove the material!");
-			return FALSE;
-		}
+		//if(MessageBox(Window, "Some ribbon emitters still references this material! Detach?", "Message", MB_YESNO | MB_ICONQUESTION) == IDNO)
+		//{
+		//	Error.SetMessage("Unable to remove the material!");
+		//	return FALSE;
+		//}
 
 		Material->RibbonEmitterNodes.Clear();
 	}
@@ -1312,11 +1312,11 @@ BOOL MODEL::RemoveTexture(MODEL_TEXTURE* Texture, HWND Window)
 
 	if(Texture->MaterialLayerNodes.GetReferenceCount() > 0)
 	{
-		if(MessageBox(Window, "Some material layers still references this texture! Detach?", "Message", MB_YESNO | MB_ICONQUESTION) == IDNO)
-		{
-			Error.SetMessage("Unable to remove the texture!");
-			return FALSE;
-		}
+		//if(MessageBox(Window, "Some material layers still references this texture! Detach?", "Message", MB_YESNO | MB_ICONQUESTION) == IDNO)
+		//{
+		//	Error.SetMessage("Unable to remove the texture!");
+		//	return FALSE;
+		//}
 
 		Texture->MaterialLayerNodes.Clear();
 		//MainWindow.MakeModelUnsaved();
@@ -1324,11 +1324,11 @@ BOOL MODEL::RemoveTexture(MODEL_TEXTURE* Texture, HWND Window)
 
 	if(Texture->ParticleEmitter2Nodes.GetReferenceCount() > 0)
 	{
-		if(MessageBox(Window, "Some particle emitters 2 still references this texture! Detach?", "Message", MB_YESNO | MB_ICONQUESTION) == IDNO)
-		{
-			Error.SetMessage("Unable to remove the texture!");
-			return FALSE;
-		}
+		//if(MessageBox(Window, "Some particle emitters 2 still references this texture! Detach?", "Message", MB_YESNO | MB_ICONQUESTION) == IDNO)
+		//{
+		//	Error.SetMessage("Unable to remove the texture!");
+		//	return FALSE;
+		//}
 
 		Texture->ParticleEmitter2Nodes.Clear();
 	}

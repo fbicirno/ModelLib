@@ -38,6 +38,8 @@ INTERPOLATOR::INTERPOLATOR()
 //+-----------------------------------------------------------------------------
 INTERPOLATOR::INTERPOLATOR(CONST INTERPOLATOR& CopyObject)
 {
+	Name = CopyObject.Name;
+
 	NodeList = CopyObject.NodeList;
 
 	GlobalSequenceId = CopyObject.GlobalSequenceId;

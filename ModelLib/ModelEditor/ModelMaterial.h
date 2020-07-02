@@ -59,7 +59,7 @@ class MODEL_MATERIAL
 		INT GetRenderOrder();
 
 		BOOL AddLayer(MODEL_MATERIAL_LAYER* Layer);
-
+		BOOL RemoveLayer(MODEL_MATERIAL_LAYER* Layer);
 	protected:
 		MODEL_MATERIAL_DATA MaterialData;
 

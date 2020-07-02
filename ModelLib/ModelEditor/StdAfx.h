@@ -68,4 +68,13 @@
 //+-----------------------------------------------------------------------------
 //| End of inclusion guard
 //+-----------------------------------------------------------------------------
+
+
+#	if defined(MODELLIB_EXPORTS)
+#		define _MODELLIB_API __declspec(dllexport)
+
+#	else
+#		define _MODELLIB_API __declspec(dllimport)
+#	endif
+
 #endif

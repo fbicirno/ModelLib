@@ -455,73 +455,42 @@ int open(lua_State* L)
 	return 1;
 }
 
-bool InitEditor()
+//int main()
+//{
+//	
+//	if (!InitEditor())
+//	{
+//		printf("±à¼­Æ÷³õÊ¼»¯Ê§°Ü\n");
+//		system("pause");
+//		return 0;
+//	}
+//	
+//
+//	lua_State* L = luaL_newstate();
+//	luaL_openlibs(L);
+//
+//	lua_getfield(L, LUA_REGISTRYINDEX, LUA_PRELOAD_TABLE);
+//	lua_pushcclosure(L, open, 0);
+//	lua_setfield(L, -2, "model.core");
+//	lua_pop(L, 1);
+//
+//	lua_getglobal(L, "require");
+//	lua_pushstring(L, "script.main");
+//	lua_pcall(L, 1, 0,0);
+//
+//	system("pause");
+//	return 0;
+//}
+
+#include "modellib.h"
+
+
+BOOL APIENTRY DllMain(HANDLE hModule,
+	DWORD  ul_reason_for_call,
+	LPVOID lpReserved
+	)
 {
-	if (!Register.FindWarcraftDirectory())
-		return FALSE;
-	Graphics.Setup();
-
-	BOOL Result = FALSE;
-	std::string FileName;
-	std::string ErrorMessage;
-	std::string WarcraftDirectory;
-
-	WarcraftDirectory = Register.GetWarcraftDirectory();
-
-	while (TRUE)
-	{
-		FileName = WarcraftDirectory + "\\" + PATH_MPQ_WAR3;
-		if (!MpqWar3.Open(FileName)) break;
-
-		FileName = WarcraftDirectory + "\\" + PATH_MPQ_WAR3X;
-		if (!MpqWar3x.Open(FileName)) break;
-
-		FileName = WarcraftDirectory + "\\" + PATH_MPQ_WAR3X_LOCAL;
-		if (!MpqWar3xLocal.Open(FileName)) break;
-
-		FileName = WarcraftDirectory + "\\" + PATH_MPQ_WAR3_PATCH;
-		if (!MpqWar3Patch.Open(FileName)) break;
-
-		Result = TRUE;
-		break;
-	}
-
-	if (!Result)
-	{
-		ErrorMessage = "Unable to open \"" + FileName + "\"!\n\n";
-		ErrorMessage += "Make sure that Warcraft 3 is installed and that the registry key\n";
-		ErrorMessage += "\"HKEY_CURRENT_USER\\Blizzard Entertainment\\Warcraft III\\InstallPath\" exists!";
-		Error.SetMessage(ErrorMessage);
-		return FALSE;
-	}
-
-	ResourceLoader.RegisterAllLoaders();
-	
-
+	return TRUE;
 }
-int main()
-{
-	
-	if (!InitEditor())
-	{
-		printf("±à¼­Æ÷³õÊ¼»¯Ê§°Ü\n");
-		system("pause");
-		return 0;
-	}
-	
 
-	lua_State* L = luaL_newstate();
-	luaL_openlibs(L);
 
-	lua_getfield(L, LUA_REGISTRYINDEX, LUA_PRELOAD_TABLE);
-	lua_pushcclosure(L, open, 0);
-	lua_setfield(L, -2, "model.core");
-	lua_pop(L, 1);
-
-	lua_getglobal(L, "require");
-	lua_pushstring(L, "script.main");
-	lua_pcall(L, 1, 0,0);
-
-	system("pause");
-	return 0;
-}

@@ -116,3 +116,23 @@ BOOL MODEL_MATERIAL::AddLayer(MODEL_MATERIAL_LAYER* Layer)
 
 	return TRUE;
 }
+
+BOOL MODEL_MATERIAL::RemoveLayer(MODEL_MATERIAL_LAYER* Layer)
+{
+
+	for (int i = 0; i < MaterialData.LayerContainer.GetTotalSize(); i++)
+	{
+		if (MaterialData.LayerContainer.ValidIndex(i))
+		{
+			if (MaterialData.LayerContainer[i] == Layer)
+			{
+				MaterialData.LayerContainer.Remove(i);
+				break;
+			}
+		}
+	}
+
+	delete Layer;
+
+	return TRUE;
+}

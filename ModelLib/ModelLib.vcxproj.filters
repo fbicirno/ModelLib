@@ -285,6 +285,9 @@
     <ClCompile Include="ModelEditor\Texture.cpp">
       <Filter>ModelEditor\Render</Filter>
     </ClCompile>
+    <ClCompile Include="modellib.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ModelEditor\Common.h">
@@ -578,5 +581,13 @@
     <ClInclude Include="ModelEditor\Texture.h">
       <Filter>ModelEditor\Render</Filter>
     </ClInclude>
+    <ClInclude Include="modellib.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ModelLib.def">
+      <Filter>资源文件</Filter>
+    </None>
   </ItemGroup>
 </Project>
