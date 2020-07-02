@@ -44,7 +44,7 @@ RemoveModelMaterial
 CreateMaterialLayer
 CopyMaterialLayer
 CloseMaterialLayer
-GetMaterialLayerByMaterial
+GetLayerByMaterial
 
 GetMaterialPriorityPlane
 SetMaterialPriorityPlane
@@ -61,3 +61,22 @@ SetMaterialFullResolution
 GetMaterialLayerSize
 AddMaterialLayer
 RemoveMaterialLayer
+
+GetLayerFilterMode
+SetLayerFilterMode
+GetLayerTextureId
+SetLayerTextureId
+GetLayerTextureAnimationId
+SetLayerTextureAnimationId
+GetLayerUnshaded;
+SetLayerUnshaded
+GetLayerUnfogged
+SetLayerUnfogged
+GetLayerTwoSided
+SetLayerTwoSided
+GetLayerSphereEnvironmentMap
+SetLayerSphereEnvironmentMap
+GetLayerNoDepthTest
+SetLayerNoDepthTest
+GetLayerNoDepthSet
+SetLayerNoDepthSet

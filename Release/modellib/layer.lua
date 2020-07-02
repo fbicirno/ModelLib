@@ -1,19 +1,42 @@
 local ffi = require 'ffi'
 
-ffi.cdef[[
+local cdef = [[
 	typedef void* HANDLE;
 
     HANDLE CreateMaterialLayer();
 	HANDLE CopyMaterialLayer(HANDLE layerhandle);
 	void CloseMaterialLayer(HANDLE layerhandle, bool del);
-	HANDLE GetMaterialLayerByMaterial(HANDLE mathandle, int index);
+	HANDLE GetLayerByMaterial(HANDLE mathandle, int index);
 
 
+    int GetLayerFilterMode(HANDLE  layerhandle);
+	void SetLayerFilterMode(HANDLE  layerhandle, int filter_mode);
+	int GetLayerTextureId(HANDLE  layerhandle);
+	void SetLayerTextureId(HANDLE  layerhandle, int textureid);
+	int GetLayerTextureAnimationId(HANDLE  layerhandle);
+	void SetLayerTextureAnimationId(HANDLE  layerhandle, int animationid);
+	bool GetLayerUnshaded(HANDLE layerhandle);
+	void SetLayerUnshaded(HANDLE layerhandle, bool flag);
+	bool GetLayerUnfogged(HANDLE layerhandle);
+	void SetLayerUnfogged(HANDLE layerhandle, bool flag);
+	bool GetLayerTwoSided(HANDLE layerhandle);
+	void SetLayerTwoSided(HANDLE layerhandle, bool flag);
+	bool GetLayerSphereEnvironmentMap(HANDLE layerhandle);
+	void SetLayerSphereEnvironmentMap(HANDLE layerhandle, bool flag);
+	bool GetLayerNoDepthTest(HANDLE layerhandle);
+	void SetLayerNoDepthTest(HANDLE layerhandle, bool flag);
+	bool GetLayerNoDepthSet(HANDLE layerhandle);
+    void SetLayerNoDepthSet(HANDLE layerhandle, bool flag);
+    
 ]]
+
+ffi.cdef(cdef)
 
 local lib = ffi.load("modellib")
 
 local layer = {}
+
+local modellib = require("modellib.modellib")
 
 setmetatable(layer, layer)
 
@@ -33,7 +56,7 @@ end
 
 
 function layer.open(material, index)
-    local handle = lib.GetMaterialLayerByMaterial(material.handle, index)
+    local handle = lib.GetLayerByMaterial(material.handle, index)
     if handle == nil then 
         return 
     end 
@@ -76,5 +99,7 @@ function layer:copy()
     return object
 end 
 
+
+modellib.auto_method(layer, cdef)
 
 return layer

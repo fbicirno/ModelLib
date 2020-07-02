@@ -62,18 +62,36 @@ extern "C" {
 	void SetMaterialFullResolution(HANDLE mathandle, bool FullResolution);
 
 
-
+	//²ÄÖÊÍ¼²ãÈÝÆ÷
+	int GetMaterialLayerSize(HANDLE mathandle);
+	bool AddMaterialLayer(HANDLE mathandle, HANDLE layerhandle);
+	bool RemoveMaterialLayer(HANDLE mathandle, HANDLE  layerhandle);
 
 
 	HANDLE CreateMaterialLayer();
 	HANDLE CopyMaterialLayer(HANDLE layerhandle);
 	void CloseMaterialLayer(HANDLE layerhandle, bool del);
-	HANDLE GetMaterialLayerByMaterial(HANDLE mathandle, int index);
+	HANDLE GetLayerByMaterial(HANDLE mathandle, int index);
 
-	//²ÄÖÊÍ¼²ãÈÝÆ÷
-	int GetMaterialLayerSize(HANDLE mathandle);
-	bool AddMaterialLayer(HANDLE mathandle, HANDLE layerhandle);
-	bool RemoveMaterialLayer(HANDLE mathandle, HANDLE  layerhandle);
+
+	int GetLayerFilterMode(HANDLE  layerhandle);
+	void SetLayerFilterMode(HANDLE  layerhandle, int filter_mode);
+	int GetLayerTextureId(HANDLE  layerhandle);
+	void SetLayerTextureId(HANDLE  layerhandle, int textureid);
+	int GetLayerTextureAnimationId(HANDLE  layerhandle);
+	void SetLayerTextureAnimationId(HANDLE  layerhandle, int animationid);
+	bool GetLayerUnshaded(HANDLE  layerhandle);
+	void SetLayerUnshaded(HANDLE  layerhandle, bool flag);
+	bool GetLayerUnfogged(HANDLE  layerhandle);
+	void SetLayerUnfogged(HANDLE  layerhandle, bool flag);
+	bool GetLayerTwoSided(HANDLE  layerhandle);
+	void SetLayerTwoSided(HANDLE  layerhandle, bool flag);
+	bool GetLayerSphereEnvironmentMap(HANDLE  layerhandle);
+	void SetLayerSphereEnvironmentMap(HANDLE  layerhandle, bool flag);
+	bool GetLayerNoDepthTest(HANDLE  layerhandle);
+	void SetLayerNoDepthTest(HANDLE  layerhandle, bool flag);
+	bool GetLayerNoDepthSet(HANDLE  layerhandle);
+	void SetLayerNoDepthSet(HANDLE  layerhandle, bool flag);
 
 
 }

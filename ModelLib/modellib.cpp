@@ -604,7 +604,7 @@ void CloseMaterialLayer(HANDLE layerhandle, bool del)
 	}
 }
 
-HANDLE GetMaterialLayerByMaterial(HANDLE mathandle, int index)
+HANDLE GetLayerByMaterial(HANDLE mathandle, int index)
 {
 	MODEL_MATERIAL* material = (MODEL_MATERIAL*)convert_object(mathandle);
 	if (!material)
@@ -668,4 +668,209 @@ bool RemoveMaterialLayer(HANDLE mathandle, HANDLE  layerhandle)
 	close_handle(mathandle);
 	return material->RemoveLayer(layer);
 
+}
+
+int GetLayerFilterMode(HANDLE  layerhandle)
+{
+	MODEL_MATERIAL_LAYER* layer = (MODEL_MATERIAL_LAYER*)convert_object(layerhandle);
+
+	if (!layer)
+	{
+		return 0;
+	}
+	return (int)layer->Data().FilterMode;
+}
+
+void SetLayerFilterMode(HANDLE  layerhandle, int filter_mode)
+{
+	MODEL_MATERIAL_LAYER* layer = (MODEL_MATERIAL_LAYER*)convert_object(layerhandle);
+
+	if (!layer)
+	{
+		return ;
+	}
+	layer->Data().FilterMode = (FILTER_MODE)filter_mode;
+}
+
+
+int GetLayerTextureId(HANDLE  layerhandle)
+{
+	MODEL_MATERIAL_LAYER* layer = (MODEL_MATERIAL_LAYER*)convert_object(layerhandle);
+
+	if (!layer)
+	{
+		return 0;
+	}
+	return (int)layer->Data().TextureId;
+}
+
+void SetLayerTextureId(HANDLE  layerhandle, int textureid)
+{
+	MODEL_MATERIAL_LAYER* layer = (MODEL_MATERIAL_LAYER*)convert_object(layerhandle);
+
+	if (!layer)
+	{
+		return;
+	}
+	layer->Data().TextureId = textureid;
+}
+
+
+int GetLayerTextureAnimationId(HANDLE  layerhandle)
+{
+	MODEL_MATERIAL_LAYER* layer = (MODEL_MATERIAL_LAYER*)convert_object(layerhandle);
+
+	if (!layer)
+	{
+		return 0;
+	}
+	return (int)layer->Data().TextureAnimationId;
+}
+
+void SetLayerTextureAnimationId(HANDLE  layerhandle, int animationid)
+{
+	MODEL_MATERIAL_LAYER* layer = (MODEL_MATERIAL_LAYER*)convert_object(layerhandle);
+
+	if (!layer)
+	{
+		return;
+	}
+	layer->Data().TextureAnimationId = animationid;
+}
+
+
+
+bool GetLayerUnshaded(HANDLE  layerhandle)
+{
+	MODEL_MATERIAL_LAYER* layer = (MODEL_MATERIAL_LAYER*)convert_object(layerhandle);
+
+	if (!layer)
+	{
+		return 0;
+	}
+	return (int)layer->Data().Unshaded;
+}
+
+void SetLayerUnshaded(HANDLE  layerhandle, bool flag)
+{
+	MODEL_MATERIAL_LAYER* layer = (MODEL_MATERIAL_LAYER*)convert_object(layerhandle);
+
+	if (!layer)
+	{
+		return;
+	}
+	layer->Data().Unshaded = flag;
+}
+
+bool GetLayerUnfogged(HANDLE  layerhandle)
+{
+	MODEL_MATERIAL_LAYER* layer = (MODEL_MATERIAL_LAYER*)convert_object(layerhandle);
+
+	if (!layer)
+	{
+		return 0;
+	}
+	return (int)layer->Data().Unfogged;
+}
+
+void SetLayerUnfogged(HANDLE  layerhandle, bool flag)
+{
+	MODEL_MATERIAL_LAYER* layer = (MODEL_MATERIAL_LAYER*)convert_object(layerhandle);
+
+	if (!layer)
+	{
+		return;
+	}
+	layer->Data().Unfogged = flag;
+}
+
+bool GetLayerTwoSided(HANDLE  layerhandle)
+{
+	MODEL_MATERIAL_LAYER* layer = (MODEL_MATERIAL_LAYER*)convert_object(layerhandle);
+
+	if (!layer)
+	{
+		return 0;
+	}
+	return (int)layer->Data().TwoSided;
+}
+
+void SetLayerTwoSided(HANDLE  layerhandle, bool flag)
+{
+	MODEL_MATERIAL_LAYER* layer = (MODEL_MATERIAL_LAYER*)convert_object(layerhandle);
+
+	if (!layer)
+	{
+		return;
+	}
+	layer->Data().TwoSided = flag;
+}
+
+bool GetLayerSphereEnvironmentMap(HANDLE  layerhandle)
+{
+	MODEL_MATERIAL_LAYER* layer = (MODEL_MATERIAL_LAYER*)convert_object(layerhandle);
+
+	if (!layer)
+	{
+		return 0;
+	}
+	return (int)layer->Data().SphereEnvironmentMap;
+}
+
+void SetLayerSphereEnvironmentMap(HANDLE  layerhandle, bool flag)
+{
+	MODEL_MATERIAL_LAYER* layer = (MODEL_MATERIAL_LAYER*)convert_object(layerhandle);
+
+	if (!layer)
+	{
+		return;
+	}
+	layer->Data().SphereEnvironmentMap = flag;
+}
+
+
+bool GetLayerNoDepthTest(HANDLE  layerhandle)
+{
+	MODEL_MATERIAL_LAYER* layer = (MODEL_MATERIAL_LAYER*)convert_object(layerhandle);
+
+	if (!layer)
+	{
+		return 0;
+	}
+	return (int)layer->Data().NoDepthTest;
+}
+
+void SetLayerNoDepthTest(HANDLE  layerhandle, bool flag)
+{
+	MODEL_MATERIAL_LAYER* layer = (MODEL_MATERIAL_LAYER*)convert_object(layerhandle);
+
+	if (!layer)
+	{
+		return;
+	}
+	layer->Data().NoDepthTest = flag;
+}
+
+
+
+bool GetLayerNoDepthSet(HANDLE  layerhandle)
+{
+	MODEL_MATERIAL_LAYER* layer = (MODEL_MATERIAL_LAYER*)convert_object(layerhandle);
+
+	if (!layer)
+	{
+		return 0;
+	}
+	return (int)layer->Data().NoDepthSet;
+}
+
+void SetLayerNoDepthSet(HANDLE  layerhandle, bool flag)
+{
+	MODEL_MATERIAL_LAYER* layer = (MODEL_MATERIAL_LAYER*)convert_object(layerhandle);
+
+	if (!layer)
+	{
+		return;
+	}
+	layer->Data().NoDepthSet = flag;
 }

@@ -1,6 +1,6 @@
 local ffi = require 'ffi'
 
-ffi.cdef[[
+local cdef = [[
     typedef void* HANDLE;
 
 
@@ -21,6 +21,7 @@ ffi.cdef[[
 
 ]]
 
+ffi.cdef(cdef)
 
 local lib = ffi.load("modellib")
 
@@ -32,7 +33,7 @@ local modellib = require 'modellib.modellib'
 --child_name: string 子模块名  
 --[[
     --例如
-    register_contariner(modellib.model, 'texture') 
+    modellib.contariner(modellib.model, 'texture') 
     会生成一套  容器模板
         model:get_texture_by_model(index):texture
         model:get_texture_size():int
@@ -42,7 +43,8 @@ local modellib = require 'modellib.modellib'
         model:each_texture() --iterator
 
 ]]
-local function register_contariner(module, child_name)
+
+function modellib.contariner(module, child_name)
     local module_name = module.type
 
     local module_name2 = module_name:sub(1, 1):upper() .. module_name:sub(2, module_name:len()) --首字母转大写
@@ -161,4 +163,3 @@ local function register_contariner(module, child_name)
     end 
 end 
 
-return register_contariner

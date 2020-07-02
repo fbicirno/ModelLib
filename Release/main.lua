@@ -12,17 +12,24 @@ for texture in model:each_texture() do
     print(texture)
 end 
 
---for material in model:each_material() do 
---    print(material)
---    for layer in material:each_layer() do 
---        print(layer)
---    end 
---    --material:close()
---end 
 local model2 = model:copy()
-for k, v in pairs(model2) do 
-    print(k, v)
+
+for material in model2:each_material() do 
+    print(material)
+    for layer in material:each_layer() do 
+        for k, v in pairs(layer) do 
+            print(layer, k, v)
+            if type(v) == 'boolean' then 
+                layer[k] = true
+            end
+        end 
+    end 
+    --material:close()
 end 
+
+--for k, v in pairs(model2) do 
+--    print(k, v)
+--end 
 --for material in model2:each_material() do 
 --    material.priority_plance = 99
 --    material.sort_Z = true 
@@ -30,7 +37,7 @@ end
 --    material.constant_color = true
 --    print(material, '11111111111')
 --    for k, v in pairs(material) do 
---        print(k, v)
+--        print(material, k, v)
 --    end 
 --end
 --

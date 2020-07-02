@@ -1,6 +1,6 @@
 local ffi = require 'ffi'
 
-ffi.cdef[[
+local cdef = [[
 	typedef void* HANDLE;
 
 
@@ -15,13 +15,13 @@ ffi.cdef[[
 
 ]]
 
+ffi.cdef(cdef)
+
 local lib = ffi.load("modellib")
 
 lib.InitMpqResource()
 
 local modellib = require 'modellib.modellib'
-
-local register_contariner = require 'modellib.contariner'
 
 local model = {}
 
@@ -84,8 +84,8 @@ end
 
 
 
-register_contariner(model, 'texture') --注册贴图容器
-register_contariner(model, 'material') --注册材质容器
+modellib.contariner(model, 'texture') --注册贴图容器
+modellib.contariner(model, 'material') --注册材质容器
 
 
 return model

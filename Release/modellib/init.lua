@@ -1,4 +1,5 @@
 local modellib = require 'modellib.modellib'
+require 'modellib.contariner'
 
 local components = {
     'model', 'texture', 'material', 'layer'

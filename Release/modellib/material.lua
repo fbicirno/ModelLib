@@ -1,6 +1,6 @@
 local ffi = require 'ffi'
 
-ffi.cdef[[
+local cdef = [[
 	typedef void* HANDLE;
 
     HANDLE CreateMaterial();
@@ -19,9 +19,12 @@ ffi.cdef[[
     
 ]]
 
+ffi.cdef(cdef)
+
 local lib = ffi.load("modellib")
 
-local register_contariner = require 'modellib.contariner'
+
+local modellib = require 'modellib.modellib'
 
 local material = {}
 
@@ -87,44 +90,10 @@ function material:copy()
 end 
 
 
---平面优先级
-function material:set_priority_plance(num)
-    lib.SetMaterialPriorityPlane(self.handle, num)
-end 
+--材质有 多层图层
+modellib.contariner(material, 'layer')
 
-function material:get_priority_plance()
-    return lib.GetMaterialPriorityPlane(self.handle)
-end 
+modellib.auto_method(material, cdef)
 
---固定颜色
-function material:set_constant_color(bool)
-    lib.SetMaterialConstantColor(self.handle, bool)
-end 
-function material:get_constant_color()
-    return lib.GetMaterialConstantColor(self.handle)
-end 
-
---延z轴排列
-function material:set_sort_Z(bool)
-    lib.SetMaterialSortPrimitivesFarZ(self.handle, bool)
-end 
-function material:get_sort_Z()
-    return lib.GetMaterialSortPrimitivesFarZ(self.handle)
-end 
-
---最大分辨率
-function material:set_full_resolution(bool)
-    lib.SetMaterialFullResolution(self.handle, bool)
-end 
-function material:get_full_resolution()
-    return lib.GetMaterialFullResolution(self.handle)
-end 
-
-
-
-
-
-
-register_contariner(material, 'layer')
 
 return material

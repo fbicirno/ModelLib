@@ -1,6 +1,6 @@
 local ffi = require 'ffi'
 
-ffi.cdef[[
+local cdef = [[
 	typedef void* HANDLE;
 
     bool LoadAllReplaceableTextures();
@@ -21,6 +21,9 @@ ffi.cdef[[
     int GetTextureWidth(HANDLE texhandle);
 	int GetTextureHeight(HANDLE texhandle);
 ]]
+
+ffi.cdef(cdef)
+
 
 local lib = ffi.load("modellib")
 
