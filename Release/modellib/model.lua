@@ -1,8 +1,6 @@
 local ffi = require 'ffi'
 
 local cdef = [[
-	typedef void* HANDLE;
-
 
 	bool InitMpqResource();
 	HANDLE CreateModel();
@@ -86,6 +84,6 @@ end
 
 modellib.contariner(model, 'texture') --注册贴图容器
 modellib.contariner(model, 'material') --注册材质容器
-
+modellib.contariner(model, 'camera') --注册材质容器
 
 return model

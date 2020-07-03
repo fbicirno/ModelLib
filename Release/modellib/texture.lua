@@ -1,7 +1,6 @@
 local ffi = require 'ffi'
 
 local cdef = [[
-	typedef void* HANDLE;
 
     bool LoadAllReplaceableTextures();
 
@@ -28,6 +27,10 @@ ffi.cdef(cdef)
 local lib = ffi.load("modellib")
 
 lib.LoadAllReplaceableTextures()
+
+
+local modellib = require 'modellib.modellib'
+
 
 local texture = {}
 
@@ -85,84 +88,7 @@ function texture:close()
     self.handle = nil
 end 
 
-function texture:get_path()
-    return ffi.string(lib.GetTexturePath(self.handle))
-end 
 
-function texture:set_path(path)
-    lib.SetTexturePath(self.handle, path)
-end 
-
-function texture:set_replaceable_id(id)
-    lib.SetTextureReplaceableId(self.handle, id)
-end 
-
-function texture:get_replaceable_id()
-    return lib.GetTextureReplaceableId(self.handle)
-end
-
-function texture:set_wrap_width(bool)
-    lib.SetTextureWrapWidth(self.handle, bool)
-end
-
-function texture:get_wrap_width()
-    return lib.GetTextureWrapWidth(self.handle)
-end
-
-function texture:set_wrap_height(bool)
-    lib.SetTextureWrapHeight(self.handle, bool)
-end
-
-function texture:get_wrap_height()
-    return lib.GetTextureWrapHeight(self.handle)
-end
-
-function texture:get_width()
-    return lib.GetTextureWidth(self.handle)
-end
-
-function texture:get_height()
-    return lib.GetTextureHeight(self.handle)
-end
-
-
-function texture:__index(name)
-    local func = rawget(texture, name)
-    if func then return func end 
-    
-    if rawget(self, 'handle') then 
-        local func = rawget(texture, 'get_' .. name)
-        if func then return func(self) end 
-    end 
-
-    return rawget(self, name)
-end 
-
-function texture:__newindex(name, value)
-    if rawget(self, 'handle') then
-        local func = rawget(texture, 'set_' .. name)
-        if func then return func(self, value) end 
-
-        local func = rawget(texture, 'get_' .. name)
-        if func then 
-            print('nothing writer', name)
-            return 
-        end 
-    end
-    rawset(self, name, value)
-end 
-
-
-function texture:__tostring()
-    local s = ''
-    local path = self.path 
-    if path and path:len() > 0 then 
-        s = '[' .. path .. ']'
-    elseif self.replaceable_id then 
-        s = '[' .. self.replaceable_id .. ']'
-    end 
-    return "texture<" .. ("%x"):format(tonumber(self.handle)) .. '>' .. s
-end 
-
+modellib.auto_method(texture, cdef)
 
 return texture

@@ -2,9 +2,10 @@ local modellib = require 'modellib.modellib'
 require 'modellib.contariner'
 
 local components = {
-    'model', 'texture', 'material', 'layer'
+    'model', 'texture', 'material', 'layer', 'camera'
 }
 
+--加载指定模块 并注册元方法
 for index, component in ipairs(components) do 
     local module = require ('modellib.' .. component)
 
@@ -43,7 +44,7 @@ for index, component in ipairs(components) do
     end 
 
     
-    local pairs2 = function (self, key)
+    local function pairs2(self, key)
        return function (self, key)
             return next(self, key)
         end, self, nil

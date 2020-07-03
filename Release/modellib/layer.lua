@@ -1,7 +1,6 @@
 local ffi = require 'ffi'
 
 local cdef = [[
-	typedef void* HANDLE;
 
     HANDLE CreateMaterialLayer();
 	HANDLE CopyMaterialLayer(HANDLE layerhandle);

@@ -6,27 +6,44 @@ local lib = require 'modellib'
 
 local model = lib.model.open("units\\other\\DranaiAkama\\DranaiAkama.mdl")
 
-
-
-for texture in model:each_texture() do 
-    print(texture)
-end 
-
 local model2 = model:copy()
 
-for material in model2:each_material() do 
-    print(material)
-    for layer in material:each_layer() do 
-        for k, v in pairs(layer) do 
-            print(layer, k, v)
-            if type(v) == 'boolean' then 
-                layer[k] = true
-            end
-        end 
-    end 
-    --material:close()
+
+--镜头
+for i = 1, 10 do 
+    local camera = lib.camera.new()
+    camera.source = {7, 8, 9}
+    camera.target = camera.source
+
+    print(camera.source, camera.source.x, camera.source.y, camera.source.z)
+    print(camera.target, camera.target.x, camera.target.y, camera.target.z)
+
+    model2:add_camera(camera)
 end 
 
+--贴图
+--for texture in model:each_texture() do 
+--    print(texture)
+--end 
+
+
+--for material in model2:each_material() do 
+--    print(material)
+--    for layer in material:each_layer() do 
+--        for k, v in pairs(layer) do 
+--            print(layer, k, v)
+--            if type(v) == 'boolean' then 
+--                layer[k] = true
+--            end
+--        end 
+--    end 
+--    --material:close()
+--end 
+--
+
+--for camera in model2:each_camera() do 
+--    print(camera)
+--end
 --for k, v in pairs(model2) do 
 --    print(k, v)
 --end 

@@ -874,3 +874,234 @@ void SetLayerNoDepthSet(HANDLE  layerhandle, bool flag)
 	}
 	layer->Data().NoDepthSet = flag;
 }
+
+
+
+
+
+HANDLE CreateCamera()
+{
+	MODEL_CAMERA* camera = new MODEL_CAMERA;
+
+	return convert_handle(camera);
+}
+
+HANDLE CopyCamera(HANDLE camhandle)
+{
+	MODEL_CAMERA* camera = (MODEL_CAMERA*)convert_object(camhandle);
+
+	if (!camera)
+		return 0;
+
+	MODEL_CAMERA* copy = new MODEL_CAMERA(*camera);
+
+	return convert_handle(camera);
+}
+
+void CloseCamera(HANDLE camhandle, bool del)
+{
+	MODEL_CAMERA* camera = (MODEL_CAMERA*)convert_object(camhandle);
+
+	close_handle(camhandle);
+	if (camera && del)
+	{
+		delete camera;
+	}
+}
+
+HANDLE GetCameraByModel(HANDLE modelhandle, int index)
+{
+	MODEL* model = (MODEL*)convert_object(modelhandle);
+	if (!model)
+	{
+		return 0;
+	}
+
+	auto& container = model->Data().CameraContainer;
+	if (index >= 0 && index < container.GetSize() && container.GetSize() > 0)
+	{
+		return convert_handle(container[index]);
+	}
+	return 0;
+}
+
+
+int GetModelCameraSize(HANDLE modelhandle)
+{
+	MODEL* model = (MODEL*)convert_object(modelhandle);
+	if (!model)
+	{
+		return 0;
+	}
+
+	return model->Data().CameraContainer.GetSize();
+}
+
+bool AddModelCamera(HANDLE modelhandle, HANDLE camhandle)
+{
+	MODEL* model = (MODEL*)convert_object(modelhandle);
+	if (!model)
+	{
+		return 0;
+	}
+	MODEL_CAMERA* camera = (MODEL_CAMERA*)convert_object(camhandle);
+
+	if (!camera)
+	{
+		return 0;
+	}
+
+	return model->AddCamera(camera);
+}
+
+bool RemoveModelCamera(HANDLE modelhandle, HANDLE  camhandle)
+{
+	MODEL* model = (MODEL*)convert_object(modelhandle);
+	if (!model)
+	{
+		return false;
+	}
+	MODEL_CAMERA* camera = (MODEL_CAMERA*)convert_object(camhandle);
+	if (!camera)
+	{
+		return false;
+	}
+
+	close_handle(camhandle);
+	model->RemoveCamera(camera);
+	return true;
+
+}
+
+const char* GetCameraName(HANDLE  camhandle)
+{
+	MODEL_CAMERA* camera = (MODEL_CAMERA*)convert_object(camhandle);
+
+	if (!camera)
+	{
+		return 0;
+	}
+	return camera->Data().Name.c_str();
+}
+
+void SetCameraName(HANDLE  camhandle, const char* name)
+{
+	MODEL_CAMERA* camera = (MODEL_CAMERA*)convert_object(camhandle);
+
+	if (!camera)
+	{
+		return ;
+	}
+	camera->Data().Name = name;
+}
+
+VECTOR3* GetCameraSource(HANDLE  camhandle)
+{
+	MODEL_CAMERA* camera = (MODEL_CAMERA*)convert_object(camhandle);
+
+	if (!camera)
+	{
+		return 0;
+	}
+	return (VECTOR3*)&camera->Data().Source;
+}
+
+void SetCameraSource(HANDLE  camhandle, VECTOR3* value)
+{
+	MODEL_CAMERA* camera = (MODEL_CAMERA*)convert_object(camhandle);
+
+	if (!camera)
+	{
+		return;
+	}
+	camera->Data().Source = *(D3DXVECTOR3*)value;
+}
+
+VECTOR3* GetCameraTarget(HANDLE  camhandle)
+{
+	MODEL_CAMERA* camera = (MODEL_CAMERA*)convert_object(camhandle);
+
+	if (!camera)
+	{
+		return 0;
+	}
+	return (VECTOR3*)&camera->Data().Target;
+}
+
+void SetCameraTarget(HANDLE  camhandle, VECTOR3* value)
+{
+	MODEL_CAMERA* camera = (MODEL_CAMERA*)convert_object(camhandle);
+
+	if (!camera)
+	{
+		return;
+	}
+	camera->Data().Target = *(D3DXVECTOR3*)value;
+}
+
+
+float GetCameraFieldOfView(HANDLE  camhandle)
+{
+	MODEL_CAMERA* camera = (MODEL_CAMERA*)convert_object(camhandle);
+
+	if (!camera)
+	{
+		return 0;
+	}
+	return camera->Data().FieldOfView;
+}
+
+void SetCameraFieldOfView(HANDLE  camhandle, float value)
+{
+	MODEL_CAMERA* camera = (MODEL_CAMERA*)convert_object(camhandle);
+
+	if (!camera)
+	{
+		return;
+	}
+	camera->Data().FieldOfView = value;
+}
+
+float GetCameraNearDistance(HANDLE  camhandle)
+{
+	MODEL_CAMERA* camera = (MODEL_CAMERA*)convert_object(camhandle);
+
+	if (!camera)
+	{
+		return 0;
+	}
+	return camera->Data().NearDistance;
+}
+
+void SetCameraNearDistance(HANDLE  camhandle, float value)
+{
+	MODEL_CAMERA* camera = (MODEL_CAMERA*)convert_object(camhandle);
+
+	if (!camera)
+	{
+		return;
+	}
+	camera->Data().NearDistance = value;
+}
+
+float GetCameraFarDistance(HANDLE  camhandle)
+{
+	MODEL_CAMERA* camera = (MODEL_CAMERA*)convert_object(camhandle);
+
+	if (!camera)
+	{
+		return 0;
+	}
+	return camera->Data().FarDistance;
+}
+
+void SetCameraFarDistance(HANDLE  camhandle, float value)
+{
+	MODEL_CAMERA* camera = (MODEL_CAMERA*)convert_object(camhandle);
+
+	if (!camera)
+	{
+		return;
+	}
+	camera->Data().FarDistance = value;
+}

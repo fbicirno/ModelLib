@@ -1,24 +1,30 @@
 local ffi = require 'ffi'
 
 local cdef = [[
-    typedef void* HANDLE;
 
-
+    //贴图容器
     int GetModelTextureSize(HANDLE handle);
     bool AddModelTexture(HANDLE modelhandle, HANDLE texhandle);
     bool RemoveModelTexture(HANDLE modelhandle, HANDLE  texhandle);
 
+    //材质容器
     int GetModelMaterialSize(HANDLE modelhandle);
     bool AddModelMaterial(HANDLE modelhandle, HANDLE mathandle);
     bool RemoveModelMaterial(HANDLE modelhandle, HANDLE  mathandle);
 
 
-
-    	//材质图层容器
+    //材质图层容器
 	int GetMaterialLayerSize(HANDLE mathandle);
 	bool AddMaterialLayer(HANDLE mathandle, HANDLE layerhandle);
 	bool RemoveMaterialLayer(HANDLE mathandle, HANDLE  layerhandle);
 
+
+    //镜头容器
+    HANDLE GetCameraByModel(HANDLE modelhandle, int index);
+	int GetModelCameraSize(HANDLE modelhandle);
+	bool AddModelCamera(HANDLE modelhandle, HANDLE camhandle);
+	bool RemoveModelCamera(HANDLE modelhandle, HANDLE  camhandle);
+    
 ]]
 
 ffi.cdef(cdef)

@@ -94,4 +94,36 @@ extern "C" {
 	void SetLayerNoDepthSet(HANDLE  layerhandle, bool flag);
 
 
+
+
+
+	HANDLE CreateCamera();
+	HANDLE CopyCamera(HANDLE camhandle);
+	void CloseCamera(HANDLE camhandle, bool del);
+	HANDLE GetCameraByModel(HANDLE modelhandle, int index);
+	int GetModelCameraSize(HANDLE modelhandle);
+	bool AddModelCamera(HANDLE modelhandle, HANDLE camhandle);
+	bool RemoveModelCamera(HANDLE modelhandle, HANDLE  camhandle);
+
+	struct VECTOR3 {
+		float x;
+		float y;
+		float z;
+	};
+
+	const char* GetCameraName(HANDLE  camhandle);
+	void SetCameraName(HANDLE  camhandle, const char* name);
+	VECTOR3* GetCameraSource(HANDLE  camhandle);
+	void SetCameraSource(HANDLE  camhandle, VECTOR3* value);
+
+	VECTOR3* GetCameraTarget(HANDLE  camhandle);
+	void SetCameraTarget(HANDLE  camhandle, VECTOR3* value);
+
+	float GetCameraFieldOfView(HANDLE  camhandle);
+	void SetCameraFieldOfView(HANDLE  camhandle, float value);
+	float GetCameraNearDistance(HANDLE  camhandle);
+	void SetCameraNearDistance(HANDLE  camhandle, float value);
+	float GetCameraFarDistance(HANDLE  camhandle);
+	void SetCameraFarDistance(HANDLE  camhandle, float value);
+
 }
