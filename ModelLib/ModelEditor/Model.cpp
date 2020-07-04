@@ -2023,11 +2023,11 @@ BOOL MODEL::RemoveBaseNode(MODEL_BASE* Node, HWND Window)
 
 	if(Node->MatrixListNodes.GetReferenceCount() > 0)
 	{
-		if(MessageBox(Window, "Some geoset matrix list groups still references this bone! Detach?", "Message", MB_YESNO | MB_ICONQUESTION) == IDNO)
-		{
-			Error.SetMessage("Unable to remove the bone!");
-			return FALSE;
-		}
+		//if(MessageBox(Window, "Some geoset matrix list groups still references this bone! Detach?", "Message", MB_YESNO | MB_ICONQUESTION) == IDNO)
+		//{
+		//	Error.SetMessage("Unable to remove the bone!");
+		//	return FALSE;
+		//}
 
 		Node->MatrixListNodes.Clear();
 	}

@@ -1,4 +1,3 @@
-local ffi = require 'ffi'
 
 local cdef = [[
 
@@ -20,12 +19,44 @@ local cdef = [[
 
 
     //镜头容器
-    HANDLE GetCameraByModel(HANDLE modelhandle, int index);
+    
 	int GetModelCameraSize(HANDLE modelhandle);
 	bool AddModelCamera(HANDLE modelhandle, HANDLE camhandle);
-	bool RemoveModelCamera(HANDLE modelhandle, HANDLE  camhandle);
+    bool RemoveModelCamera(HANDLE modelhandle, HANDLE  camhandle);
     
+    //动作容器
+    int GetModelSequenceSize(HANDLE modelhandle);
+	bool AddModelSequence(HANDLE modelhandle, HANDLE seqhandle);
+    bool RemoveModelSequence(HANDLE modelhandle, HANDLE  seqhandle);
+
+    //节点容器
+    int GetModelNodeSize(HANDLE modelhandle);
+	bool AddModelNode(HANDLE modelhandle, HANDLE nodehandle);
+    bool RemoveModelNode(HANDLE modelhandle, HANDLE  nodehandle);
+    
+    //骨骼容器
+    int GetModelBoneSize(HANDLE modelhandle);
+	bool AddModelBone(HANDLE modelhandle, HANDLE bonehandle);
+    bool RemoveModelBone(HANDLE modelhandle, HANDLE  bonehandle);
+
+    //附加点容器
+    int GetModelAttachmentSize(HANDLE modelhandle);
+	bool AddModelAttachment(HANDLE modelhandle, HANDLE attachmenthandle);
+    bool RemoveModelAttachment(HANDLE modelhandle, HANDLE  attachmenthandle);
+    
+    //碰撞容器
+    int GetModelCollisionshapeSize(HANDLE modelhandle);
+	bool AddModelCollisionshape(HANDLE modelhandle, HANDLE collisionshapehandle);
+    bool RemoveModelCollisionshape(HANDLE modelhandle, HANDLE  collisionshapehandle);
+    
+
+    //碰撞盒子的顶点容器
+    int GetCollisionshapeVertexSize(HANDLE collisionshapehandle);
+	bool AddCollisionshapVertex(HANDLE collisionshapehandle, VECTOR3* vec3);
+    bool RemoveCollisionshapVertex(HANDLE collisionshapehandle, int index);
 ]]
+
+local ffi = require 'ffi'
 
 ffi.cdef(cdef)
 
@@ -35,7 +66,7 @@ local modellib = require 'modellib.modellib'
 
 
 --给模块注册容器 
---module: object  model|texture|materiable 这些模块 
+--class: object  model|texture|materiable 这些模块 
 --child_name: string 子模块名  
 --[[
     --例如
@@ -50,38 +81,37 @@ local modellib = require 'modellib.modellib'
 
 ]]
 
-function modellib.contariner(module, child_name)
-    local module_name = module.type
+function modellib.contariner(class, child_name)
+    local class_name = class.type
 
-    local module_name2 = module_name:sub(1, 1):upper() .. module_name:sub(2, module_name:len()) --首字母转大写
+    local class_name2 = class_name:sub(1, 1):upper() .. class_name:sub(2, class_name:len()) --首字母转大写
 
     local child_name2 = child_name:sub(1, 1):upper() .. child_name:sub(2, child_name:len()) --首字母转大写
     
-    local name = module_name2 .. child_name2
+    local name = class_name2 .. child_name2
 
-    local get_child_by_module = 'get_' .. child_name .. '_by_' .. module_name
+    local get_child_by_class = 'get_' .. child_name .. '_by_' .. class_name
     local get_child_size = 'get_' .. child_name .. '_size'
 
     --查询容器尺寸
-    module[get_child_size] = function (self)
+    class[get_child_size] = function (self)
         return lib['Get'.. name .. 'Size'](self.handle)
     end 
 
     --获取容器指定索引元素
-    module[get_child_by_module] = function (self, index)
+    class[get_child_by_class] = function (self, index)
         local object = modellib[child_name].open(self, index)
         self:contariner_add(object, index)
         return object
     end 
 
-    local i = 0
+
     --为容器添加新元素
-    module['add_' .. child_name] = function (self, object)
+    class['add_' .. child_name] = function (self, object)
         if object.owner then 
-            print('对象已经有所属模型 需要new 或者 copy一个新的对象')
+            print('对象已经有所属模型 需要new 或者 copy一个新的对象', debug.traceback())
             return
         end 
-        i = i + 1
         object.owner = self
 
         local bool = lib['Add'.. name](self.handle, object.handle)
@@ -94,7 +124,7 @@ function modellib.contariner(module, child_name)
     end 
 
     --为容器删除指定元素
-    module['remove_' .. child_name] = function (self, object)
+    class['remove_' .. child_name] = function (self, object)
         if object.owner ~= self then 
             return 
         end 
@@ -104,12 +134,12 @@ function modellib.contariner(module, child_name)
 
 
     --容器迭代器
-    module['each_' .. child_name] = function (self)
+    class['each_' .. child_name] = function (self)
         local size = self[get_child_size](self) 
 
         local result = {}
         for i = 0, size - 1 do 
-            table.insert(result,  self[get_child_by_module](self, i))
+            table.insert(result,  self[get_child_by_class](self, i))
         end 
 
         local n = 0
@@ -120,7 +150,7 @@ function modellib.contariner(module, child_name)
     end 
 
     --清空容器
-    module['clear_' .. child_name] = function (self)
+    class['clear_' .. child_name] = function (self)
         for object in self['each_' .. child_name](self) do 
             self['remove_' .. child_name](self, object)
         end 
@@ -128,7 +158,7 @@ function modellib.contariner(module, child_name)
 
 
     
-    function module:contariner_add(object)
+    function class:contariner_add(object)
         if object == nil or object.type == nil then 
             return 
         end 
@@ -142,7 +172,7 @@ function modellib.contariner(module, child_name)
         contariner[object] = true
     end
     
-    function module:contariner_remove(object)
+    function class:contariner_remove(object)
         if object == nil or object.type == nil then 
             return 
         end 
@@ -154,18 +184,27 @@ function modellib.contariner(module, child_name)
         contariner[object] = nil
     end
 
-    local close = module.close
-    function module:close()
-        close(self)
+    local function pairs2(self, key)
+        return function (self, key)
+             return next(self, key)
+         end, self, nil
+     end
 
-        for key, value in pairs(self) do 
-            if key:find('_contariner') and type(value) == 'table' then 
-                for object in pairs(value) do 
-                    object:close()
-                end 
-            end
-            self[key] = nil
+    local close = class.close
+    if class.real_close == nil then 
+        class.real_close = close
+        function class:close()
+            close(self)
+
+            for key, value in pairs2(self) do 
+                if key:find('_contariner') and type(value) == 'table' then 
+                    for object in pairs2(value) do 
+                        object:close()
+                    end 
+                end
+                self[key] = nil
+            end 
         end 
-    end 
+    end
 end 
 

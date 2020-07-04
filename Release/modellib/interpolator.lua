@@ -1,0 +1,204 @@
+local ffi = require 'ffi'
+
+local cdef = [[
+	INTERPOLATOR_HANDLE CreateInterpolator();
+	INTERPOLATOR_HANDLE CopyInterpolator(INTERPOLATOR_HANDLE interhandle);
+	void CloseInterpolator(INTERPOLATOR_HANDLE interhandle, bool del);
+	void InterpolatorClear(INTERPOLATOR_HANDLE interhandle);
+	int GetInterpolatorSize(INTERPOLATOR_HANDLE interhandle);
+	INTERPOLATOR_NODE* GetInterpolatorNode(INTERPOLATOR_HANDLE interhandle, int index);
+	bool GetInterpolatorIsStatic(INTERPOLATOR_HANDLE interhandle);
+	int GetInterpolatorDataType(INTERPOLATOR_HANDLE interhandle);
+	void SetInterpolatorDataType(INTERPOLATOR_HANDLE interhandle, int type);
+	int GetInterpolatorType(INTERPOLATOR_HANDLE interhandle);
+	void SetInterpolatorType(INTERPOLATOR_HANDLE interhandle, int type);
+	void SetInterpolatorGlobalSequenceId(INTERPOLATOR_HANDLE interhandle, int sequence_id);
+	int GetInterpolatorGlobalSequenceId(INTERPOLATOR_HANDLE interhandle);
+	const char* GetInterpolatorString(INTERPOLATOR_HANDLE interhandle);
+	bool SetInterpolatorString(INTERPOLATOR_HANDLE interhandle, const char* str);
+
+	float GetInterpolatorStaticScalar(INTERPOLATOR_HANDLE interhandle, SEQUENCE_TIME* time);
+	bool GetInterpolatorVector2(INTERPOLATOR_HANDLE interhandle, SEQUENCE_TIME* time, VECTOR2* result);
+	bool GetInterpolatorVector3(INTERPOLATOR_HANDLE interhandle, SEQUENCE_TIME* time, VECTOR3* result);
+	bool GetInterpolatorVector4(INTERPOLATOR_HANDLE interhandle, SEQUENCE_TIME* time, VECTOR4* result);
+	bool SetInterpolatorStaticScalar(INTERPOLATOR_HANDLE interhandle, float value, const char* name);
+	bool SetInterpolatorStaticScalarInt(INTERPOLATOR_HANDLE interhandle, int value, const char* name);
+	bool SetInterpolatorStaticVector2(INTERPOLATOR_HANDLE interhandle, VECTOR2* value, const char* name);
+	bool SetInterpolatorStaticVector3(INTERPOLATOR_HANDLE interhandle, VECTOR3* value, const char* name);
+	bool SetInterpolatorStaticVector4(INTERPOLATOR_HANDLE interhandle, VECTOR4* value, const char* name);
+]]
+
+ffi.cdef(cdef)
+
+
+local lib = ffi.load("modellib")
+
+
+local modellib = require 'modellib.modellib'
+
+
+local interpolator = modellib.register_class('interpolator', cdef)
+
+
+function interpolator.open(owner, handle)
+    local object = interpolator.all_interpolator_map[tonumber(handle)]
+    if object then 
+        return object
+    end 
+
+    object = setmetatable({handle = handle, owner = model}, interpolator)
+
+    interpolator.all_interpolator_map[tonumber(handle)] = object
+    return object
+end 
+
+
+function interpolator:clear_node()
+    lib.InterpolatorClear(self.handle)
+end
+
+function interpolator:get_nodes_size()
+    return lib.GetInterpolatorSize(self.handle)
+end
+
+function interpolator:get_node(index)
+    return modellib.c2object['INTERPOLATOR_NODE*'](lib.GetInterpolatorNode(self.handle, index))
+end
+
+function interpolator:is_static()
+    return lib.GetInterpolatorIsStatic(self.handle)
+end
+
+local type_map = { 
+    'NONE', 'SCALAR', 'SCALAR_INT', 'VECTOR2', 'VECTOR3', 'VECTOR4',
+    ['NONE'] = 1, ['SCALAR'] = 2, ['SCALAR_INT'] = 3, ['VECTOR2'] = 4, ['VECTOR3'] = 5, ['VECTOR4'] = 6,
+}
+--获取该插值器储存的数据类型 
+function interpolator:get_data_type()
+    local type_index = lib.GetInterpolatorDataType(self.handle)
+    return type_map[type_index + 1]
+end
+
+--设置插值器的储存数据类型
+function interpolator:set_data_type(name)
+    local index = type_map[name] or type_map['NONE']
+    lib.SetInterpolatorDataType(index - 1)
+end 
+
+local interpolator_type = {
+    'NONE', 'LINEAR', 'HERMITE', 'BEZIER',
+    ['NONE'] = 1,['LINEAR'] = 2,['HERMITE'] = 3,['BEZIER'] = 4,
+}
+
+--获取该插值器储存的类型 
+function interpolator:get_type()
+    local type_index = lib.GetInterpolatorType(self.handle)
+    return interpolator_type[type_index + 1]
+end
+
+--设置插值器的类型
+function interpolator:set_type(name)
+    local index = interpolator_type[name] or interpolator_type['NONE']
+    lib.SetInterpolatorType(index - 1)
+end 
+
+
+--获取全局动画id
+function interpolator:get_global_sequence_id()
+    return lib.GetInterpolatorGlobalSequenceId(self.handle)
+end
+
+--设置全局动画id
+function interpolator:set_global_sequence_id(id)
+    lib.SetInterpolatorGlobalSequenceId(self.handle, id)
+end
+
+--将插值器转换为字符串 只有非静态插值器才可以转换
+function interpolator:to_string()
+    return ffi.string(lib.GetInterpolatorString(self.handle))
+end
+--给插值器设置字符串 设置了之后 改变为 非静态插值器
+function interpolator:from_string(string)
+    return lib.SetInterpolatorString(self.handle, tostring(string))
+end
+
+--获取缩放倍率
+--@time: nil | SEQUENCE_TIME对象 | table{ time:integer, intervalStart:integer, intervalEnd:ingeger}
+--@return number 缩放
+function interpolator:get_scalar(time)
+    return lib.GetInterpolatorStaticScalar(self.handle, modellib.object2c['SEQUENCE_TIME*'](time))
+end
+
+--设置缩放倍率
+--@vaule: number
+--@time: nil | SEQUENCE_TIME对象 | table{ time:integer, intervalStart:integer, intervalEnd:ingeger}
+--@return number 缩放
+function interpolator:set_scalar(value, time)
+    lib.SetInterpolatorStaticScalar(self.handle, value, modellib.object2c['SEQUENCE_TIME*'](time))
+end
+
+--设置缩放倍率
+--@vaule: number
+--@time: nil | SEQUENCE_TIME对象 | table{ time:integer, intervalStart:integer, intervalEnd:ingeger}
+--@return number 缩放
+function interpolator:set_scalar_int(value, time)
+    lib.SetInterpolatorStaticScalarInt(self.handle, value, modellib.object2c['SEQUENCE_TIME*'](time))
+end
+
+--获取数据
+--@time: nil | SEQUENCE_TIME对象 | table{ time:integer, intervalStart:integer, intervalEnd:ingeger}
+--@return VECTOR2 包含2值
+function interpolator:get_vec2(time)
+    local vec2 = modellib.object2c['VECTOR2*']({})
+    lib.GetInterpolatorVector2(self.handle, modellib.object2c['SEQUENCE_TIME*'](time), vec2)
+    return vec2
+end
+
+
+--获取数据
+--@time: nil | SEQUENCE_TIME对象 | table{ time:integer, intervalStart:integer, intervalEnd:ingeger}
+--@return VECTOR3 包含3值
+function interpolator:get_vec3(time)
+    local vec3 = modellib.object2c['VECTOR3*']({})
+    lib.GetInterpolatorVector3(self.handle, modellib.object2c['SEQUENCE_TIME*'](time), vec3)
+    return vec3
+end
+
+
+--获取数据
+--@time: nil | SEQUENCE_TIME对象 | table{ time:integer, intervalStart:integer, intervalEnd:ingeger}
+--@return VECTOR4 包含3值
+function interpolator:get_vec4(time)
+    local vec4 = modellib.object2c['VECTOR4*']({})
+    lib.GetInterpolatorVector4(self.handle, modellib.object2c['SEQUENCE_TIME*'](time), vec4)
+    return vec4
+end
+
+
+
+--设置静态数据
+--@vec2: VECTOR2 | array[2] | {x, y}
+--@name: string
+--@return bool 是否设置成功 只有静态插值器 才可以设置数值
+function interpolator:set_vec3(vec2, name)
+    return lib.SetInterpolatorStaticVector2(self.handle, modellib.object2c['VECTOR2*'](vec2), name)
+end
+
+--设置静态数据
+--@vec3: VECTOR3 | array[3] | {x, y, z}
+--@name: string
+--@return bool 是否设置成功 只有静态插值器 才可以设置数值
+function interpolator:set_vec3(vec3, name)
+    return lib.SetInterpolatorStaticVector3(self.handle, modellib.object2c['VECTOR3*'](vec3), name)
+end
+
+--设置静态数据
+--@vec4: VECTOR4 | array[4] | {x, y, z, w}
+--@name: string
+--@return bool 是否设置成功 只有静态插值器 才可以设置数值
+function interpolator:set_vec4(vec4, name)
+    return lib.SetInterpolatorStaticVector4(self.handle, modellib.object2c['VECTOR4*'](vec4), name)
+end
+
+
+return interpolator

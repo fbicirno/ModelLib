@@ -2,11 +2,13 @@ local ffi = require 'ffi'
 
 local cdef = [[
 
-	bool InitMpqResource();
+    bool InitMpqResource();
+    bool LoadAllReplaceableTextures();
+
 	HANDLE CreateModel();
     HANDLE OpenModel(const char* FileName);
     bool SaveModel(HANDLE handle, const char* path);
-	void CloseModel(HANDLE handle);
+	void CloseModel(HANDLE handle, bool del);
     HANDLE CopyModel(HANDLE handle);
 
 
@@ -18,23 +20,11 @@ ffi.cdef(cdef)
 local lib = ffi.load("modellib")
 
 lib.InitMpqResource()
+lib.LoadAllReplaceableTextures()
 
 local modellib = require 'modellib.modellib'
 
-local model = {}
-
-setmetatable(model, model)
-
-model.__index = model
-
-model.type = 'model'
-
-function model.new()
-	local handle = lib.CreateModel()
-
-	return setmetatable({handle = handle}, model)
-end
-
+local model = modellib.register_class('model', cdef)
 
 function model.open(path)
 	local handle = lib.OpenModel(path)
@@ -57,34 +47,18 @@ function model.open(path)
 end
 
 
-function model:close()
-	if self.handle == nil then
-		return
-    end
-
-	lib.CloseModel(self.handle)
-    self.handle = nil
-
-end
-
-function model:copy()
-    local handle = lib.CopyModel(self.handle)
-    if handle == nil then 
-        return 
-    end 
-
-    return setmetatable({handle = handle}, model)
-end
-
 function model:save(path)
     lib.SaveModel(self.handle, path)
 end 
-
 
 
 modellib.contariner(model, 'texture') --注册贴图容器
 modellib.contariner(model, 'material') --注册材质容器
 modellib.contariner(model, 'camera') --注册镜头容器
 modellib.contariner(model, 'sequence') --注册动作容器
+
+modellib.contariner(model, 'attachment') --注册附加点容器
+modellib.contariner(model, 'bone') --注册骨骼容器
+modellib.contariner(model, 'collisionshape') --注册碰撞容器
 
 return model

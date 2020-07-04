@@ -175,11 +175,13 @@ class MODEL
 		VOID WrapPivotPoints();
 		VOID UnwrapPivotPoints();
 
-	protected:
-		BOOL AddBaseNode(MODEL_BASE* Node, MODEL_BASE* ParentNode);
 		BOOL RemoveBaseNode(MODEL_BASE* Node, HWND Window);
 
 		VOID InsertNode(MODEL_BASE* Node);
+
+	protected:
+		BOOL AddBaseNode(MODEL_BASE* Node, MODEL_BASE* ParentNode);
+
 
 		MODEL_GEOSET_VERTEX* CreateVertex(CONST D3DXVECTOR3& Position, CONST D3DXVECTOR3& Normal, CONST D3DXVECTOR2& TexturePosition, INT VertexGroup);
 		MODEL_GEOSET_FACE* CreateFace(INT Index1, INT Index2, INT Index3);
