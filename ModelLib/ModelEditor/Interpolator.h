@@ -130,6 +130,9 @@ class INTERPOLATOR
 		std::list<INTERPOLATOR_NODE> NodeList;
 
 		std::string Name;
+
+		std::string Buffer;
+
 		INT GlobalSequenceId;
 		INTERPOLATOR_TYPE Type;
 		INTERPOLATION_TYPE InterpolationType;

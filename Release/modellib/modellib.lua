@@ -6,37 +6,90 @@ local lib = ffi.load("modellib")
 ffi.cdef [[
     typedef void* HANDLE;
 
+    struct VECTOR2 {
+		float x;
+		float y;
+    };
+    
     struct VECTOR3 {
 		float x;
 		float y;
 		float z;
-	};
+    };
+    
+    struct EXTENT
+    {
+    	float radius;
+    	VECTOR3 min;
+    	VECTOR3 max;
+    };
+
+    struct SEQUENCE_TIME
+    {
+    	int Time;
+    	int IntervalStart;
+    	int IntervalEnd;
+    };
+
+
 ]]
 
 --lua参数转换为 c 参数
-local param_type_convert_map = {
+local lua2ffi
+local ffi2lua
+
+lua2ffi = {
     ['string'] = function (value)
         return tostring(value)
     end,
 
+    ['VECTOR2*'] = function (v)
+        if type(v) == 'table' then 
+            local vec2 = ffi.new('struct VECTOR2')
+            vec2.x = v.x or v[1] or 0
+            vec2.y = v.y or v[2] or 0
+            return vec2
+        end
+        return v
+    end,
+
+
     ['VECTOR3*'] = function (v)
         if type(v) == 'table' then 
-            local vector3 = ffi.new('struct VECTOR3')
-            vector3.x = v.x or v[1] or 0
-            vector3.y = v.y or v[2] or 0
-            vector3.z = v.z or v[3] or 0
-            return vector3
+            local vec3 = ffi.new('struct VECTOR3')
+            vec3.x = v.x or v[1] or 0
+            vec3.y = v.y or v[2] or 0
+            vec3.z = v.z or v[3] or 0
+            return vec3
         end
+        return v
+    end,
+
+    ['EXTENT*'] = function (v)
+        local extent = v 
+        if type(v) == 'table' then 
+            extent = ffi.new('struct EXTENT')
+        end
+        extent.min = lua2ffi['VECTOR3*'](v.min or {0, 0, 0})
+        extent.max = lua2ffi['VECTOR3*'](v.max or {0, 0, 0})
         return v
     end,
 }
 --c参数 转换为lua参数
-local retn_type_convert_map = {
+ffi2lua = {
     ['string'] = function (value)
         return ffi.string(value)
     end,
 
+    ['VECTOR2*'] = function (v)
+        return v
+    end,
+
     ['VECTOR3*'] = function (v)
+        return v
+    end,
+
+    ['EXTENT*'] = function (v)
         return v
     end,
 }
@@ -94,7 +147,7 @@ function modellib.auto_method(module, cdef)
         func_map[api] = {
             name = table.concat(s),
             is_set = api:sub(1,1) == 'S',
-            ret = ret,
+            ret = ret:find('char*') and 'string' or ret,
             args = args,
         }
     end)
@@ -108,7 +161,7 @@ function modellib.auto_method(module, cdef)
         local function convert_param(param, count)
             for i = 1, count do 
                 local v = param[i]
-                local func = param_type_convert_map[args[i]]
+                local func = lua2ffi[args[i]]
                 if func then 
                     param[i] = func(v)
                 end 
@@ -126,7 +179,7 @@ function modellib.auto_method(module, cdef)
         else
             module[name] = function (self)
                 local value = lib[api](self.handle)
-                local func = retn_type_convert_map[ret]
+                local func = ffi2lua[ret]
                 if func then 
                     value = func(value)
                 end

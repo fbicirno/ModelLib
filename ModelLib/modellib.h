@@ -2,6 +2,30 @@
 #include "stdafx.h"
 
 extern "C" {
+	typedef void* HANDLE;
+
+	struct VECTOR2 {
+		float x;
+		float y;
+	};
+
+	struct VECTOR3 {
+		float x;
+		float y;
+		float z;
+	};
+
+	struct VECTOR4 {
+		float x;
+		float y;
+		float z;
+		float w;
+	};
+
+
+	HANDLE CreateInterpolator();
+
+
 	//config
 	bool InitMpqResource();
 	bool LoadAllReplaceableTextures();
@@ -101,15 +125,12 @@ extern "C" {
 	HANDLE CopyCamera(HANDLE camhandle);
 	void CloseCamera(HANDLE camhandle, bool del);
 	HANDLE GetCameraByModel(HANDLE modelhandle, int index);
+
 	int GetModelCameraSize(HANDLE modelhandle);
 	bool AddModelCamera(HANDLE modelhandle, HANDLE camhandle);
 	bool RemoveModelCamera(HANDLE modelhandle, HANDLE  camhandle);
 
-	struct VECTOR3 {
-		float x;
-		float y;
-		float z;
-	};
+
 
 	const char* GetCameraName(HANDLE  camhandle);
 	void SetCameraName(HANDLE  camhandle, const char* name);
@@ -125,5 +146,31 @@ extern "C" {
 	void SetCameraNearDistance(HANDLE  camhandle, float value);
 	float GetCameraFarDistance(HANDLE  camhandle);
 	void SetCameraFarDistance(HANDLE  camhandle, float value);
+
+
+
+	HANDLE CreateSequence();
+	HANDLE CopySequence(HANDLE seqhandle);
+	void CloseSequence(HANDLE seqhandle, bool del);
+	HANDLE GetSequenceByModel(HANDLE modelhandle, int index);
+	int GetModelSequenceSize(HANDLE modelhandle);
+	bool AddModelSequence(HANDLE modelhandle, HANDLE seqhandle);
+	bool RemoveModelSequence(HANDLE modelhandle, HANDLE  seqhandle);
+
+
+
+	const char* GetSequenceName(HANDLE  seqhandle);
+	void SetSequenceName(HANDLE  seqhandle, const char* name);
+	float GetSequenceRarity(HANDLE  seqhandle);
+	void SetSequenceRarity(HANDLE  seqhandle, float value);
+	float GetSequenceMoveSpeed(HANDLE  seqhandle);
+	void SetSequenceMoveSpeed(HANDLE  seqhandle, float value);
+	bool GetSequenceNonLooping(HANDLE  seqhandle);
+	void SetSequenceNonLooping(HANDLE  seqhandle, bool value);
+	VECTOR2* GetSequenceInterval(HANDLE  seqhandle);
+	void SetSequenceInterval(HANDLE  seqhandle, VECTOR2* value);
+	EXTENT* GetSequenceExtent(HANDLE  seqhandle);
+	void SetSequenceExtent(HANDLE  seqhandle, EXTENT* value);
+
 
 }

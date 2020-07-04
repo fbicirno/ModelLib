@@ -82,6 +82,397 @@ bool LoadAllReplaceableTextures()
 	return TextureManager.LoadAllReplaceableTextures();
 }
 
+
+HANDLE CreateInterpolator()
+{
+	INTERPOLATOR* interpolator = new INTERPOLATOR;
+	return convert_handle(interpolator);
+}
+
+
+HANDLE CopyInterpolator(HANDLE interhandle)
+{
+	INTERPOLATOR* interpolator = (INTERPOLATOR*)convert_object(interhandle);
+	if (!interpolator)
+	{
+		return 0;
+	}
+
+	return convert_handle(new INTERPOLATOR(*interpolator);
+}
+
+void CloseInterpolator(HANDLE interhandle)
+{
+	INTERPOLATOR* interpolator = (INTERPOLATOR*)convert_object(interhandle);
+	if (!interpolator)
+	{
+		return ;
+	}
+	close_handle(interhandle);
+	delete interpolator;
+}
+
+void InterClear(HANDLE interhandle)
+{
+	INTERPOLATOR* interpolator = (INTERPOLATOR*)convert_object(interhandle);
+	if (!interpolator)
+	{
+		return ;
+	}
+
+	interpolator->Clear();
+}
+
+int GetInterpolatorSize(HANDLE interhandle)
+{
+	INTERPOLATOR* interpolator = (INTERPOLATOR*)convert_object(interhandle);
+	if (!interpolator)
+	{
+		return 0;
+	}
+
+	return interpolator->GetSize();
+}
+
+bool GetInterpolatorIsStatic(HANDLE interhandle)
+{
+	INTERPOLATOR* interpolator = (INTERPOLATOR*)convert_object(interhandle);
+	if (!interpolator)
+	{
+		return 0;
+	}
+	return interpolator->IsStatic();
+}
+
+int GetInterpolatorDataType(HANDLE interhandle)
+{
+	INTERPOLATOR* interpolator = (INTERPOLATOR*)convert_object(interhandle);
+	if (!interpolator)
+	{
+		return 0;
+	}
+	return (int)interpolator->GetType();
+}
+
+void SetInterpolatorDataType(HANDLE interhandle, int type)
+{
+	INTERPOLATOR* interpolator = (INTERPOLATOR*)convert_object(interhandle);
+	if (!interpolator)
+	{
+		return ;
+	}
+	interpolator->SetType((INTERPOLATOR_TYPE)type);
+}
+
+int GetInterpolatorType(HANDLE interhandle)
+{
+	INTERPOLATOR* interpolator = (INTERPOLATOR*)convert_object(interhandle);
+	if (!interpolator)
+	{
+		return 0;
+	}
+	return (int)interpolator->GetInterpolatorpolationType();
+}
+
+void SetInterpolatorType(HANDLE interhandle, int type)
+{
+	INTERPOLATOR* interpolator = (INTERPOLATOR*)convert_object(interhandle);
+	if (!interpolator)
+	{
+		return;
+	}
+	interpolator->SetInterpolatorpolationType((INTERPOLATION_TYPE)type);
+}
+
+void SetInterpolatorGlobalSequenceId(HANDLE interhandle, int sequence_id)
+{
+	INTERPOLATOR* interpolator = (INTERPOLATOR*)convert_object(interhandle);
+	if (!interpolator)
+	{
+		return;
+	}
+	interpolator->SetGlobalSequenceId(sequence_id);
+}
+
+int GetInterpolatorGlobalSequenceId(HANDLE interhandle)
+{
+	INTERPOLATOR* interpolator = (INTERPOLATOR*)convert_object(interhandle);
+	if (!interpolator)
+	{
+		return 0;
+	}
+	return interpolator->GetGlobalSequenceId();
+}
+
+static void BuildVector(INTERPOLATOR* interpolator,std::stringstream& Stream, CONST D3DXVECTOR4& Vector)
+{
+	switch (interpolator->Type)
+	{
+		case INTERPOLATOR_TYPE_SCALAR:
+		case INTERPOLATOR_TYPE_SCALAR_INT:
+		{
+			Stream << Vector.x;
+			break;
+		}
+
+		case INTERPOLATOR_TYPE_VECTOR2:
+		{
+			Stream << "{ " << Vector.x << ", " << Vector.y << " }";
+			break;
+		}
+
+		case INTERPOLATOR_TYPE_VECTOR3:
+		{
+			Stream << "{ " << Vector.x << ", " << Vector.y << ", " << Vector.z << " }";
+			break;
+		}
+
+		case INTERPOLATOR_TYPE_VECTOR4:
+		{
+			Stream << "{ " << Vector.x << ", " << Vector.y << ", " << Vector.z << ", " << Vector.w << " }";
+			break;
+		}
+	}
+}
+
+static bool RetrieveVector(INTERPOLATOR* interpolator, std::stringstream& Stream, D3DXVECTOR4& Vector)
+{
+	Vector = D3DXVECTOR4(0.0f, 0.0f, 0.0f, 0.0f);
+
+	switch (interpolator->Type)
+	{
+	case INTERPOLATOR_TYPE_SCALAR:
+	case INTERPOLATOR_TYPE_SCALAR_INT:
+	{
+		Stream >> Vector.x;
+		break;
+	}
+
+	case INTERPOLATOR_TYPE_VECTOR2:
+	{
+		if (!ExpectChar(Stream, '{')) return FALSE;
+		Stream >> Vector.x;
+		if (!ExpectChar(Stream, ',')) return FALSE;
+		Stream >> Vector.y;
+		if (!ExpectChar(Stream, '}')) return FALSE;
+		break;
+	}
+
+	case INTERPOLATOR_TYPE_VECTOR3:
+	{
+		if (!ExpectChar(Stream, '{')) return FALSE;
+		Stream >> Vector.x;
+		if (!ExpectChar(Stream, ',')) return FALSE;
+		Stream >> Vector.y;
+		if (!ExpectChar(Stream, ',')) return FALSE;
+		Stream >> Vector.z;
+		if (!ExpectChar(Stream, '}')) return FALSE;
+		break;
+	}
+
+	case INTERPOLATOR_TYPE_VECTOR4:
+	{
+		if (!ExpectChar(Stream, '{')) return FALSE;
+		Stream >> Vector.x;
+		if (!ExpectChar(Stream, ',')) return FALSE;
+		Stream >> Vector.y;
+		if (!ExpectChar(Stream, ',')) return FALSE;
+		Stream >> Vector.z;
+		if (!ExpectChar(Stream, ',')) return FALSE;
+		Stream >> Vector.z;
+		if (!ExpectChar(Stream, '}')) return FALSE;
+		break;
+	}
+	}
+
+	return TRUE;
+}
+
+static bool ExpectChar(std::stringstream& Stream, CHAR Char)
+{
+	CHAR TempChar = ' ';
+
+	Stream >> TempChar;
+	if (TempChar != Char)
+	{
+		Error.SetMessage(std::string("Expected \"") + Char + "\", got \"" + TempChar + "\"!");
+		return FALSE;
+	}
+
+	return TRUE;
+}
+
+const char* GetInterpolatorString(HANDLE interhandle)
+{
+	INTERPOLATOR* interpolator = (INTERPOLATOR*)convert_object(interhandle);
+	if (!interpolator)
+	{
+		return ;
+	}
+	std::stringstream Stream;
+	std::list<INTERPOLATOR_NODE>::iterator i;
+
+	if (interpolator->IsStatic())
+	{
+		Stream << "0: ";
+		BuildVector(interpolator, Stream, interpolator->StaticVector);
+		Stream << "\n";
+
+		interpolator->Buffer = Stream.str();
+		return interpolator->Buffer.c_str();
+	}
+	i = interpolator->NodeList.begin();
+	while (i != interpolator->NodeList.end())
+	{
+		Stream << i->Time << ": ";
+		BuildVector(interpolator, Stream, i->Vector);
+		Stream << "\n";
+
+		switch (interpolator->InterpolationType)
+		{
+		case INTERPOLATION_TYPE_HERMITE:
+		case INTERPOLATION_TYPE_BEZIER:
+		{
+			Stream << "  InTan: ";
+			BuildVector(interpolator, Stream, i->InTan);
+			Stream << "\n";
+
+			Stream << "  OutTan: ";
+			BuildVector(interpolator, Stream, i->OutTan);
+			Stream << "\n";
+		}
+		}
+
+		i++;
+	}
+	interpolator->Buffer = Stream.str();
+	return interpolator->Buffer.c_str();
+}
+
+
+bool SetInterpolatorString(HANDLE interhandle, const char* str)
+{
+	INTERPOLATOR* interpolator = (INTERPOLATOR*)convert_object(interhandle);
+	if (!interpolator)
+	{
+		return false;
+	}
+	std::string Word;
+	std::stringstream Stream;
+	INTERPOLATOR_NODE Node;
+
+	Stream.str(str);
+
+	interpolator->NodeList.clear();
+
+	while (!Stream.eof())
+	{
+		Node = INTERPOLATOR_NODE();
+
+		Node.Time = -1;
+		Stream >> Node.Time;
+		if (Node.Time == -1) break;
+
+		if (!ExpectChar(Stream, ':')) return false;
+		if (!RetrieveVector(interpolator, Stream, Node.Vector)) return false;
+
+		switch (interpolator->InterpolationType)
+		{
+			case INTERPOLATION_TYPE_HERMITE:
+			case INTERPOLATION_TYPE_BEZIER:
+			{
+				Word = "";
+				Stream >> Word;
+				if (Word != "InTan:")
+				{
+					Error.SetMessage("Expected \"InTan:\", got \"" + Word + "\"!");
+					return false;
+				}
+
+				if (!RetrieveVector(interpolator, Stream, Node.InTan)) return false;
+
+				Word = "";
+				Stream >> Word;
+				if (Word != "OutTan:")
+				{
+					Error.SetMessage("Expected \"OutTan:\", got \"" + Word + "\"!");
+					return false;
+				}
+
+				if (!RetrieveVector(interpolator, Stream, Node.OutTan)) return false;
+			}
+		}
+		interpolator->NodeList.push_back(Node);
+	}
+
+	interpolator->Static = FALSE;
+	return true;
+}
+
+bool GetInterpolatorVector2(HANDLE interhandle, SEQUENCE_TIME* time, VECTOR2* result)
+{
+	INTERPOLATOR* interpolator = (INTERPOLATOR*)convert_object(interhandle);
+	if (!interpolator)
+	{
+		return false;
+	}
+
+	interpolator->GetVector2(time ? *time : SEQUENCE_TIME());
+}
+
+bool GetInterpolatorVector3(HANDLE interhandle, SEQUENCE_TIME* time, VECTOR3* result)
+{
+	INTERPOLATOR* interpolator = (INTERPOLATOR*)convert_object(interhandle);
+	if (!interpolator)
+	{
+		return false;
+	}
+	interpolator->GetVector3(time ? *time : SEQUENCE_TIME());
+}
+
+bool SetInterpolatorVector4(HANDLE interhandle, SEQUENCE_TIME* time, VECTOR4* result)
+{
+	INTERPOLATOR* interpolator = (INTERPOLATOR*)convert_object(interhandle);
+	if (!interpolator)
+	{
+		return false;
+	}
+	interpolator->GetVector4(time ? *time : SEQUENCE_TIME());
+}
+
+bool SetInterpolatorVector2(HANDLE interhandle, SEQUENCE_TIME* time, VECTOR2* result)
+{
+	INTERPOLATOR* interpolator = (INTERPOLATOR*)convert_object(interhandle);
+	if (!interpolator)
+	{
+		return false;
+	}
+
+	interpolator->GetVector2(time ? *time : SEQUENCE_TIME());
+}
+
+bool SetInterpolatorVector3(HANDLE interhandle, SEQUENCE_TIME* time, VECTOR3* result)
+{
+	INTERPOLATOR* interpolator = (INTERPOLATOR*)convert_object(interhandle);
+	if (!interpolator)
+	{
+		return false;
+	}
+	interpolator->GetVector3(time ? *time : SEQUENCE_TIME());
+}
+
+bool SetInterpolatorVector4(HANDLE interhandle, SEQUENCE_TIME* time, VECTOR4* result)
+{
+	INTERPOLATOR* interpolator = (INTERPOLATOR*)convert_object(interhandle);
+	if (!interpolator)
+	{
+		return false;
+	}
+	interpolator->GetVector4(time ? *time : SEQUENCE_TIME());
+}
+
+
+
 HANDLE CreateModel()
 {
 	MODEL* model = new MODEL;
@@ -1105,3 +1496,246 @@ void SetCameraFarDistance(HANDLE  camhandle, float value)
 	}
 	camera->Data().FarDistance = value;
 }
+
+
+
+
+
+HANDLE CreateSequence()
+{
+	MODEL_SEQUENCE* sequence = new MODEL_SEQUENCE;
+
+	return convert_handle(sequence);
+}
+
+HANDLE CopySequence(HANDLE seqhandle)
+{
+	MODEL_SEQUENCE* sequence = (MODEL_SEQUENCE*)convert_object(seqhandle);
+
+	if (!sequence)
+		return 0;
+
+	MODEL_SEQUENCE* copy = new MODEL_SEQUENCE(*sequence);
+
+	return convert_handle(sequence);
+}
+
+void CloseSequence(HANDLE seqhandle, bool del)
+{
+	MODEL_SEQUENCE* sequence = (MODEL_SEQUENCE*)convert_object(seqhandle);
+
+	close_handle(seqhandle);
+	if (sequence && del)
+	{
+		delete sequence;
+	}
+}
+
+HANDLE GetSequenceByModel(HANDLE modelhandle, int index)
+{
+	MODEL* model = (MODEL*)convert_object(modelhandle);
+	if (!model)
+	{
+		return 0;
+	}
+
+	auto& container = model->Data().SequenceContainer;
+	if (index >= 0 && index < container.GetSize() && container.GetSize() > 0)
+	{
+		return convert_handle(container[index]);
+	}
+	return 0;
+}
+
+
+int GetModelSequenceSize(HANDLE modelhandle)
+{
+	MODEL* model = (MODEL*)convert_object(modelhandle);
+	if (!model)
+	{
+		return 0;
+	}
+
+	return model->Data().SequenceContainer.GetSize();
+}
+
+bool AddModelSequence(HANDLE modelhandle, HANDLE seqhandle)
+{
+	MODEL* model = (MODEL*)convert_object(modelhandle);
+	if (!model)
+	{
+		return 0;
+	}
+	MODEL_SEQUENCE* sequence = (MODEL_SEQUENCE*)convert_object(seqhandle);
+
+	if (!sequence)
+	{
+		return 0;
+	}
+
+	return model->AddSequence(sequence);
+}
+
+bool RemoveModelSequence(HANDLE modelhandle, HANDLE  seqhandle)
+{
+	MODEL* model = (MODEL*)convert_object(modelhandle);
+	if (!model)
+	{
+		return false;
+	}
+	MODEL_SEQUENCE* sequence = (MODEL_SEQUENCE*)convert_object(seqhandle);
+	if (!sequence)
+	{
+		return false;
+	}
+
+	close_handle(seqhandle);
+	model->RemoveSequence(sequence);
+	return true;
+
+}
+
+
+
+const char* GetSequenceName(HANDLE  seqhandle)
+{
+	MODEL_SEQUENCE* sequence = (MODEL_SEQUENCE*)convert_object(seqhandle);
+
+	if (!sequence)
+	{
+		return 0;
+	}
+	return sequence->Data().Name.c_str();
+}
+
+void SetSequenceName(HANDLE  seqhandle, const char* name)
+{
+	MODEL_SEQUENCE* sequence = (MODEL_SEQUENCE*)convert_object(seqhandle);
+
+
+	if (!sequence)
+	{
+		return;
+	}
+	sequence->Data().Name = name;
+}
+
+
+float GetSequenceRarity(HANDLE  seqhandle)
+{
+	MODEL_SEQUENCE* sequence = (MODEL_SEQUENCE*)convert_object(seqhandle);
+
+	if (!sequence)
+	{
+		return 0;
+	}
+	return sequence->Data().Rarity;
+}
+
+void SetSequenceRarity(HANDLE  seqhandle, float value)
+{
+	MODEL_SEQUENCE* sequence = (MODEL_SEQUENCE*)convert_object(seqhandle);
+
+
+	if (!sequence)
+	{
+		return;
+	}
+	sequence->Data().Rarity = value;
+}
+
+float GetSequenceMoveSpeed(HANDLE  seqhandle)
+{
+	MODEL_SEQUENCE* sequence = (MODEL_SEQUENCE*)convert_object(seqhandle);
+
+	if (!sequence)
+	{
+		return 0;
+	}
+	return sequence->Data().MoveSpeed;
+}
+
+void SetSequenceMoveSpeed(HANDLE  seqhandle, float value)
+{
+	MODEL_SEQUENCE* sequence = (MODEL_SEQUENCE*)convert_object(seqhandle);
+
+
+	if (!sequence)
+	{
+		return;
+	}
+	sequence->Data().MoveSpeed = value;
+}
+
+bool GetSequenceNonLooping(HANDLE  seqhandle)
+{
+	MODEL_SEQUENCE* sequence = (MODEL_SEQUENCE*)convert_object(seqhandle);
+
+	if (!sequence)
+	{
+		return 0;
+	}
+	return sequence->Data().NonLooping;
+}
+
+void SetSequenceNonLooping(HANDLE  seqhandle, bool value)
+{
+	MODEL_SEQUENCE* sequence = (MODEL_SEQUENCE*)convert_object(seqhandle);
+
+
+	if (!sequence)
+	{
+		return;
+	}
+	sequence->Data().NonLooping = value;
+}
+
+
+
+VECTOR2* GetSequenceInterval(HANDLE  seqhandle)
+{
+	MODEL_SEQUENCE* sequence = (MODEL_SEQUENCE*)convert_object(seqhandle);
+
+	if (!sequence)
+	{
+		return 0;
+	}
+	return (VECTOR2*)&sequence->Data().Interval;
+}
+
+void SetSequenceInterval(HANDLE  seqhandle, VECTOR2* value)
+{
+	MODEL_SEQUENCE* sequence = (MODEL_SEQUENCE*)convert_object(seqhandle);
+
+
+	if (!sequence)
+	{
+		return;
+	}
+	sequence->Data().Interval = *(D3DXVECTOR2*)value;
+}
+
+
+EXTENT* GetSequenceExtent(HANDLE  seqhandle)
+{
+	MODEL_SEQUENCE* sequence = (MODEL_SEQUENCE*)convert_object(seqhandle);
+
+	if (!sequence)
+	{
+		return 0;
+	}
+	return (EXTENT*)&sequence->Data().Extent;
+}
+
+void SetSequenceExtent(HANDLE  seqhandle, EXTENT* value)
+{
+	MODEL_SEQUENCE* sequence = (MODEL_SEQUENCE*)convert_object(seqhandle);
+
+
+	if (!sequence)
+	{
+		return;
+	}
+	sequence->Data().Extent = *(EXTENT*)value;
+}
+

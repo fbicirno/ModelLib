@@ -10,15 +10,31 @@ local model2 = model:copy()
 
 
 --镜头
-for i = 1, 10 do 
-    local camera = lib.camera.new()
-    camera.source = {7, 8, 9}
-    camera.target = camera.source
+--for i = 1, 10 do 
+--    local camera = lib.camera.new()
+--    camera.source = {7, 8, 9}
+--    camera.target = camera.source
+--
+--    print(camera.source, camera.source.x, camera.source.y, camera.source.z)
+--    print(camera.target, camera.target.x, camera.target.y, camera.target.z)
+--
+--    model2:add_camera(camera)
+--end 
 
-    print(camera.source, camera.source.x, camera.source.y, camera.source.z)
-    print(camera.target, camera.target.x, camera.target.y, camera.target.z)
-
-    model2:add_camera(camera)
+for sequence in model2:each_sequence() do 
+    print(sequence)
+    for k, v in pairs(sequence) do 
+        if type(v) == 'number' then 
+            sequence[k] = 999
+        end 
+    end 
+    sequence.name = sequence.name .. '_test'
+    sequence.interval = {555, 666}
+    sequence.extent = {
+        radius = 888,
+        min = {2, 2, 2},
+        max = {3, 3, 3},
+    }
 end 
 
 --贴图

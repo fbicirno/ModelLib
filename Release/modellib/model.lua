@@ -84,6 +84,7 @@ end
 
 modellib.contariner(model, 'texture') --注册贴图容器
 modellib.contariner(model, 'material') --注册材质容器
-modellib.contariner(model, 'camera') --注册材质容器
+modellib.contariner(model, 'camera') --注册镜头容器
+modellib.contariner(model, 'sequence') --注册动作容器
 
 return model
