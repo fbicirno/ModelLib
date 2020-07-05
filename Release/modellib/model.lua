@@ -67,7 +67,7 @@ function model:save_ui_model(path)
 
     --粒子发射器缩小1000倍
     for particle2 in object:each_particle2() do 
-        local scaling = particle2.scaling
+        local scaling = particle2.particle_scaling
         scaling.x = scaling.x / 1000
         scaling.y = scaling.y / 1000
         scaling.z = scaling.z / 1000

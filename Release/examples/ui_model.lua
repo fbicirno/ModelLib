@@ -4,7 +4,7 @@ local lib = require 'modellib'
 --将模型转换为ui模型的参数
 
 --打开模型 --支持mdx mdl 路径
-local model = lib.model.open("units\\other\\DranaiAkama\\DranaiAkama.mdx")
+local model = lib.model.open("Units\\Human\\Jaina\\Jaina.mdx")
 
 
 model:save_ui_model("ui.mdx") --内存另存为mdx文件
