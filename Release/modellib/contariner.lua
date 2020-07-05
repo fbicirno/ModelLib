@@ -54,6 +54,39 @@ local cdef = [[
     int GetCollisionshapeVertexSize(HANDLE collisionshapehandle);
 	bool AddCollisionshapVertex(HANDLE collisionshapehandle, VECTOR3* vec3);
     bool RemoveCollisionshapVertex(HANDLE collisionshapehandle, int index);
+
+    //事件容器
+    int GetModelEventobjectSize(HANDLE modelhandle);
+	bool AddModelEventobject(HANDLE modelhandle, HANDLE eventobjecthandle);
+    bool RemoveModelEventobject(HANDLE modelhandle, HANDLE  eventobjecthandle);
+    
+    //事件监听id容器
+    int GetEventTrackByEventobject(HANDLE eventobjecthandle, int index);
+	int GetEventobjectEventTrackSize(HANDLE eventobjecthandle);
+	bool AddEventobjectEventTrack(HANDLE eventobjecthandle, int value);
+	bool RemoveEventobjectEventTrack(HANDLE eventobjecthandle, int index);
+
+
+    //帮助体容器
+    int GetModelHelperSize(HANDLE modelhandle);
+	bool AddModelHelper(HANDLE modelhandle, HANDLE helperhandle);
+	bool RemoveModelHelper(HANDLE modelhandle, HANDLE  helperhandle);
+
+    //高光
+    int GetModelLightSize(HANDLE modelhandle);
+	bool AddModelLight(HANDLE modelhandle, HANDLE lighthandle);
+    bool RemoveModelLight(HANDLE modelhandle, HANDLE  lighthandle);
+    
+    //粒子
+    int GetModelParticleSize(HANDLE modelhandle);
+	bool AddModelParticle(HANDLE modelhandle, HANDLE particlehandle);
+    bool RemoveModelParticle(HANDLE modelhandle, HANDLE  particlehandle);
+    
+    //粒子2
+    int GetModelParticle2Size(HANDLE modelhandle);
+	bool AddModelParticle2(HANDLE modelhandle, HANDLE particle2handle);
+	bool RemoveModelParticle2(HANDLE modelhandle, HANDLE  particle2handle);
+
 ]]
 
 local ffi = require 'ffi'

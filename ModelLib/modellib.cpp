@@ -604,6 +604,16 @@ HANDLE CopyModel(HANDLE handle)
 	return convert_handle(copy);
 }
 
+void ModelCalculateBoundsRadius(HANDLE handle)
+{
+	MODEL* model = (MODEL*)convert_object(handle);
+	if (!model)
+	{
+		return ;
+	}
+	model->CalculateBoundsRadius();
+}
+
 
 HANDLE CreateTexture()
 {
@@ -3599,4 +3609,3871 @@ bool RemoveCollisionshapVertex(HANDLE collisionshapehandle, int index)
 }
 
 
-std::list<D3DXVECTOR3> VertexList;
+
+HANDLE CreateEventobject()
+{
+	MODEL_EVENT_OBJECT* eventobject = new MODEL_EVENT_OBJECT;
+
+	return convert_handle(eventobject);
+}
+
+HANDLE CopyEventobject(HANDLE eventobjecthandle)
+{
+	MODEL_EVENT_OBJECT* eventobject = (MODEL_EVENT_OBJECT*)convert_object(eventobjecthandle);
+
+	if (!eventobject)
+		return 0;
+
+	MODEL_EVENT_OBJECT* copy = new MODEL_EVENT_OBJECT(*eventobject);
+
+	return convert_handle(eventobject);
+}
+
+void CloseEventobject(HANDLE eventobjecthandle, bool del)
+{
+	MODEL_EVENT_OBJECT* eventobject = (MODEL_EVENT_OBJECT*)convert_object(eventobjecthandle);
+
+	close_handle(eventobjecthandle);
+	if (eventobject && del)
+	{
+		delete eventobject;
+	}
+}
+
+HANDLE GetEventobjectByModel(HANDLE modelhandle, int index)
+{
+	MODEL* model = (MODEL*)convert_object(modelhandle);
+	if (!model)
+	{
+		return 0;
+	}
+
+	auto& container = model->Data().EventObjectContainer;
+	if (index >= 0 && index < container.GetSize() && container.GetSize() > 0)
+	{
+		return convert_handle(container[index]);
+	}
+	return 0;
+}
+
+
+int GetModelEventobjectSize(HANDLE modelhandle)
+{
+	MODEL* model = (MODEL*)convert_object(modelhandle);
+	if (!model)
+	{
+		return 0;
+	}
+
+	return model->Data().EventObjectContainer.GetSize();
+}
+
+bool AddModelEventobject(HANDLE modelhandle, HANDLE eventobjecthandle)
+{
+	MODEL* model = (MODEL*)convert_object(modelhandle);
+	if (!model)
+	{
+		return 0;
+	}
+	MODEL_EVENT_OBJECT* eventobject = (MODEL_EVENT_OBJECT*)convert_object(eventobjecthandle);
+
+	if (!eventobject)
+	{
+		return 0;
+	}
+
+	return model->AddEventObject(eventobject);
+}
+
+bool RemoveModelEventobject(HANDLE modelhandle, HANDLE  eventobjecthandle)
+{
+	MODEL* model = (MODEL*)convert_object(modelhandle);
+	if (!model)
+	{
+		return false;
+	}
+	MODEL_EVENT_OBJECT* eventobject = (MODEL_EVENT_OBJECT*)convert_object(eventobjecthandle);
+	if (!eventobject)
+	{
+		return false;
+	}
+
+	close_handle(eventobjecthandle);
+	model->RemoveEventObject(eventobject);
+	return true;
+
+}
+
+
+const char* GetEventobjectName(HANDLE  eventobjecthandle)
+{
+	MODEL_EVENT_OBJECT* eventobject = (MODEL_EVENT_OBJECT*)convert_object(eventobjecthandle);
+
+	if (!eventobject)
+	{
+		return 0;
+	}
+	return eventobject->Data().Name.c_str();
+}
+
+void SetEventobjectName(HANDLE  eventobjecthandle, const char* name)
+{
+	MODEL_EVENT_OBJECT* eventobject = (MODEL_EVENT_OBJECT*)convert_object(eventobjecthandle);
+
+	if (!eventobject)
+	{
+		return;
+	}
+	eventobject->Data().Name = name;
+}
+
+int GetEventobjectObjectId(HANDLE  eventobjecthandle)
+{
+	MODEL_EVENT_OBJECT* eventobject = (MODEL_EVENT_OBJECT*)convert_object(eventobjecthandle);
+
+	if (!eventobject)
+	{
+		return 0;
+	}
+	return eventobject->Data().ObjectId;
+}
+
+void SetEventobjectObjectId(HANDLE  eventobjecthandle, int value)
+{
+	MODEL_EVENT_OBJECT* eventobject = (MODEL_EVENT_OBJECT*)convert_object(eventobjecthandle);
+
+	if (!eventobject)
+	{
+		return;
+	}
+	eventobject->Data().ObjectId = value;
+}
+
+int GetEventobjectParentId(HANDLE  eventobjecthandle)
+{
+	MODEL_EVENT_OBJECT* eventobject = (MODEL_EVENT_OBJECT*)convert_object(eventobjecthandle);
+
+	if (!eventobject)
+	{
+		return 0;
+	}
+	return eventobject->Data().ParentId;
+}
+
+void SetEventobjectParentId(HANDLE  eventobjecthandle, int value)
+{
+	MODEL_EVENT_OBJECT* eventobject = (MODEL_EVENT_OBJECT*)convert_object(eventobjecthandle);
+
+	if (!eventobject)
+	{
+		return;
+	}
+	eventobject->Data().ParentId = value;
+}
+
+
+INTERPOLATOR_HANDLE GetEventobjectTranslation(HANDLE  eventobjecthandle)
+{
+	MODEL_EVENT_OBJECT* eventobject = (MODEL_EVENT_OBJECT*)convert_object(eventobjecthandle);
+
+	if (!eventobject)
+	{
+		return 0;
+	}
+	INTERPOLATOR* interpolator = &eventobject->Data().Translation;
+
+	return convert_handle(interpolator);
+}
+
+void SetEventobjectTranslation(HANDLE camhandle, INTERPOLATOR_HANDLE eventobjecthandle)
+{
+	MODEL_EVENT_OBJECT* eventobject = (MODEL_EVENT_OBJECT*)convert_object(eventobjecthandle);
+
+	if (!eventobject)
+	{
+		return;
+	}
+	INTERPOLATOR* interpolator = (INTERPOLATOR*)convert_object(eventobjecthandle);
+	if (!interpolator)
+	{
+		return;
+	}
+	eventobject->Data().Translation = *interpolator;
+}
+
+
+INTERPOLATOR_HANDLE GetEventobjectRotation(HANDLE  eventobjecthandle)
+{
+	MODEL_EVENT_OBJECT* eventobject = (MODEL_EVENT_OBJECT*)convert_object(eventobjecthandle);
+
+	if (!eventobject)
+	{
+		return 0;
+	}
+	INTERPOLATOR* interpolator = &eventobject->Data().Rotation;
+
+	return convert_handle(interpolator);
+}
+
+void SetEventobjectRotation(HANDLE camhandle, INTERPOLATOR_HANDLE eventobjecthandle)
+{
+	MODEL_EVENT_OBJECT* eventobject = (MODEL_EVENT_OBJECT*)convert_object(eventobjecthandle);
+
+	if (!eventobject)
+	{
+		return;
+	}
+	INTERPOLATOR* interpolator = (INTERPOLATOR*)convert_object(eventobjecthandle);
+	if (!interpolator)
+	{
+		return;
+	}
+	eventobject->Data().Rotation = *interpolator;
+}
+
+
+INTERPOLATOR_HANDLE GetEventobjectScaling(HANDLE  eventobjecthandle)
+{
+	MODEL_EVENT_OBJECT* eventobject = (MODEL_EVENT_OBJECT*)convert_object(eventobjecthandle);
+
+	if (!eventobject)
+	{
+		return 0;
+	}
+	INTERPOLATOR* interpolator = &eventobject->Data().Scaling;
+
+	return convert_handle(interpolator);
+}
+
+void SetEventobjectScaling(HANDLE camhandle, INTERPOLATOR_HANDLE eventobjecthandle)
+{
+	MODEL_EVENT_OBJECT* eventobject = (MODEL_EVENT_OBJECT*)convert_object(eventobjecthandle);
+
+	if (!eventobject)
+	{
+		return;
+	}
+	INTERPOLATOR* interpolator = (INTERPOLATOR*)convert_object(eventobjecthandle);
+	if (!interpolator)
+	{
+		return;
+	}
+	eventobject->Data().Scaling = *interpolator;
+}
+
+
+bool GetEventobjectDontInheritTranslation(HANDLE  eventobjecthandle)
+{
+	MODEL_EVENT_OBJECT* eventobject = (MODEL_EVENT_OBJECT*)convert_object(eventobjecthandle);
+
+	if (!eventobject)
+	{
+		return 0;
+	}
+	return eventobject->Data().DontInheritTranslation;
+}
+
+void SetEventobjectDontInheritTranslation(HANDLE  eventobjecthandle, bool value)
+{
+	MODEL_EVENT_OBJECT* eventobject = (MODEL_EVENT_OBJECT*)convert_object(eventobjecthandle);
+
+	if (!eventobject)
+	{
+		return;
+	}
+	eventobject->Data().DontInheritTranslation = value;
+}
+
+
+bool GetEventobjectDontInheritRotation(HANDLE  eventobjecthandle)
+{
+	MODEL_EVENT_OBJECT* eventobject = (MODEL_EVENT_OBJECT*)convert_object(eventobjecthandle);
+
+	if (!eventobject)
+	{
+		return 0;
+	}
+	return eventobject->Data().DontInheritRotation;
+}
+
+void SetEventobjectDontInheritRotation(HANDLE  eventobjecthandle, bool value)
+{
+	MODEL_EVENT_OBJECT* eventobject = (MODEL_EVENT_OBJECT*)convert_object(eventobjecthandle);
+
+	if (!eventobject)
+	{
+		return;
+	}
+	eventobject->Data().DontInheritRotation = value;
+}
+
+bool GetEventobjectDontInheritScaling(HANDLE  eventobjecthandle)
+{
+	MODEL_EVENT_OBJECT* eventobject = (MODEL_EVENT_OBJECT*)convert_object(eventobjecthandle);
+
+	if (!eventobject)
+	{
+		return 0;
+	}
+	return eventobject->Data().DontInheritScaling;
+}
+
+void SetEventobjectDontInheritScaling(HANDLE  eventobjecthandle, bool value)
+{
+	MODEL_EVENT_OBJECT* eventobject = (MODEL_EVENT_OBJECT*)convert_object(eventobjecthandle);
+
+	if (!eventobject)
+	{
+		return;
+	}
+	eventobject->Data().DontInheritScaling = value;
+}
+
+bool GetEventobjectBillboarded(HANDLE  eventobjecthandle)
+{
+	MODEL_EVENT_OBJECT* eventobject = (MODEL_EVENT_OBJECT*)convert_object(eventobjecthandle);
+
+	if (!eventobject)
+	{
+		return 0;
+	}
+	return eventobject->Data().Billboarded;
+}
+
+void SetEventobjectBillboarded(HANDLE  eventobjecthandle, bool value)
+{
+	MODEL_EVENT_OBJECT* eventobject = (MODEL_EVENT_OBJECT*)convert_object(eventobjecthandle);
+
+	if (!eventobject)
+	{
+		return;
+	}
+	eventobject->Data().Billboarded = value;
+}
+
+bool GetEventobjectBillboardedLockX(HANDLE  eventobjecthandle)
+{
+	MODEL_EVENT_OBJECT* eventobject = (MODEL_EVENT_OBJECT*)convert_object(eventobjecthandle);
+
+	if (!eventobject)
+	{
+		return 0;
+	}
+	return eventobject->Data().BillboardedLockX;
+}
+
+void SetEventobjectBillboardedLockX(HANDLE  eventobjecthandle, bool value)
+{
+	MODEL_EVENT_OBJECT* eventobject = (MODEL_EVENT_OBJECT*)convert_object(eventobjecthandle);
+
+	if (!eventobject)
+	{
+		return;
+	}
+	eventobject->Data().BillboardedLockX = value;
+}
+
+bool GetEventobjectBillboardedLockY(HANDLE  eventobjecthandle)
+{
+	MODEL_EVENT_OBJECT* eventobject = (MODEL_EVENT_OBJECT*)convert_object(eventobjecthandle);
+
+	if (!eventobject)
+	{
+		return 0;
+	}
+	return eventobject->Data().BillboardedLockY;
+}
+
+void SetEventobjectBillboardedLockY(HANDLE  eventobjecthandle, bool value)
+{
+	MODEL_EVENT_OBJECT* eventobject = (MODEL_EVENT_OBJECT*)convert_object(eventobjecthandle);
+
+	if (!eventobject)
+	{
+		return;
+	}
+	eventobject->Data().BillboardedLockY = value;
+}
+
+bool GetEventobjectBillboardedLockZ(HANDLE  eventobjecthandle)
+{
+	MODEL_EVENT_OBJECT* eventobject = (MODEL_EVENT_OBJECT*)convert_object(eventobjecthandle);
+
+	if (!eventobject)
+	{
+		return 0;
+	}
+	return eventobject->Data().BillboardedLockZ;
+}
+
+void SetEventobjectBillboardedLockZ(HANDLE  eventobjecthandle, bool value)
+{
+	MODEL_EVENT_OBJECT* eventobject = (MODEL_EVENT_OBJECT*)convert_object(eventobjecthandle);
+
+	if (!eventobject)
+	{
+		return;
+	}
+	eventobject->Data().BillboardedLockZ = value;
+}
+
+bool GetEventobjectCameraAnchored(HANDLE  eventobjecthandle)
+{
+	MODEL_EVENT_OBJECT* eventobject = (MODEL_EVENT_OBJECT*)convert_object(eventobjecthandle);
+
+	if (!eventobject)
+	{
+		return 0;
+	}
+	return eventobject->Data().CameraAnchored;
+}
+
+void SetEventobjectCameraAnchored(HANDLE  eventobjecthandle, bool value)
+{
+	MODEL_EVENT_OBJECT* eventobject = (MODEL_EVENT_OBJECT*)convert_object(eventobjecthandle);
+
+	if (!eventobject)
+	{
+		return;
+	}
+	eventobject->Data().CameraAnchored = value;
+}
+
+
+VECTOR3* GetEventobjectPivotPoint(HANDLE  eventobjecthandle)
+{
+	MODEL_EVENT_OBJECT* eventobject = (MODEL_EVENT_OBJECT*)convert_object(eventobjecthandle);
+
+	if (!eventobject)
+	{
+		return 0;
+	}
+	return (VECTOR3*)&eventobject->Data().PivotPoint;
+}
+
+void SetEventobjectPivotPoint(HANDLE  eventobjecthandle, VECTOR3* value)
+{
+	MODEL_EVENT_OBJECT* eventobject = (MODEL_EVENT_OBJECT*)convert_object(eventobjecthandle);
+
+	if (!eventobject)
+	{
+		return;
+	}
+	eventobject->Data().PivotPoint = *(D3DXVECTOR3*)value;
+}
+
+int GetEventobjectType(HANDLE  eventobjecthandle)
+{
+	MODEL_EVENT_OBJECT* eventobject = (MODEL_EVENT_OBJECT*)convert_object(eventobjecthandle);
+
+	if (!eventobject)
+	{
+		return 0;
+	}
+	return (int)eventobject->Data().Type;
+}
+
+void SetEventobjectType(HANDLE  eventobjecthandle, int value)
+{
+	MODEL_EVENT_OBJECT* eventobject = (MODEL_EVENT_OBJECT*)convert_object(eventobjecthandle);
+
+	if (!eventobject)
+	{
+		return;
+	}
+	eventobject->Data().Type = (NODE_TYPE)value;
+}
+
+
+int GetEventTrackByEventobject(HANDLE eventobjecthandle, int index)
+{
+	MODEL_EVENT_OBJECT* eventobject = (MODEL_EVENT_OBJECT*)convert_object(eventobjecthandle);
+
+	if (!eventobject)
+	{
+		return 0;
+	}
+
+	auto size = eventobject->Data().EventTrack.size();
+
+	if (index < 0 || index >= size || size == 0)
+	{
+		return 0;
+	}
+	auto it = eventobject->Data().EventTrack.begin();
+	if (index > 0)
+	{
+		advance(it, index - 1);
+	}
+	return *it;
+}
+
+
+int GetEventobjectEventTrackSize(HANDLE eventobjecthandle)
+{
+	MODEL_EVENT_OBJECT* eventobject = (MODEL_EVENT_OBJECT*)convert_object(eventobjecthandle);
+
+	if (!eventobject)
+	{
+		return 0;
+	}
+
+	return eventobject->Data().EventTrack.size();
+}
+
+bool AddEventobjectEventTrack(HANDLE eventobjecthandle, int value)
+{
+	MODEL_EVENT_OBJECT* eventobject = (MODEL_EVENT_OBJECT*)convert_object(eventobjecthandle);
+
+	if (!eventobject)
+	{
+		return 0;
+	}
+
+
+	eventobject->Data().EventTrack.push_back(value);
+	return true;
+}
+
+bool RemoveEventobjectEventTrack(HANDLE eventobjecthandle, int index)
+{
+	MODEL_EVENT_OBJECT* eventobject = (MODEL_EVENT_OBJECT*)convert_object(eventobjecthandle);
+
+	if (!eventobject)
+	{
+		return 0;
+	}
+	auto it = eventobject->Data().EventTrack.begin();
+	if (index > 0)
+	{
+		advance(it, index - 1);
+	}
+
+	eventobject->Data().EventTrack.erase(it);
+	return true;
+}
+
+
+HANDLE CreateHelper()
+{
+	MODEL_HELPER* helper = new MODEL_HELPER;
+
+	return convert_handle(helper);
+}
+
+HANDLE CopyHelper(HANDLE helperhandle)
+{
+	MODEL_HELPER* helper = (MODEL_HELPER*)convert_object(helperhandle);
+
+	if (!helper)
+		return 0;
+
+	MODEL_HELPER* copy = new MODEL_HELPER(*helper);
+
+	return convert_handle(helper);
+}
+
+void CloseHelper(HANDLE helperhandle, bool del)
+{
+	MODEL_HELPER* helper = (MODEL_HELPER*)convert_object(helperhandle);
+
+	close_handle(helperhandle);
+	if (helper && del)
+	{
+		delete helper;
+	}
+}
+
+HANDLE GetHelperByModel(HANDLE modelhandle, int index)
+{
+	MODEL* model = (MODEL*)convert_object(modelhandle);
+	if (!model)
+	{
+		return 0;
+	}
+
+	auto& container = model->Data().HelperContainer;
+	if (index >= 0 && index < container.GetSize() && container.GetSize() > 0)
+	{
+		return convert_handle(container[index]);
+	}
+	return 0;
+}
+
+
+int GetModelHelperSize(HANDLE modelhandle)
+{
+	MODEL* model = (MODEL*)convert_object(modelhandle);
+	if (!model)
+	{
+		return 0;
+	}
+
+	return model->Data().HelperContainer.GetSize();
+}
+
+bool AddModelHelper(HANDLE modelhandle, HANDLE helperhandle)
+{
+	MODEL* model = (MODEL*)convert_object(modelhandle);
+	if (!model)
+	{
+		return 0;
+	}
+	MODEL_HELPER* helper = (MODEL_HELPER*)convert_object(helperhandle);
+
+	if (!helper)
+	{
+		return 0;
+	}
+
+	return model->AddHelper(helper);
+}
+
+bool RemoveModelHelper(HANDLE modelhandle, HANDLE  helperhandle)
+{
+	MODEL* model = (MODEL*)convert_object(modelhandle);
+	if (!model)
+	{
+		return false;
+	}
+	MODEL_HELPER* helper = (MODEL_HELPER*)convert_object(helperhandle);
+	if (!helper)
+	{
+		return false;
+	}
+
+	close_handle(helperhandle);
+	model->RemoveHelper(helper);
+	return true;
+
+}
+
+
+const char* GetHelperName(HANDLE  helperhandle)
+{
+	MODEL_HELPER* helper = (MODEL_HELPER*)convert_object(helperhandle);
+
+	if (!helper)
+	{
+		return 0;
+	}
+	return helper->Data().Name.c_str();
+}
+
+void SetHelperName(HANDLE  helperhandle, const char* name)
+{
+	MODEL_HELPER* helper = (MODEL_HELPER*)convert_object(helperhandle);
+
+	if (!helper)
+	{
+		return;
+	}
+	helper->Data().Name = name;
+}
+
+int GetHelperObjectId(HANDLE  helperhandle)
+{
+	MODEL_HELPER* helper = (MODEL_HELPER*)convert_object(helperhandle);
+
+	if (!helper)
+	{
+		return 0;
+	}
+	return helper->Data().ObjectId;
+}
+
+void SetHelperObjectId(HANDLE  helperhandle, int value)
+{
+	MODEL_HELPER* helper = (MODEL_HELPER*)convert_object(helperhandle);
+
+	if (!helper)
+	{
+		return;
+	}
+	helper->Data().ObjectId = value;
+}
+
+int GetHelperParentId(HANDLE  helperhandle)
+{
+	MODEL_HELPER* helper = (MODEL_HELPER*)convert_object(helperhandle);
+
+	if (!helper)
+	{
+		return 0;
+	}
+	return helper->Data().ParentId;
+}
+
+void SetHelperParentId(HANDLE  helperhandle, int value)
+{
+	MODEL_HELPER* helper = (MODEL_HELPER*)convert_object(helperhandle);
+
+	if (!helper)
+	{
+		return;
+	}
+	helper->Data().ParentId = value;
+}
+
+
+INTERPOLATOR_HANDLE GetHelperTranslation(HANDLE  helperhandle)
+{
+	MODEL_HELPER* helper = (MODEL_HELPER*)convert_object(helperhandle);
+
+	if (!helper)
+	{
+		return 0;
+	}
+	INTERPOLATOR* interpolator = &helper->Data().Translation;
+
+	return convert_handle(interpolator);
+}
+
+void SetHelperTranslation(HANDLE camhandle, INTERPOLATOR_HANDLE helperhandle)
+{
+	MODEL_HELPER* helper = (MODEL_HELPER*)convert_object(helperhandle);
+
+	if (!helper)
+	{
+		return;
+	}
+	INTERPOLATOR* interpolator = (INTERPOLATOR*)convert_object(helperhandle);
+	if (!interpolator)
+	{
+		return;
+	}
+	helper->Data().Translation = *interpolator;
+}
+
+
+INTERPOLATOR_HANDLE GetHelperRotation(HANDLE  helperhandle)
+{
+	MODEL_HELPER* helper = (MODEL_HELPER*)convert_object(helperhandle);
+
+	if (!helper)
+	{
+		return 0;
+	}
+	INTERPOLATOR* interpolator = &helper->Data().Rotation;
+
+	return convert_handle(interpolator);
+}
+
+void SetHelperRotation(HANDLE camhandle, INTERPOLATOR_HANDLE helperhandle)
+{
+	MODEL_HELPER* helper = (MODEL_HELPER*)convert_object(helperhandle);
+
+	if (!helper)
+	{
+		return;
+	}
+	INTERPOLATOR* interpolator = (INTERPOLATOR*)convert_object(helperhandle);
+	if (!interpolator)
+	{
+		return;
+	}
+	helper->Data().Rotation = *interpolator;
+}
+
+
+INTERPOLATOR_HANDLE GetHelperScaling(HANDLE  helperhandle)
+{
+	MODEL_HELPER* helper = (MODEL_HELPER*)convert_object(helperhandle);
+
+	if (!helper)
+	{
+		return 0;
+	}
+	INTERPOLATOR* interpolator = &helper->Data().Scaling;
+
+	return convert_handle(interpolator);
+}
+
+void SetHelperScaling(HANDLE camhandle, INTERPOLATOR_HANDLE helperhandle)
+{
+	MODEL_HELPER* helper = (MODEL_HELPER*)convert_object(helperhandle);
+
+	if (!helper)
+	{
+		return;
+	}
+	INTERPOLATOR* interpolator = (INTERPOLATOR*)convert_object(helperhandle);
+	if (!interpolator)
+	{
+		return;
+	}
+	helper->Data().Scaling = *interpolator;
+}
+
+
+bool GetHelperDontInheritTranslation(HANDLE  helperhandle)
+{
+	MODEL_HELPER* helper = (MODEL_HELPER*)convert_object(helperhandle);
+
+	if (!helper)
+	{
+		return 0;
+	}
+	return helper->Data().DontInheritTranslation;
+}
+
+void SetHelperDontInheritTranslation(HANDLE  helperhandle, bool value)
+{
+	MODEL_HELPER* helper = (MODEL_HELPER*)convert_object(helperhandle);
+
+	if (!helper)
+	{
+		return;
+	}
+	helper->Data().DontInheritTranslation = value;
+}
+
+
+bool GetHelperDontInheritRotation(HANDLE  helperhandle)
+{
+	MODEL_HELPER* helper = (MODEL_HELPER*)convert_object(helperhandle);
+
+	if (!helper)
+	{
+		return 0;
+	}
+	return helper->Data().DontInheritRotation;
+}
+
+void SetHelperDontInheritRotation(HANDLE  helperhandle, bool value)
+{
+	MODEL_HELPER* helper = (MODEL_HELPER*)convert_object(helperhandle);
+
+	if (!helper)
+	{
+		return;
+	}
+	helper->Data().DontInheritRotation = value;
+}
+
+bool GetHelperDontInheritScaling(HANDLE  helperhandle)
+{
+	MODEL_HELPER* helper = (MODEL_HELPER*)convert_object(helperhandle);
+
+	if (!helper)
+	{
+		return 0;
+	}
+	return helper->Data().DontInheritScaling;
+}
+
+void SetHelperDontInheritScaling(HANDLE  helperhandle, bool value)
+{
+	MODEL_HELPER* helper = (MODEL_HELPER*)convert_object(helperhandle);
+
+	if (!helper)
+	{
+		return;
+	}
+	helper->Data().DontInheritScaling = value;
+}
+
+bool GetHelperBillboarded(HANDLE  helperhandle)
+{
+	MODEL_HELPER* helper = (MODEL_HELPER*)convert_object(helperhandle);
+
+	if (!helper)
+	{
+		return 0;
+	}
+	return helper->Data().Billboarded;
+}
+
+void SetHelperBillboarded(HANDLE  helperhandle, bool value)
+{
+	MODEL_HELPER* helper = (MODEL_HELPER*)convert_object(helperhandle);
+
+	if (!helper)
+	{
+		return;
+	}
+	helper->Data().Billboarded = value;
+}
+
+bool GetHelperBillboardedLockX(HANDLE  helperhandle)
+{
+	MODEL_HELPER* helper = (MODEL_HELPER*)convert_object(helperhandle);
+
+	if (!helper)
+	{
+		return 0;
+	}
+	return helper->Data().BillboardedLockX;
+}
+
+void SetHelperBillboardedLockX(HANDLE  helperhandle, bool value)
+{
+	MODEL_HELPER* helper = (MODEL_HELPER*)convert_object(helperhandle);
+
+	if (!helper)
+	{
+		return;
+	}
+	helper->Data().BillboardedLockX = value;
+}
+
+bool GetHelperBillboardedLockY(HANDLE  helperhandle)
+{
+	MODEL_HELPER* helper = (MODEL_HELPER*)convert_object(helperhandle);
+
+	if (!helper)
+	{
+		return 0;
+	}
+	return helper->Data().BillboardedLockY;
+}
+
+void SetHelperBillboardedLockY(HANDLE  helperhandle, bool value)
+{
+	MODEL_HELPER* helper = (MODEL_HELPER*)convert_object(helperhandle);
+
+	if (!helper)
+	{
+		return;
+	}
+	helper->Data().BillboardedLockY = value;
+}
+
+bool GetHelperBillboardedLockZ(HANDLE  helperhandle)
+{
+	MODEL_HELPER* helper = (MODEL_HELPER*)convert_object(helperhandle);
+
+	if (!helper)
+	{
+		return 0;
+	}
+	return helper->Data().BillboardedLockZ;
+}
+
+void SetHelperBillboardedLockZ(HANDLE  helperhandle, bool value)
+{
+	MODEL_HELPER* helper = (MODEL_HELPER*)convert_object(helperhandle);
+
+	if (!helper)
+	{
+		return;
+	}
+	helper->Data().BillboardedLockZ = value;
+}
+
+bool GetHelperCameraAnchored(HANDLE  helperhandle)
+{
+	MODEL_HELPER* helper = (MODEL_HELPER*)convert_object(helperhandle);
+
+	if (!helper)
+	{
+		return 0;
+	}
+	return helper->Data().CameraAnchored;
+}
+
+void SetHelperCameraAnchored(HANDLE  helperhandle, bool value)
+{
+	MODEL_HELPER* helper = (MODEL_HELPER*)convert_object(helperhandle);
+
+	if (!helper)
+	{
+		return;
+	}
+	helper->Data().CameraAnchored = value;
+}
+
+
+VECTOR3* GetHelperPivotPoint(HANDLE  helperhandle)
+{
+	MODEL_HELPER* helper = (MODEL_HELPER*)convert_object(helperhandle);
+
+	if (!helper)
+	{
+		return 0;
+	}
+	return (VECTOR3*)&helper->Data().PivotPoint;
+}
+
+void SetHelperPivotPoint(HANDLE  helperhandle, VECTOR3* value)
+{
+	MODEL_HELPER* helper = (MODEL_HELPER*)convert_object(helperhandle);
+
+	if (!helper)
+	{
+		return;
+	}
+	helper->Data().PivotPoint = *(D3DXVECTOR3*)value;
+}
+
+int GetHelperType(HANDLE  helperhandle)
+{
+	MODEL_HELPER* helper = (MODEL_HELPER*)convert_object(helperhandle);
+
+	if (!helper)
+	{
+		return 0;
+	}
+	return (int)helper->Data().Type;
+}
+
+void SetHelperType(HANDLE  helperhandle, int value)
+{
+	MODEL_HELPER* helper = (MODEL_HELPER*)convert_object(helperhandle);
+
+	if (!helper)
+	{
+		return;
+	}
+	helper->Data().Type = (NODE_TYPE)value;
+}
+
+
+
+
+
+
+HANDLE CreateLight()
+{
+	MODEL_LIGHT* light = new MODEL_LIGHT;
+
+	return convert_handle(light);
+}
+
+HANDLE CopyLight(HANDLE lighthandle)
+{
+	MODEL_LIGHT* light = (MODEL_LIGHT*)convert_object(lighthandle);
+
+	if (!light)
+		return 0;
+
+	MODEL_LIGHT* copy = new MODEL_LIGHT(*light);
+
+	return convert_handle(light);
+}
+
+void CloseLight(HANDLE lighthandle, bool del)
+{
+	MODEL_LIGHT* light = (MODEL_LIGHT*)convert_object(lighthandle);
+
+	close_handle(lighthandle);
+	if (light && del)
+	{
+		delete light;
+	}
+}
+
+HANDLE GetLightByModel(HANDLE modelhandle, int index)
+{
+	MODEL* model = (MODEL*)convert_object(modelhandle);
+	if (!model)
+	{
+		return 0;
+	}
+
+	auto& container = model->Data().LightContainer;
+	if (index >= 0 && index < container.GetSize() && container.GetSize() > 0)
+	{
+		return convert_handle(container[index]);
+	}
+	return 0;
+}
+
+
+int GetModelLightSize(HANDLE modelhandle)
+{
+	MODEL* model = (MODEL*)convert_object(modelhandle);
+	if (!model)
+	{
+		return 0;
+	}
+
+	return model->Data().LightContainer.GetSize();
+}
+
+bool AddModelLight(HANDLE modelhandle, HANDLE lighthandle)
+{
+	MODEL* model = (MODEL*)convert_object(modelhandle);
+	if (!model)
+	{
+		return 0;
+	}
+	MODEL_LIGHT* light = (MODEL_LIGHT*)convert_object(lighthandle);
+
+	if (!light)
+	{
+		return 0;
+	}
+
+	return model->AddLight(light);
+}
+
+bool RemoveModelLight(HANDLE modelhandle, HANDLE  lighthandle)
+{
+	MODEL* model = (MODEL*)convert_object(modelhandle);
+	if (!model)
+	{
+		return false;
+	}
+	MODEL_LIGHT* light = (MODEL_LIGHT*)convert_object(lighthandle);
+	if (!light)
+	{
+		return false;
+	}
+
+	close_handle(lighthandle);
+	model->RemoveLight(light);
+	return true;
+
+}
+
+
+const char* GetLightName(HANDLE  lighthandle)
+{
+	MODEL_LIGHT* light = (MODEL_LIGHT*)convert_object(lighthandle);
+
+	if (!light)
+	{
+		return 0;
+	}
+	return light->Data().Name.c_str();
+}
+
+void SetLightName(HANDLE  lighthandle, const char* name)
+{
+	MODEL_LIGHT* light = (MODEL_LIGHT*)convert_object(lighthandle);
+
+	if (!light)
+	{
+		return;
+	}
+	light->Data().Name = name;
+}
+
+int GetLightObjectId(HANDLE  lighthandle)
+{
+	MODEL_LIGHT* light = (MODEL_LIGHT*)convert_object(lighthandle);
+
+	if (!light)
+	{
+		return 0;
+	}
+	return light->Data().ObjectId;
+}
+
+void SetLightObjectId(HANDLE  lighthandle, int value)
+{
+	MODEL_LIGHT* light = (MODEL_LIGHT*)convert_object(lighthandle);
+
+	if (!light)
+	{
+		return;
+	}
+	light->Data().ObjectId = value;
+}
+
+int GetLightParentId(HANDLE  lighthandle)
+{
+	MODEL_LIGHT* light = (MODEL_LIGHT*)convert_object(lighthandle);
+
+	if (!light)
+	{
+		return 0;
+	}
+	return light->Data().ParentId;
+}
+
+void SetLightParentId(HANDLE  lighthandle, int value)
+{
+	MODEL_LIGHT* light = (MODEL_LIGHT*)convert_object(lighthandle);
+
+	if (!light)
+	{
+		return;
+	}
+	light->Data().ParentId = value;
+}
+
+
+INTERPOLATOR_HANDLE GetLightTranslation(HANDLE  lighthandle)
+{
+	MODEL_LIGHT* light = (MODEL_LIGHT*)convert_object(lighthandle);
+
+	if (!light)
+	{
+		return 0;
+	}
+	INTERPOLATOR* interpolator = &light->Data().Translation;
+
+	return convert_handle(interpolator);
+}
+
+void SetLightTranslation(HANDLE camhandle, INTERPOLATOR_HANDLE lighthandle)
+{
+	MODEL_LIGHT* light = (MODEL_LIGHT*)convert_object(lighthandle);
+
+	if (!light)
+	{
+		return;
+	}
+	INTERPOLATOR* interpolator = (INTERPOLATOR*)convert_object(lighthandle);
+	if (!interpolator)
+	{
+		return;
+	}
+	light->Data().Translation = *interpolator;
+}
+
+
+INTERPOLATOR_HANDLE GetLightRotation(HANDLE  lighthandle)
+{
+	MODEL_LIGHT* light = (MODEL_LIGHT*)convert_object(lighthandle);
+
+	if (!light)
+	{
+		return 0;
+	}
+	INTERPOLATOR* interpolator = &light->Data().Rotation;
+
+	return convert_handle(interpolator);
+}
+
+void SetLightRotation(HANDLE camhandle, INTERPOLATOR_HANDLE lighthandle)
+{
+	MODEL_LIGHT* light = (MODEL_LIGHT*)convert_object(lighthandle);
+
+	if (!light)
+	{
+		return;
+	}
+	INTERPOLATOR* interpolator = (INTERPOLATOR*)convert_object(lighthandle);
+	if (!interpolator)
+	{
+		return;
+	}
+	light->Data().Rotation = *interpolator;
+}
+
+
+INTERPOLATOR_HANDLE GetLightScaling(HANDLE  lighthandle)
+{
+	MODEL_LIGHT* light = (MODEL_LIGHT*)convert_object(lighthandle);
+
+	if (!light)
+	{
+		return 0;
+	}
+	INTERPOLATOR* interpolator = &light->Data().Scaling;
+
+	return convert_handle(interpolator);
+}
+
+void SetLightScaling(HANDLE camhandle, INTERPOLATOR_HANDLE lighthandle)
+{
+	MODEL_LIGHT* light = (MODEL_LIGHT*)convert_object(lighthandle);
+
+	if (!light)
+	{
+		return;
+	}
+	INTERPOLATOR* interpolator = (INTERPOLATOR*)convert_object(lighthandle);
+	if (!interpolator)
+	{
+		return;
+	}
+	light->Data().Scaling = *interpolator;
+}
+
+
+bool GetLightDontInheritTranslation(HANDLE  lighthandle)
+{
+	MODEL_LIGHT* light = (MODEL_LIGHT*)convert_object(lighthandle);
+
+	if (!light)
+	{
+		return 0;
+	}
+	return light->Data().DontInheritTranslation;
+}
+
+void SetLightDontInheritTranslation(HANDLE  lighthandle, bool value)
+{
+	MODEL_LIGHT* light = (MODEL_LIGHT*)convert_object(lighthandle);
+
+	if (!light)
+	{
+		return;
+	}
+	light->Data().DontInheritTranslation = value;
+}
+
+
+bool GetLightDontInheritRotation(HANDLE  lighthandle)
+{
+	MODEL_LIGHT* light = (MODEL_LIGHT*)convert_object(lighthandle);
+
+	if (!light)
+	{
+		return 0;
+	}
+	return light->Data().DontInheritRotation;
+}
+
+void SetLightDontInheritRotation(HANDLE  lighthandle, bool value)
+{
+	MODEL_LIGHT* light = (MODEL_LIGHT*)convert_object(lighthandle);
+
+	if (!light)
+	{
+		return;
+	}
+	light->Data().DontInheritRotation = value;
+}
+
+bool GetLightDontInheritScaling(HANDLE  lighthandle)
+{
+	MODEL_LIGHT* light = (MODEL_LIGHT*)convert_object(lighthandle);
+
+	if (!light)
+	{
+		return 0;
+	}
+	return light->Data().DontInheritScaling;
+}
+
+void SetLightDontInheritScaling(HANDLE  lighthandle, bool value)
+{
+	MODEL_LIGHT* light = (MODEL_LIGHT*)convert_object(lighthandle);
+
+	if (!light)
+	{
+		return;
+	}
+	light->Data().DontInheritScaling = value;
+}
+
+bool GetLightBillboarded(HANDLE  lighthandle)
+{
+	MODEL_LIGHT* light = (MODEL_LIGHT*)convert_object(lighthandle);
+
+	if (!light)
+	{
+		return 0;
+	}
+	return light->Data().Billboarded;
+}
+
+void SetLightBillboarded(HANDLE  lighthandle, bool value)
+{
+	MODEL_LIGHT* light = (MODEL_LIGHT*)convert_object(lighthandle);
+
+	if (!light)
+	{
+		return;
+	}
+	light->Data().Billboarded = value;
+}
+
+bool GetLightBillboardedLockX(HANDLE  lighthandle)
+{
+	MODEL_LIGHT* light = (MODEL_LIGHT*)convert_object(lighthandle);
+
+	if (!light)
+	{
+		return 0;
+	}
+	return light->Data().BillboardedLockX;
+}
+
+void SetLightBillboardedLockX(HANDLE  lighthandle, bool value)
+{
+	MODEL_LIGHT* light = (MODEL_LIGHT*)convert_object(lighthandle);
+
+	if (!light)
+	{
+		return;
+	}
+	light->Data().BillboardedLockX = value;
+}
+
+bool GetLightBillboardedLockY(HANDLE  lighthandle)
+{
+	MODEL_LIGHT* light = (MODEL_LIGHT*)convert_object(lighthandle);
+
+	if (!light)
+	{
+		return 0;
+	}
+	return light->Data().BillboardedLockY;
+}
+
+void SetLightBillboardedLockY(HANDLE  lighthandle, bool value)
+{
+	MODEL_LIGHT* light = (MODEL_LIGHT*)convert_object(lighthandle);
+
+	if (!light)
+	{
+		return;
+	}
+	light->Data().BillboardedLockY = value;
+}
+
+bool GetLightBillboardedLockZ(HANDLE  lighthandle)
+{
+	MODEL_LIGHT* light = (MODEL_LIGHT*)convert_object(lighthandle);
+
+	if (!light)
+	{
+		return 0;
+	}
+	return light->Data().BillboardedLockZ;
+}
+
+void SetLightBillboardedLockZ(HANDLE  lighthandle, bool value)
+{
+	MODEL_LIGHT* light = (MODEL_LIGHT*)convert_object(lighthandle);
+
+	if (!light)
+	{
+		return;
+	}
+	light->Data().BillboardedLockZ = value;
+}
+
+bool GetLightCameraAnchored(HANDLE  lighthandle)
+{
+	MODEL_LIGHT* light = (MODEL_LIGHT*)convert_object(lighthandle);
+
+	if (!light)
+	{
+		return 0;
+	}
+	return light->Data().CameraAnchored;
+}
+
+void SetLightCameraAnchored(HANDLE  lighthandle, bool value)
+{
+	MODEL_LIGHT* light = (MODEL_LIGHT*)convert_object(lighthandle);
+
+	if (!light)
+	{
+		return;
+	}
+	light->Data().CameraAnchored = value;
+}
+
+
+VECTOR3* GetLightPivotPoint(HANDLE  lighthandle)
+{
+	MODEL_LIGHT* light = (MODEL_LIGHT*)convert_object(lighthandle);
+
+	if (!light)
+	{
+		return 0;
+	}
+	return (VECTOR3*)&light->Data().PivotPoint;
+}
+
+void SetLightPivotPoint(HANDLE  lighthandle, VECTOR3* value)
+{
+	MODEL_LIGHT* light = (MODEL_LIGHT*)convert_object(lighthandle);
+
+	if (!light)
+	{
+		return;
+	}
+	light->Data().PivotPoint = *(D3DXVECTOR3*)value;
+}
+
+int GetLightType(HANDLE  lighthandle)
+{
+	MODEL_LIGHT* light = (MODEL_LIGHT*)convert_object(lighthandle);
+
+	if (!light)
+	{
+		return 0;
+	}
+	return (int)light->Data().Type;
+}
+
+void SetLightType(HANDLE  lighthandle, int value)
+{
+	MODEL_LIGHT* light = (MODEL_LIGHT*)convert_object(lighthandle);
+
+	if (!light)
+	{
+		return;
+	}
+	light->Data().Type = (NODE_TYPE)value;
+}
+
+
+INTERPOLATOR_HANDLE GetLightAttenuationStart(HANDLE  lighthandle)
+{
+	MODEL_LIGHT* light = (MODEL_LIGHT*)convert_object(lighthandle);
+
+	if (!light)
+	{
+		return 0;
+	}
+
+	INTERPOLATOR* interpolator = &light->Data().AttenuationStart;
+
+	return convert_handle(interpolator);
+}
+
+void SetLightAttenuationStart(HANDLE  lighthandle, INTERPOLATOR_HANDLE interpolatorhandle)
+{
+	MODEL_LIGHT* light = (MODEL_LIGHT*)convert_object(lighthandle);
+
+	if (!light)
+	{
+		return ;
+	}
+	INTERPOLATOR* interpolator = (INTERPOLATOR*)convert_object(interpolatorhandle);
+	if (!interpolator)
+	{
+		return;
+	}
+	light->Data().AttenuationStart = *interpolator;
+}
+
+
+INTERPOLATOR_HANDLE GetLightAttenuationEnd(HANDLE  lighthandle)
+{
+	MODEL_LIGHT* light = (MODEL_LIGHT*)convert_object(lighthandle);
+
+	if (!light)
+	{
+		return 0;
+	}
+
+	INTERPOLATOR* interpolator = &light->Data().AttenuationEnd;
+
+	return convert_handle(interpolator);
+}
+
+void SetLightAttenuationEnd(HANDLE  lighthandle, INTERPOLATOR_HANDLE interpolatorhandle)
+{
+	MODEL_LIGHT* light = (MODEL_LIGHT*)convert_object(lighthandle);
+
+	if (!light)
+	{
+		return;
+	}
+	INTERPOLATOR* interpolator = (INTERPOLATOR*)convert_object(interpolatorhandle);
+	if (!interpolator)
+	{
+		return;
+	}
+	light->Data().AttenuationEnd = *interpolator;
+}
+
+
+INTERPOLATOR_HANDLE GetLightColor(HANDLE  lighthandle)
+{
+	MODEL_LIGHT* light = (MODEL_LIGHT*)convert_object(lighthandle);
+
+	if (!light)
+	{
+		return 0;
+	}
+
+	INTERPOLATOR* interpolator = &light->Data().Color;
+
+	return convert_handle(interpolator);
+}
+
+void SetLightColor(HANDLE  lighthandle, INTERPOLATOR_HANDLE interpolatorhandle)
+{
+	MODEL_LIGHT* light = (MODEL_LIGHT*)convert_object(lighthandle);
+
+	if (!light)
+	{
+		return;
+	}
+	INTERPOLATOR* interpolator = (INTERPOLATOR*)convert_object(interpolatorhandle);
+	if (!interpolator)
+	{
+		return;
+	}
+	light->Data().Color = *interpolator;
+}
+
+INTERPOLATOR_HANDLE GetLightIntensity(HANDLE  lighthandle)
+{
+	MODEL_LIGHT* light = (MODEL_LIGHT*)convert_object(lighthandle);
+
+	if (!light)
+	{
+		return 0;
+	}
+
+	INTERPOLATOR* interpolator = &light->Data().Intensity;
+
+	return convert_handle(interpolator);
+}
+
+void SetLightIntensity(HANDLE  lighthandle, INTERPOLATOR_HANDLE interpolatorhandle)
+{
+	MODEL_LIGHT* light = (MODEL_LIGHT*)convert_object(lighthandle);
+
+	if (!light)
+	{
+		return;
+	}
+	INTERPOLATOR* interpolator = (INTERPOLATOR*)convert_object(interpolatorhandle);
+	if (!interpolator)
+	{
+		return;
+	}
+	light->Data().Intensity = *interpolator;
+}
+
+INTERPOLATOR_HANDLE GetLightAmbientColor(HANDLE  lighthandle)
+{
+	MODEL_LIGHT* light = (MODEL_LIGHT*)convert_object(lighthandle);
+
+	if (!light)
+	{
+		return 0;
+	}
+
+	INTERPOLATOR* interpolator = &light->Data().AmbientColor;
+
+	return convert_handle(interpolator);
+}
+
+void SetLightAmbientColor(HANDLE  lighthandle, INTERPOLATOR_HANDLE interpolatorhandle)
+{
+	MODEL_LIGHT* light = (MODEL_LIGHT*)convert_object(lighthandle);
+
+	if (!light)
+	{
+		return;
+	}
+	INTERPOLATOR* interpolator = (INTERPOLATOR*)convert_object(interpolatorhandle);
+	if (!interpolator)
+	{
+		return;
+	}
+	light->Data().AmbientColor = *interpolator;
+}
+
+INTERPOLATOR_HANDLE GetLightAmbientIntensity(HANDLE  lighthandle)
+{
+	MODEL_LIGHT* light = (MODEL_LIGHT*)convert_object(lighthandle);
+
+	if (!light)
+	{
+		return 0;
+	}
+
+	INTERPOLATOR* interpolator = &light->Data().AmbientIntensity;
+
+	return convert_handle(interpolator);
+}
+
+void SetLightAmbientIntensity(HANDLE  lighthandle, INTERPOLATOR_HANDLE interpolatorhandle)
+{
+	MODEL_LIGHT* light = (MODEL_LIGHT*)convert_object(lighthandle);
+
+	if (!light)
+	{
+		return;
+	}
+	INTERPOLATOR* interpolator = (INTERPOLATOR*)convert_object(interpolatorhandle);
+	if (!interpolator)
+	{
+		return;
+	}
+	light->Data().AmbientIntensity = *interpolator;
+}
+
+INTERPOLATOR_HANDLE GetLightVisibility(HANDLE  lighthandle)
+{
+	MODEL_LIGHT* light = (MODEL_LIGHT*)convert_object(lighthandle);
+
+	if (!light)
+	{
+		return 0;
+	}
+
+	INTERPOLATOR* interpolator = &light->Data().Visibility;
+
+	return convert_handle(interpolator);
+}
+
+void SetLightVisibility(HANDLE  lighthandle, INTERPOLATOR_HANDLE interpolatorhandle)
+{
+	MODEL_LIGHT* light = (MODEL_LIGHT*)convert_object(lighthandle);
+
+	if (!light)
+	{
+		return;
+	}
+	INTERPOLATOR* interpolator = (INTERPOLATOR*)convert_object(interpolatorhandle);
+	if (!interpolator)
+	{
+		return;
+	}
+	light->Data().Visibility = *interpolator;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+HANDLE CreateParticle()
+{
+	MODEL_PARTICLE_EMITTER* particle = new MODEL_PARTICLE_EMITTER;
+
+	return convert_handle(particle);
+}
+
+HANDLE CopyParticle(HANDLE particlehandle)
+{
+	MODEL_PARTICLE_EMITTER* particle = (MODEL_PARTICLE_EMITTER*)convert_object(particlehandle);
+
+	if (!particle)
+		return 0;
+
+	MODEL_PARTICLE_EMITTER* copy = new MODEL_PARTICLE_EMITTER(*particle);
+
+	return convert_handle(particle);
+}
+
+void CloseParticle(HANDLE particlehandle, bool del)
+{
+	MODEL_PARTICLE_EMITTER* particle = (MODEL_PARTICLE_EMITTER*)convert_object(particlehandle);
+
+	close_handle(particlehandle);
+	if (particle && del)
+	{
+		delete particle;
+	}
+}
+
+HANDLE GetParticleByModel(HANDLE modelhandle, int index)
+{
+	MODEL* model = (MODEL*)convert_object(modelhandle);
+	if (!model)
+	{
+		return 0;
+	}
+
+	auto& container = model->Data().ParticleEmitterContainer;
+	if (index >= 0 && index < container.GetSize() && container.GetSize() > 0)
+	{
+		return convert_handle(container[index]);
+	}
+	return 0;
+}
+
+
+int GetModelParticleSize(HANDLE modelhandle)
+{
+	MODEL* model = (MODEL*)convert_object(modelhandle);
+	if (!model)
+	{
+		return 0;
+	}
+
+	return model->Data().ParticleEmitterContainer.GetSize();
+}
+
+bool AddModelParticle(HANDLE modelhandle, HANDLE particlehandle)
+{
+	MODEL* model = (MODEL*)convert_object(modelhandle);
+	if (!model)
+	{
+		return 0;
+	}
+	MODEL_PARTICLE_EMITTER* particle = (MODEL_PARTICLE_EMITTER*)convert_object(particlehandle);
+
+	if (!particle)
+	{
+		return 0;
+	}
+
+	return model->AddParticleEmitter(particle);
+}
+
+bool RemoveModelParticle(HANDLE modelhandle, HANDLE  particlehandle)
+{
+	MODEL* model = (MODEL*)convert_object(modelhandle);
+	if (!model)
+	{
+		return false;
+	}
+	MODEL_PARTICLE_EMITTER* particle = (MODEL_PARTICLE_EMITTER*)convert_object(particlehandle);
+	if (!particle)
+	{
+		return false;
+	}
+
+	close_handle(particlehandle);
+	model->RemoveParticleEmitter(particle);
+	return true;
+
+}
+
+
+const char* GetParticleName(HANDLE  particlehandle)
+{
+	MODEL_PARTICLE_EMITTER* particle = (MODEL_PARTICLE_EMITTER*)convert_object(particlehandle);
+
+	if (!particle)
+	{
+		return 0;
+	}
+	return particle->Data().Name.c_str();
+}
+
+void SetParticleName(HANDLE  particlehandle, const char* name)
+{
+	MODEL_PARTICLE_EMITTER* particle = (MODEL_PARTICLE_EMITTER*)convert_object(particlehandle);
+
+	if (!particle)
+	{
+		return;
+	}
+	particle->Data().Name = name;
+}
+
+int GetParticleObjectId(HANDLE  particlehandle)
+{
+	MODEL_PARTICLE_EMITTER* particle = (MODEL_PARTICLE_EMITTER*)convert_object(particlehandle);
+
+	if (!particle)
+	{
+		return 0;
+	}
+	return particle->Data().ObjectId;
+}
+
+void SetParticleObjectId(HANDLE  particlehandle, int value)
+{
+	MODEL_PARTICLE_EMITTER* particle = (MODEL_PARTICLE_EMITTER*)convert_object(particlehandle);
+
+	if (!particle)
+	{
+		return;
+	}
+	particle->Data().ObjectId = value;
+}
+
+int GetParticleParentId(HANDLE  particlehandle)
+{
+	MODEL_PARTICLE_EMITTER* particle = (MODEL_PARTICLE_EMITTER*)convert_object(particlehandle);
+
+	if (!particle)
+	{
+		return 0;
+	}
+	return particle->Data().ParentId;
+}
+
+void SetParticleParentId(HANDLE  particlehandle, int value)
+{
+	MODEL_PARTICLE_EMITTER* particle = (MODEL_PARTICLE_EMITTER*)convert_object(particlehandle);
+
+	if (!particle)
+	{
+		return;
+	}
+	particle->Data().ParentId = value;
+}
+
+
+INTERPOLATOR_HANDLE GetParticleTranslation(HANDLE  particlehandle)
+{
+	MODEL_PARTICLE_EMITTER* particle = (MODEL_PARTICLE_EMITTER*)convert_object(particlehandle);
+
+	if (!particle)
+	{
+		return 0;
+	}
+	INTERPOLATOR* interpolator = &particle->Data().Translation;
+
+	return convert_handle(interpolator);
+}
+
+void SetParticleTranslation(HANDLE camhandle, INTERPOLATOR_HANDLE particlehandle)
+{
+	MODEL_PARTICLE_EMITTER* particle = (MODEL_PARTICLE_EMITTER*)convert_object(particlehandle);
+
+	if (!particle)
+	{
+		return;
+	}
+	INTERPOLATOR* interpolator = (INTERPOLATOR*)convert_object(particlehandle);
+	if (!interpolator)
+	{
+		return;
+	}
+	particle->Data().Translation = *interpolator;
+}
+
+
+INTERPOLATOR_HANDLE GetParticleRotation(HANDLE  particlehandle)
+{
+	MODEL_PARTICLE_EMITTER* particle = (MODEL_PARTICLE_EMITTER*)convert_object(particlehandle);
+
+	if (!particle)
+	{
+		return 0;
+	}
+	INTERPOLATOR* interpolator = &particle->Data().Rotation;
+
+	return convert_handle(interpolator);
+}
+
+void SetParticleRotation(HANDLE camhandle, INTERPOLATOR_HANDLE particlehandle)
+{
+	MODEL_PARTICLE_EMITTER* particle = (MODEL_PARTICLE_EMITTER*)convert_object(particlehandle);
+
+	if (!particle)
+	{
+		return;
+	}
+	INTERPOLATOR* interpolator = (INTERPOLATOR*)convert_object(particlehandle);
+	if (!interpolator)
+	{
+		return;
+	}
+	particle->Data().Rotation = *interpolator;
+}
+
+
+INTERPOLATOR_HANDLE GetParticleScaling(HANDLE  particlehandle)
+{
+	MODEL_PARTICLE_EMITTER* particle = (MODEL_PARTICLE_EMITTER*)convert_object(particlehandle);
+
+	if (!particle)
+	{
+		return 0;
+	}
+	INTERPOLATOR* interpolator = &particle->Data().Scaling;
+
+	return convert_handle(interpolator);
+}
+
+void SetParticleScaling(HANDLE camhandle, INTERPOLATOR_HANDLE particlehandle)
+{
+	MODEL_PARTICLE_EMITTER* particle = (MODEL_PARTICLE_EMITTER*)convert_object(particlehandle);
+
+	if (!particle)
+	{
+		return;
+	}
+	INTERPOLATOR* interpolator = (INTERPOLATOR*)convert_object(particlehandle);
+	if (!interpolator)
+	{
+		return;
+	}
+	particle->Data().Scaling = *interpolator;
+}
+
+
+bool GetParticleDontInheritTranslation(HANDLE  particlehandle)
+{
+	MODEL_PARTICLE_EMITTER* particle = (MODEL_PARTICLE_EMITTER*)convert_object(particlehandle);
+
+	if (!particle)
+	{
+		return 0;
+	}
+	return particle->Data().DontInheritTranslation;
+}
+
+void SetParticleDontInheritTranslation(HANDLE  particlehandle, bool value)
+{
+	MODEL_PARTICLE_EMITTER* particle = (MODEL_PARTICLE_EMITTER*)convert_object(particlehandle);
+
+	if (!particle)
+	{
+		return;
+	}
+	particle->Data().DontInheritTranslation = value;
+}
+
+
+bool GetParticleDontInheritRotation(HANDLE  particlehandle)
+{
+	MODEL_PARTICLE_EMITTER* particle = (MODEL_PARTICLE_EMITTER*)convert_object(particlehandle);
+
+	if (!particle)
+	{
+		return 0;
+	}
+	return particle->Data().DontInheritRotation;
+}
+
+void SetParticleDontInheritRotation(HANDLE  particlehandle, bool value)
+{
+	MODEL_PARTICLE_EMITTER* particle = (MODEL_PARTICLE_EMITTER*)convert_object(particlehandle);
+
+	if (!particle)
+	{
+		return;
+	}
+	particle->Data().DontInheritRotation = value;
+}
+
+bool GetParticleDontInheritScaling(HANDLE  particlehandle)
+{
+	MODEL_PARTICLE_EMITTER* particle = (MODEL_PARTICLE_EMITTER*)convert_object(particlehandle);
+
+	if (!particle)
+	{
+		return 0;
+	}
+	return particle->Data().DontInheritScaling;
+}
+
+void SetParticleDontInheritScaling(HANDLE  particlehandle, bool value)
+{
+	MODEL_PARTICLE_EMITTER* particle = (MODEL_PARTICLE_EMITTER*)convert_object(particlehandle);
+
+	if (!particle)
+	{
+		return;
+	}
+	particle->Data().DontInheritScaling = value;
+}
+
+bool GetParticleBillboarded(HANDLE  particlehandle)
+{
+	MODEL_PARTICLE_EMITTER* particle = (MODEL_PARTICLE_EMITTER*)convert_object(particlehandle);
+
+	if (!particle)
+	{
+		return 0;
+	}
+	return particle->Data().Billboarded;
+}
+
+void SetParticleBillboarded(HANDLE  particlehandle, bool value)
+{
+	MODEL_PARTICLE_EMITTER* particle = (MODEL_PARTICLE_EMITTER*)convert_object(particlehandle);
+
+	if (!particle)
+	{
+		return;
+	}
+	particle->Data().Billboarded = value;
+}
+
+bool GetParticleBillboardedLockX(HANDLE  particlehandle)
+{
+	MODEL_PARTICLE_EMITTER* particle = (MODEL_PARTICLE_EMITTER*)convert_object(particlehandle);
+
+	if (!particle)
+	{
+		return 0;
+	}
+	return particle->Data().BillboardedLockX;
+}
+
+void SetParticleBillboardedLockX(HANDLE  particlehandle, bool value)
+{
+	MODEL_PARTICLE_EMITTER* particle = (MODEL_PARTICLE_EMITTER*)convert_object(particlehandle);
+
+	if (!particle)
+	{
+		return;
+	}
+	particle->Data().BillboardedLockX = value;
+}
+
+bool GetParticleBillboardedLockY(HANDLE  particlehandle)
+{
+	MODEL_PARTICLE_EMITTER* particle = (MODEL_PARTICLE_EMITTER*)convert_object(particlehandle);
+
+	if (!particle)
+	{
+		return 0;
+	}
+	return particle->Data().BillboardedLockY;
+}
+
+void SetParticleBillboardedLockY(HANDLE  particlehandle, bool value)
+{
+	MODEL_PARTICLE_EMITTER* particle = (MODEL_PARTICLE_EMITTER*)convert_object(particlehandle);
+
+	if (!particle)
+	{
+		return;
+	}
+	particle->Data().BillboardedLockY = value;
+}
+
+bool GetParticleBillboardedLockZ(HANDLE  particlehandle)
+{
+	MODEL_PARTICLE_EMITTER* particle = (MODEL_PARTICLE_EMITTER*)convert_object(particlehandle);
+
+	if (!particle)
+	{
+		return 0;
+	}
+	return particle->Data().BillboardedLockZ;
+}
+
+void SetParticleBillboardedLockZ(HANDLE  particlehandle, bool value)
+{
+	MODEL_PARTICLE_EMITTER* particle = (MODEL_PARTICLE_EMITTER*)convert_object(particlehandle);
+
+	if (!particle)
+	{
+		return;
+	}
+	particle->Data().BillboardedLockZ = value;
+}
+
+bool GetParticleCameraAnchored(HANDLE  particlehandle)
+{
+	MODEL_PARTICLE_EMITTER* particle = (MODEL_PARTICLE_EMITTER*)convert_object(particlehandle);
+
+	if (!particle)
+	{
+		return 0;
+	}
+	return particle->Data().CameraAnchored;
+}
+
+void SetParticleCameraAnchored(HANDLE  particlehandle, bool value)
+{
+	MODEL_PARTICLE_EMITTER* particle = (MODEL_PARTICLE_EMITTER*)convert_object(particlehandle);
+
+	if (!particle)
+	{
+		return;
+	}
+	particle->Data().CameraAnchored = value;
+}
+
+
+VECTOR3* GetParticlePivotPoint(HANDLE  particlehandle)
+{
+	MODEL_PARTICLE_EMITTER* particle = (MODEL_PARTICLE_EMITTER*)convert_object(particlehandle);
+
+	if (!particle)
+	{
+		return 0;
+	}
+	return (VECTOR3*)&particle->Data().PivotPoint;
+}
+
+void SetParticlePivotPoint(HANDLE  particlehandle, VECTOR3* value)
+{
+	MODEL_PARTICLE_EMITTER* particle = (MODEL_PARTICLE_EMITTER*)convert_object(particlehandle);
+
+	if (!particle)
+	{
+		return;
+	}
+	particle->Data().PivotPoint = *(D3DXVECTOR3*)value;
+}
+
+int GetParticleType(HANDLE  particlehandle)
+{
+	MODEL_PARTICLE_EMITTER* particle = (MODEL_PARTICLE_EMITTER*)convert_object(particlehandle);
+
+	if (!particle)
+	{
+		return 0;
+	}
+	return (int)particle->Data().Type;
+}
+
+void SetParticleType(HANDLE  particlehandle, int value)
+{
+	MODEL_PARTICLE_EMITTER* particle = (MODEL_PARTICLE_EMITTER*)convert_object(particlehandle);
+
+	if (!particle)
+	{
+		return;
+	}
+	particle->Data().Type = (NODE_TYPE)value;
+}
+
+
+INTERPOLATOR_HANDLE GetParticleEmissionRate(HANDLE  particlehandle)
+{
+	MODEL_PARTICLE_EMITTER* particle = (MODEL_PARTICLE_EMITTER*)convert_object(particlehandle);
+
+	if (!particle)
+	{
+		return 0;
+	}
+
+	INTERPOLATOR* interpolator = &particle->Data().EmissionRate;
+
+	return convert_handle(interpolator);
+}
+
+void SetParticleEmissionRate(HANDLE  particlehandle, INTERPOLATOR_HANDLE interpolatorhandle)
+{
+	MODEL_PARTICLE_EMITTER* particle = (MODEL_PARTICLE_EMITTER*)convert_object(particlehandle);
+
+	if (!particle)
+	{
+		return;
+	}
+	INTERPOLATOR* interpolator = (INTERPOLATOR*)convert_object(interpolatorhandle);
+	if (!interpolator)
+	{
+		return;
+	}
+	particle->Data().EmissionRate = *interpolator;
+}
+
+
+INTERPOLATOR_HANDLE GetParticleGravity(HANDLE  particlehandle)
+{
+	MODEL_PARTICLE_EMITTER* particle = (MODEL_PARTICLE_EMITTER*)convert_object(particlehandle);
+
+	if (!particle)
+	{
+		return 0;
+	}
+
+	INTERPOLATOR* interpolator = &particle->Data().Gravity;
+
+	return convert_handle(interpolator);
+}
+
+void SetParticleGravity(HANDLE  particlehandle, INTERPOLATOR_HANDLE interpolatorhandle)
+{
+	MODEL_PARTICLE_EMITTER* particle = (MODEL_PARTICLE_EMITTER*)convert_object(particlehandle);
+
+	if (!particle)
+	{
+		return;
+	}
+	INTERPOLATOR* interpolator = (INTERPOLATOR*)convert_object(interpolatorhandle);
+	if (!interpolator)
+	{
+		return;
+	}
+	particle->Data().Gravity = *interpolator;
+}
+
+
+INTERPOLATOR_HANDLE GetParticleLongitude(HANDLE  particlehandle)
+{
+	MODEL_PARTICLE_EMITTER* particle = (MODEL_PARTICLE_EMITTER*)convert_object(particlehandle);
+
+	if (!particle)
+	{
+		return 0;
+	}
+
+	INTERPOLATOR* interpolator = &particle->Data().Longitude;
+
+	return convert_handle(interpolator);
+}
+
+void SetParticleLongitude(HANDLE  particlehandle, INTERPOLATOR_HANDLE interpolatorhandle)
+{
+	MODEL_PARTICLE_EMITTER* particle = (MODEL_PARTICLE_EMITTER*)convert_object(particlehandle);
+
+	if (!particle)
+	{
+		return;
+	}
+	INTERPOLATOR* interpolator = (INTERPOLATOR*)convert_object(interpolatorhandle);
+	if (!interpolator)
+	{
+		return;
+	}
+	particle->Data().Longitude = *interpolator;
+}
+
+
+
+INTERPOLATOR_HANDLE GetParticleLatitude(HANDLE  particlehandle)
+{
+	MODEL_PARTICLE_EMITTER* particle = (MODEL_PARTICLE_EMITTER*)convert_object(particlehandle);
+
+	if (!particle)
+	{
+		return 0;
+	}
+
+	INTERPOLATOR* interpolator = &particle->Data().Latitude;
+
+	return convert_handle(interpolator);
+}
+
+void SetParticleLatitude(HANDLE  particlehandle, INTERPOLATOR_HANDLE interpolatorhandle)
+{
+	MODEL_PARTICLE_EMITTER* particle = (MODEL_PARTICLE_EMITTER*)convert_object(particlehandle);
+
+	if (!particle)
+	{
+		return;
+	}
+	INTERPOLATOR* interpolator = (INTERPOLATOR*)convert_object(interpolatorhandle);
+	if (!interpolator)
+	{
+		return;
+	}
+	particle->Data().Latitude = *interpolator;
+}
+
+
+INTERPOLATOR_HANDLE GetParticleVisibility(HANDLE  particlehandle)
+{
+	MODEL_PARTICLE_EMITTER* particle = (MODEL_PARTICLE_EMITTER*)convert_object(particlehandle);
+
+	if (!particle)
+	{
+		return 0;
+	}
+
+	INTERPOLATOR* interpolator = &particle->Data().Visibility;
+
+	return convert_handle(interpolator);
+}
+
+void SetParticleVisibility(HANDLE  particlehandle, INTERPOLATOR_HANDLE interpolatorhandle)
+{
+	MODEL_PARTICLE_EMITTER* particle = (MODEL_PARTICLE_EMITTER*)convert_object(particlehandle);
+
+	if (!particle)
+	{
+		return;
+	}
+	INTERPOLATOR* interpolator = (INTERPOLATOR*)convert_object(interpolatorhandle);
+	if (!interpolator)
+	{
+		return;
+	}
+	particle->Data().Visibility = *interpolator;
+}
+
+
+INTERPOLATOR_HANDLE GetParticleParticleLifeSpan(HANDLE  particlehandle)
+{
+	MODEL_PARTICLE_EMITTER* particle = (MODEL_PARTICLE_EMITTER*)convert_object(particlehandle);
+
+	if (!particle)
+	{
+		return 0;
+	}
+
+	INTERPOLATOR* interpolator = &particle->Data().ParticleLifeSpan;
+
+	return convert_handle(interpolator);
+}
+
+void SetParticleParticleLifeSpan(HANDLE  particlehandle, INTERPOLATOR_HANDLE interpolatorhandle)
+{
+	MODEL_PARTICLE_EMITTER* particle = (MODEL_PARTICLE_EMITTER*)convert_object(particlehandle);
+
+	if (!particle)
+	{
+		return;
+	}
+	INTERPOLATOR* interpolator = (INTERPOLATOR*)convert_object(interpolatorhandle);
+	if (!interpolator)
+	{
+		return;
+	}
+	particle->Data().ParticleLifeSpan = *interpolator;
+}
+
+
+INTERPOLATOR_HANDLE GetParticleParticleInitialVelocity(HANDLE  particlehandle)
+{
+	MODEL_PARTICLE_EMITTER* particle = (MODEL_PARTICLE_EMITTER*)convert_object(particlehandle);
+
+	if (!particle)
+	{
+		return 0;
+	}
+
+	INTERPOLATOR* interpolator = &particle->Data().ParticleInitialVelocity;
+
+	return convert_handle(interpolator);
+}
+
+void SetParticleParticleInitialVelocity(HANDLE  particlehandle, INTERPOLATOR_HANDLE interpolatorhandle)
+{
+	MODEL_PARTICLE_EMITTER* particle = (MODEL_PARTICLE_EMITTER*)convert_object(particlehandle);
+
+	if (!particle)
+	{
+		return;
+	}
+	INTERPOLATOR* interpolator = (INTERPOLATOR*)convert_object(interpolatorhandle);
+	if (!interpolator)
+	{
+		return;
+	}
+	particle->Data().ParticleInitialVelocity = *interpolator;
+}
+
+
+
+const char* GetParticleParticleFileName(HANDLE  particlehandle)
+{
+	MODEL_PARTICLE_EMITTER* particle = (MODEL_PARTICLE_EMITTER*)convert_object(particlehandle);
+
+	if (!particle)
+	{
+		return 0;
+	}
+	return particle->Data().ParticleFileName.c_str();
+}
+
+void SetParticleParticleFileName(HANDLE  particlehandle, const char* name)
+{
+	MODEL_PARTICLE_EMITTER* particle = (MODEL_PARTICLE_EMITTER*)convert_object(particlehandle);
+
+	if (!particle)
+	{
+		return;
+	}
+	particle->Data().ParticleFileName = name;
+}
+
+
+
+bool GetParticleEmitterUsesMdl(HANDLE  particlehandle)
+{
+	MODEL_PARTICLE_EMITTER* particle = (MODEL_PARTICLE_EMITTER*)convert_object(particlehandle);
+
+	if (!particle)
+	{
+		return 0;
+	}
+	return particle->Data().EmitterUsesMdl;
+}
+
+void SetParticleEmitterUsesMdl(HANDLE  particlehandle, bool value)
+{
+	MODEL_PARTICLE_EMITTER* particle = (MODEL_PARTICLE_EMITTER*)convert_object(particlehandle);
+
+	if (!particle)
+	{
+		return;
+	}
+	particle->Data().EmitterUsesMdl = value;
+}
+
+
+
+bool GetParticleEmitterUsesTga(HANDLE  particlehandle)
+{
+	MODEL_PARTICLE_EMITTER* particle = (MODEL_PARTICLE_EMITTER*)convert_object(particlehandle);
+
+	if (!particle)
+	{
+		return 0;
+	}
+	return particle->Data().EmitterUsesMdl;
+}
+
+void SetParticleEmitterUsesTga(HANDLE  particlehandle, bool value)
+{
+	MODEL_PARTICLE_EMITTER* particle = (MODEL_PARTICLE_EMITTER*)convert_object(particlehandle);
+
+	if (!particle)
+	{
+		return;
+	}
+	particle->Data().EmitterUsesMdl = value;
+}
+
+
+
+
+HANDLE CreateParticle2()
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = new MODEL_PARTICLE_EMITTER_2;
+
+	return convert_handle(particle2);
+}
+
+HANDLE CopyParticle2(HANDLE particle2handle)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+		return 0;
+
+	MODEL_PARTICLE_EMITTER_2* copy = new MODEL_PARTICLE_EMITTER_2(*particle2);
+
+	return convert_handle(particle2);
+}
+
+void CloseParticle2(HANDLE particle2handle, bool del)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	close_handle(particle2handle);
+	if (particle2 && del)
+	{
+		delete particle2;
+	}
+}
+
+HANDLE GetParticle2ByModel(HANDLE modelhandle, int index)
+{
+	MODEL* model = (MODEL*)convert_object(modelhandle);
+	if (!model)
+	{
+		return 0;
+	}
+
+	auto& container = model->Data().ParticleEmitter2Container;
+	if (index >= 0 && index < container.GetSize() && container.GetSize() > 0)
+	{
+		return convert_handle(container[index]);
+	}
+	return 0;
+}
+
+
+int GetModelParticle2Size(HANDLE modelhandle)
+{
+	MODEL* model = (MODEL*)convert_object(modelhandle);
+	if (!model)
+	{
+		return 0;
+	}
+
+	return model->Data().ParticleEmitter2Container.GetSize();
+}
+
+bool AddModelParticle2(HANDLE modelhandle, HANDLE particle2handle)
+{
+	MODEL* model = (MODEL*)convert_object(modelhandle);
+	if (!model)
+	{
+		return 0;
+	}
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return 0;
+	}
+
+	return model->AddParticleEmitter2(particle2);
+}
+
+bool RemoveModelParticle2(HANDLE modelhandle, HANDLE  particle2handle)
+{
+	MODEL* model = (MODEL*)convert_object(modelhandle);
+	if (!model)
+	{
+		return false;
+	}
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+	if (!particle2)
+	{
+		return false;
+	}
+
+	close_handle(particle2handle);
+	model->RemoveParticleEmitter2(particle2);
+	return true;
+
+}
+
+
+const char* GetParticle2Name(HANDLE  particle2handle)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return 0;
+	}
+	return particle2->Data().Name.c_str();
+}
+
+void SetParticle2Name(HANDLE  particle2handle, const char* name)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return;
+	}
+	particle2->Data().Name = name;
+}
+
+int GetParticle2ObjectId(HANDLE  particle2handle)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return 0;
+	}
+	return particle2->Data().ObjectId;
+}
+
+void SetParticle2ObjectId(HANDLE  particle2handle, int value)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return;
+	}
+	particle2->Data().ObjectId = value;
+}
+
+int GetParticle2ParentId(HANDLE  particle2handle)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return 0;
+	}
+	return particle2->Data().ParentId;
+}
+
+void SetParticle2ParentId(HANDLE  particle2handle, int value)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return;
+	}
+	particle2->Data().ParentId = value;
+}
+
+
+INTERPOLATOR_HANDLE GetParticle2Translation(HANDLE  particle2handle)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return 0;
+	}
+	INTERPOLATOR* interpolator = &particle2->Data().Translation;
+
+	return convert_handle(interpolator);
+}
+
+void SetParticle2Translation(HANDLE camhandle, INTERPOLATOR_HANDLE particle2handle)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return;
+	}
+	INTERPOLATOR* interpolator = (INTERPOLATOR*)convert_object(particle2handle);
+	if (!interpolator)
+	{
+		return;
+	}
+	particle2->Data().Translation = *interpolator;
+}
+
+
+INTERPOLATOR_HANDLE GetParticle2Rotation(HANDLE  particle2handle)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return 0;
+	}
+	INTERPOLATOR* interpolator = &particle2->Data().Rotation;
+
+	return convert_handle(interpolator);
+}
+
+void SetParticle2Rotation(HANDLE camhandle, INTERPOLATOR_HANDLE particle2handle)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return;
+	}
+	INTERPOLATOR* interpolator = (INTERPOLATOR*)convert_object(particle2handle);
+	if (!interpolator)
+	{
+		return;
+	}
+	particle2->Data().Rotation = *interpolator;
+}
+
+
+INTERPOLATOR_HANDLE GetParticle2Scaling(HANDLE  particle2handle)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return 0;
+	}
+	INTERPOLATOR* interpolator = &particle2->Data().Scaling;
+
+	return convert_handle(interpolator);
+}
+
+void SetParticle2Scaling(HANDLE camhandle, INTERPOLATOR_HANDLE particle2handle)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return;
+	}
+	INTERPOLATOR* interpolator = (INTERPOLATOR*)convert_object(particle2handle);
+	if (!interpolator)
+	{
+		return;
+	}
+	particle2->Data().Scaling = *interpolator;
+}
+
+
+bool GetParticle2DontInheritTranslation(HANDLE  particle2handle)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return 0;
+	}
+	return particle2->Data().DontInheritTranslation;
+}
+
+void SetParticle2DontInheritTranslation(HANDLE  particle2handle, bool value)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return;
+	}
+	particle2->Data().DontInheritTranslation = value;
+}
+
+
+bool GetParticle2DontInheritRotation(HANDLE  particle2handle)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return 0;
+	}
+	return particle2->Data().DontInheritRotation;
+}
+
+void SetParticle2DontInheritRotation(HANDLE  particle2handle, bool value)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return;
+	}
+	particle2->Data().DontInheritRotation = value;
+}
+
+bool GetParticle2DontInheritScaling(HANDLE  particle2handle)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return 0;
+	}
+	return particle2->Data().DontInheritScaling;
+}
+
+void SetParticle2DontInheritScaling(HANDLE  particle2handle, bool value)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return;
+	}
+	particle2->Data().DontInheritScaling = value;
+}
+
+bool GetParticle2Billboarded(HANDLE  particle2handle)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return 0;
+	}
+	return particle2->Data().Billboarded;
+}
+
+void SetParticle2Billboarded(HANDLE  particle2handle, bool value)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return;
+	}
+	particle2->Data().Billboarded = value;
+}
+
+bool GetParticle2BillboardedLockX(HANDLE  particle2handle)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return 0;
+	}
+	return particle2->Data().BillboardedLockX;
+}
+
+void SetParticle2BillboardedLockX(HANDLE  particle2handle, bool value)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return;
+	}
+	particle2->Data().BillboardedLockX = value;
+}
+
+bool GetParticle2BillboardedLockY(HANDLE  particle2handle)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return 0;
+	}
+	return particle2->Data().BillboardedLockY;
+}
+
+void SetParticle2BillboardedLockY(HANDLE  particle2handle, bool value)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return;
+	}
+	particle2->Data().BillboardedLockY = value;
+}
+
+bool GetParticle2BillboardedLockZ(HANDLE  particle2handle)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return 0;
+	}
+	return particle2->Data().BillboardedLockZ;
+}
+
+void SetParticle2BillboardedLockZ(HANDLE  particle2handle, bool value)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return;
+	}
+	particle2->Data().BillboardedLockZ = value;
+}
+
+bool GetParticle2CameraAnchored(HANDLE  particle2handle)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return 0;
+	}
+	return particle2->Data().CameraAnchored;
+}
+
+void SetParticle2CameraAnchored(HANDLE  particle2handle, bool value)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return;
+	}
+	particle2->Data().CameraAnchored = value;
+}
+
+
+VECTOR3* GetParticle2PivotPoint(HANDLE  particle2handle)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return 0;
+	}
+	return (VECTOR3*)&particle2->Data().PivotPoint;
+}
+
+void SetParticle2PivotPoint(HANDLE  particle2handle, VECTOR3* value)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return;
+	}
+	particle2->Data().PivotPoint = *(D3DXVECTOR3*)value;
+}
+
+int GetParticle2Type(HANDLE  particle2handle)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return 0;
+	}
+	return (int)particle2->Data().Type;
+}
+
+void SetParticle2Type(HANDLE  particle2handle, int value)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return;
+	}
+	particle2->Data().Type = (NODE_TYPE)value;
+}
+
+
+
+int GetParticle2FilterMode(HANDLE  particle2handle)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return 0;
+	}
+	return (int)particle2->Data().FilterMode;
+}
+
+void SetParticle2FilterMode(HANDLE  particle2handle, int filter_mode)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return ;
+	}
+	particle2->Data().FilterMode = (FILTER_MODE)filter_mode;
+}
+
+
+INTERPOLATOR_HANDLE GetParticle2Speed(HANDLE  particle2handle)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return 0;
+	}
+
+	INTERPOLATOR* interpolator = &particle2->Data().Speed;
+
+	return convert_handle(interpolator);
+}
+
+void SetParticle2Speed(HANDLE  particle2handle, INTERPOLATOR_HANDLE interpolatorhandle)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return;
+	}
+	INTERPOLATOR* interpolator = (INTERPOLATOR*)convert_object(interpolatorhandle);
+	if (!interpolator)
+	{
+		return;
+	}
+	particle2->Data().Speed = *interpolator;
+}
+
+
+INTERPOLATOR_HANDLE GetParticle2Variation(HANDLE  particle2handle)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return 0;
+	}
+
+	INTERPOLATOR* interpolator = &particle2->Data().Variation;
+
+	return convert_handle(interpolator);
+}
+
+void SetParticle2Variation(HANDLE  particle2handle, INTERPOLATOR_HANDLE interpolatorhandle)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return;
+	}
+	INTERPOLATOR* interpolator = (INTERPOLATOR*)convert_object(interpolatorhandle);
+	if (!interpolator)
+	{
+		return;
+	}
+	particle2->Data().Variation = *interpolator;
+}
+
+
+
+INTERPOLATOR_HANDLE GetParticle2Latitude(HANDLE  particle2handle)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return 0;
+	}
+
+	INTERPOLATOR* interpolator = &particle2->Data().Latitude;
+
+	return convert_handle(interpolator);
+}
+
+void SetParticle2Latitude(HANDLE  particle2handle, INTERPOLATOR_HANDLE interpolatorhandle)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return;
+	}
+	INTERPOLATOR* interpolator = (INTERPOLATOR*)convert_object(interpolatorhandle);
+	if (!interpolator)
+	{
+		return;
+	}
+	particle2->Data().Latitude = *interpolator;
+}
+
+
+INTERPOLATOR_HANDLE GetParticle2Gravity(HANDLE  particle2handle)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return 0;
+	}
+
+	INTERPOLATOR* interpolator = &particle2->Data().Gravity;
+
+	return convert_handle(interpolator);
+}
+
+void SetParticle2Gravity(HANDLE  particle2handle, INTERPOLATOR_HANDLE interpolatorhandle)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return;
+	}
+	INTERPOLATOR* interpolator = (INTERPOLATOR*)convert_object(interpolatorhandle);
+	if (!interpolator)
+	{
+		return;
+	}
+	particle2->Data().Gravity = *interpolator;
+}
+
+
+INTERPOLATOR_HANDLE GetParticle2Visibility(HANDLE  particle2handle)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return 0;
+	}
+
+	INTERPOLATOR* interpolator = &particle2->Data().Visibility;
+
+	return convert_handle(interpolator);
+}
+
+void SetParticle2Visibility(HANDLE  particle2handle, INTERPOLATOR_HANDLE interpolatorhandle)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return;
+	}
+	INTERPOLATOR* interpolator = (INTERPOLATOR*)convert_object(interpolatorhandle);
+	if (!interpolator)
+	{
+		return;
+	}
+	particle2->Data().Visibility = *interpolator;
+}
+
+
+INTERPOLATOR_HANDLE GetParticle2EmissionRate(HANDLE  particle2handle)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return 0;
+	}
+
+	INTERPOLATOR* interpolator = &particle2->Data().EmissionRate;
+
+	return convert_handle(interpolator);
+}
+
+void SetParticle2EmissionRate(HANDLE  particle2handle, INTERPOLATOR_HANDLE interpolatorhandle)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return;
+	}
+	INTERPOLATOR* interpolator = (INTERPOLATOR*)convert_object(interpolatorhandle);
+	if (!interpolator)
+	{
+		return;
+	}
+	particle2->Data().EmissionRate = *interpolator;
+}
+
+
+INTERPOLATOR_HANDLE GetParticle2Width(HANDLE  particle2handle)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return 0;
+	}
+
+	INTERPOLATOR* interpolator = &particle2->Data().Width;
+
+	return convert_handle(interpolator);
+}
+
+void SetParticle2Width(HANDLE  particle2handle, INTERPOLATOR_HANDLE interpolatorhandle)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return;
+	}
+	INTERPOLATOR* interpolator = (INTERPOLATOR*)convert_object(interpolatorhandle);
+	if (!interpolator)
+	{
+		return;
+	}
+	particle2->Data().Width = *interpolator;
+}
+
+
+INTERPOLATOR_HANDLE GetParticle2Length(HANDLE  particle2handle)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return 0;
+	}
+
+	INTERPOLATOR* interpolator = &particle2->Data().Length;
+
+	return convert_handle(interpolator);
+}
+
+void SetParticle2Length(HANDLE  particle2handle, INTERPOLATOR_HANDLE interpolatorhandle)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return;
+	}
+	INTERPOLATOR* interpolator = (INTERPOLATOR*)convert_object(interpolatorhandle);
+	if (!interpolator)
+	{
+		return;
+	}
+	particle2->Data().Length = *interpolator;
+}
+
+
+VECTOR3* GetParticle2SegmentColor1(HANDLE  particle2handle)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return 0;
+	}
+	return (VECTOR3*)&particle2->Data().SegmentColor1;
+}
+
+void SetParticle2SegmentColor1(HANDLE  particle2handle, VECTOR3* value)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return;
+	}
+	particle2->Data().SegmentColor1 = *(D3DXVECTOR3*)value;
+}
+
+
+VECTOR3* GetParticle2SegmentColor2(HANDLE  particle2handle)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return 0;
+	}
+	return (VECTOR3*)&particle2->Data().SegmentColor2;
+}
+
+void SetParticle2SegmentColor2(HANDLE  particle2handle, VECTOR3* value)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return;
+	}
+	particle2->Data().SegmentColor2 = *(D3DXVECTOR3*)value;
+}
+
+VECTOR3* GetParticle2SegmentColor3(HANDLE  particle2handle)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return 0;
+	}
+	return (VECTOR3*)&particle2->Data().SegmentColor3;
+}
+
+void SetParticle2SegmentColor3(HANDLE  particle2handle, VECTOR3* value)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return;
+	}
+	particle2->Data().SegmentColor3 = *(D3DXVECTOR3*)value;
+}
+
+VECTOR3* GetParticle2Alpha(HANDLE  particle2handle)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return 0;
+	}
+	return (VECTOR3*)&particle2->Data().Alpha;
+}
+
+void SetParticle2Alpha(HANDLE  particle2handle, VECTOR3* value)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return;
+	}
+	particle2->Data().Alpha = *(D3DXVECTOR3*)value;
+}
+
+VECTOR3* GetParticle2ParticleScaling(HANDLE  particle2handle)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return 0;
+	}
+	return (VECTOR3*)&particle2->Data().ParticleScaling;
+}
+
+void SetParticle2ParticleScaling(HANDLE  particle2handle, VECTOR3* value)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return;
+	}
+	particle2->Data().ParticleScaling = *(D3DXVECTOR3*)value;
+}
+
+VECTOR3* GetParticle2HeadLifeSpan(HANDLE  particle2handle)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return 0;
+	}
+	return (VECTOR3*)&particle2->Data().HeadLifeSpan;
+}
+
+void SetParticle2HeadLifeSpan(HANDLE  particle2handle, VECTOR3* value)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return;
+	}
+	particle2->Data().HeadLifeSpan = *(D3DXVECTOR3*)value;
+};
+
+VECTOR3* GetParticle2HeadDecay(HANDLE  particle2handle)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return 0;
+	}
+	return (VECTOR3*)&particle2->Data().HeadDecay;
+}
+
+void SetParticle2HeadDecay(HANDLE  particle2handle, VECTOR3* value)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return;
+	}
+	particle2->Data().HeadDecay = *(D3DXVECTOR3*)value;
+}
+
+VECTOR3* GetParticle2TailLifeSpan(HANDLE  particle2handle)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return 0;
+	}
+	return (VECTOR3*)&particle2->Data().TailLifeSpan;
+}
+
+void SetParticle2TailLifeSpan(HANDLE  particle2handle, VECTOR3* value)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return;
+	}
+	particle2->Data().TailLifeSpan = *(D3DXVECTOR3*)value;
+}
+
+VECTOR3* GetParticle2TailDecay(HANDLE  particle2handle)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return 0;
+	}
+	return (VECTOR3*)&particle2->Data().TailDecay;
+}
+
+void SetParticle2TailDecay(HANDLE  particle2handle, VECTOR3* value)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return;
+	}
+	particle2->Data().TailDecay = *(D3DXVECTOR3*)value;
+}
+
+
+int GetParticle2Rows(HANDLE  particle2handle)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return 0;
+	}
+	return particle2->Data().Rows;
+}
+
+void SetParticle2Rows(HANDLE  particle2handle, int value)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return;
+	}
+	particle2->Data().Rows = value;
+}
+
+int GetParticle2Columns(HANDLE  particle2handle)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return 0;
+	}
+	return particle2->Data().Columns;
+}
+
+void SetParticle2Columns(HANDLE  particle2handle, int value)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return;
+	}
+	particle2->Data().Columns = value;
+}
+
+int GetParticle2TextureId(HANDLE  particle2handle)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return 0;
+	}
+	return particle2->Data().TextureId;
+}
+
+void SetParticle2TextureId(HANDLE  particle2handle, int value)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return;
+	}
+	particle2->Data().TextureId = value;
+}
+
+int GetParticle2PriorityPlane(HANDLE  particle2handle)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return 0;
+	}
+	return particle2->Data().PriorityPlane;
+}
+
+void SetParticle2PriorityPlane(HANDLE  particle2handle, int value)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return;
+	}
+	particle2->Data().PriorityPlane = value;
+};
+
+int GetParticle2ReplaceableId(HANDLE  particle2handle)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return 0;
+	}
+	return particle2->Data().ReplaceableId;
+}
+
+void SetParticle2ReplaceableId(HANDLE  particle2handle, int value)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return;
+	}
+	particle2->Data().ReplaceableId = value;
+}
+
+
+
+float GetParticle2Time(HANDLE  particle2handle)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return 0;
+	}
+	return particle2->Data().Time;
+}
+
+void SetParticle2Time(HANDLE  particle2handle, float value)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return;
+	}
+	particle2->Data().Time = value;
+}
+
+float GetParticle2LifeSpan(HANDLE  particle2handle)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return 0;
+	}
+	return particle2->Data().LifeSpan;
+}
+
+void SetParticle2LifeSpan(HANDLE  particle2handle, float value)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return;
+	}
+	particle2->Data().LifeSpan = value;
+}
+
+float GetParticle2TailLength(HANDLE  particle2handle)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return 0;
+	}
+	return particle2->Data().TailLength;
+}
+
+void SetParticle2TailLength(HANDLE  particle2handle, float value)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return;
+	}
+	particle2->Data().TailLength = value;
+}
+
+
+
+bool GetParticle2SortPrimitivesFarZ(HANDLE  particle2handle)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return 0;
+	}
+	return particle2->Data().SortPrimitivesFarZ;
+}
+
+void SetParticle2SortPrimitivesFarZ(HANDLE  particle2handle, bool value)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return;
+	}
+	particle2->Data().SortPrimitivesFarZ = value;
+}
+
+
+bool GetParticle2LineEmitter(HANDLE  particle2handle)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return 0;
+	}
+	return particle2->Data().LineEmitter;
+}
+
+void SetParticle2LineEmitter(HANDLE  particle2handle, bool value)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return;
+	}
+	particle2->Data().LineEmitter = value;
+}
+
+
+bool GetParticle2ModelSpace(HANDLE  particle2handle)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return 0;
+	}
+	return particle2->Data().ModelSpace;
+}
+
+void SetParticle2ModelSpace(HANDLE  particle2handle, bool value)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return;
+	}
+	particle2->Data().ModelSpace = value;
+}
+
+
+bool GetParticle2AlphaKey(HANDLE  particle2handle)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return 0;
+	}
+	return particle2->Data().AlphaKey;
+}
+
+void SetParticle2AlphaKey(HANDLE  particle2handle, bool value)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return;
+	}
+	particle2->Data().AlphaKey = value;
+}
+
+
+bool GetParticle2Unshaded(HANDLE  particle2handle)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return 0;
+	}
+	return particle2->Data().Unshaded;
+}
+
+void SetParticle2Unshaded(HANDLE  particle2handle, bool value)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return;
+	}
+	particle2->Data().Unshaded = value;
+}
+
+
+bool GetParticle2Unfogged(HANDLE  particle2handle)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return 0;
+	}
+	return particle2->Data().Unfogged;
+}
+
+void SetParticle2Unfogged(HANDLE  particle2handle, bool value)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return;
+	}
+	particle2->Data().Unfogged = value;
+}
+
+
+bool GetParticle2XYQuad(HANDLE  particle2handle)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return 0;
+	}
+	return particle2->Data().XYQuad;
+}
+
+void SetParticle2XYQuad(HANDLE  particle2handle, bool value)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return;
+	}
+	particle2->Data().XYQuad = value;
+}
+
+
+bool GetParticle2Squirt(HANDLE  particle2handle)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return 0;
+	}
+	return particle2->Data().Squirt;
+}
+
+void SetParticle2Squirt(HANDLE  particle2handle, bool value)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return;
+	}
+	particle2->Data().Squirt = value;
+}
+
+bool GetParticle2Head(HANDLE  particle2handle)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return 0;
+	}
+	return particle2->Data().Head;
+}
+
+void SetParticle2Head(HANDLE  particle2handle, bool value)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return;
+	}
+	particle2->Data().Head = value;
+}
+
+bool GetParticle2Tail(HANDLE  particle2handle)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return 0;
+	}
+	return particle2->Data().Tail;
+}
+
+void SetParticle2Tail(HANDLE  particle2handle, bool value)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return;
+	}
+	particle2->Data().Tail = value;
+}
+
+
+float GetParticle2CurrentEmission(HANDLE  particle2handle)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return 0;
+	}
+	return particle2->Data().CurrentEmission;
+}
+
+void SetParticle2CurrentEmission(HANDLE  particle2handle, float value)
+{
+	MODEL_PARTICLE_EMITTER_2* particle2 = (MODEL_PARTICLE_EMITTER_2*)convert_object(particle2handle);
+
+	if (!particle2)
+	{
+		return;
+	}
+	particle2->Data().CurrentEmission = value;
+}

@@ -1135,7 +1135,7 @@ BOOL MODEL_LOADER_MDX::SaveParticleEmitters(MODEL& Model, DATA_OUT_STREAM& DataS
 	INT i;
 	INT TotalSize = 0;
 
-	if(Model.Data().ParticleEmitter2Container.GetSize() <= 0) return TRUE;
+	if(Model.Data().ParticleEmitterContainer.GetSize() <= 0) return TRUE;
 
 	for(i = 0; i < Model.Data().ParticleEmitterContainer.GetTotalSize(); i++)
 	{

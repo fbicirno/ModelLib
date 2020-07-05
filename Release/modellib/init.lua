@@ -3,7 +3,8 @@ require 'modellib.contariner'
 
 local components = {
     'interpolator','model', 'texture', 'material', 'layer', 'camera', 'sequence',
-    'attachment', 'bone', 'collisionshape'
+    'attachment', 'bone', 'collisionshape','eventobject', 'helper', 'light', 
+    'particle', 'particle2'
 }
 
 --加载指定模块 并注册元方法

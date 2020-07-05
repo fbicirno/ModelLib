@@ -55,7 +55,10 @@ extern "C" {
 	HANDLE OpenModel(const char* path);
 	bool SaveModel(HANDLE handle, const char* path);
 	void CloseModel(HANDLE handle, bool del);
-	HANDLE CopyModel(HANDLE handle);
+	HANDLE CopyModel(HANDLE handle)
+
+	void ModelCalculateBoundsRadius(HANDLE handle);
+
 
 	//Ä£ÐÍÈÝÆ÷
 	int GetModelTextureSize(HANDLE modelhandle);
@@ -362,4 +365,357 @@ extern "C" {
 	bool AddCollisionshapVertex(HANDLE collisionshapehandle, VECTOR3* vec3);
 	bool RemoveCollisionshapVertex(HANDLE collisionshapehandle, int index);
 
+
+
+
+
+
+	HANDLE CreateEventobject();
+	HANDLE CopyEventobject(HANDLE eventobjecthandle);
+	void CloseEventobject(HANDLE eventobjecthandle, bool del);
+	HANDLE GetEventobjectByModel(HANDLE modelhandle, int index);
+	int GetModelEventobjectSize(HANDLE modelhandle);
+	bool AddModelEventobject(HANDLE modelhandle, HANDLE eventobjecthandle);
+	bool RemoveModelEventobject(HANDLE modelhandle, HANDLE  eventobjecthandle);
+
+
+	const char* GetEventobjectName(HANDLE  eventobjecthandle);
+	void SetEventobjectName(HANDLE  eventobjecthandle, const char* name);
+	int GetEventobjectObjectId(HANDLE  eventobjecthandle);
+	void SetEventobjectObjectId(HANDLE  eventobjecthandle, int value);
+	int GetEventobjectParentId(HANDLE  eventobjecthandle);
+	void SetEventobjectParentId(HANDLE  eventobjecthandle, int value);
+	INTERPOLATOR_HANDLE GetEventobjectTranslation(HANDLE  eventobjecthandle);
+	void SetEventobjectTranslation(HANDLE camhandle, INTERPOLATOR_HANDLE eventobjecthandle);
+	INTERPOLATOR_HANDLE GetEventobjectRotation(HANDLE  eventobjecthandle);
+	void SetEventobjectRotation(HANDLE camhandle, INTERPOLATOR_HANDLE eventobjecthandle);
+	INTERPOLATOR_HANDLE GetEventobjectScaling(HANDLE  eventobjecthandle);
+	void SetEventobjectScaling(HANDLE camhandle, INTERPOLATOR_HANDLE eventobjecthandle);
+	bool GetEventobjectDontInheritTranslation(HANDLE  eventobjecthandle);
+	void SetEventobjectDontInheritTranslation(HANDLE  eventobjecthandle, bool value);
+	bool GetEventobjectDontInheritRotation(HANDLE  eventobjecthandle);
+	void SetEventobjectDontInheritRotation(HANDLE  eventobjecthandle, bool value);
+	bool GetEventobjectDontInheritScaling(HANDLE  eventobjecthandle);
+	void SetEventobjectDontInheritScaling(HANDLE  eventobjecthandle, bool value);
+	bool GetEventobjectBillboarded(HANDLE  eventobjecthandle);
+	void SetEventobjectBillboarded(HANDLE  eventobjecthandle, bool value);
+	bool GetEventobjectBillboardedLockX(HANDLE  eventobjecthandle);
+	void SetEventobjectBillboardedLockX(HANDLE  eventobjecthandle, bool value);
+	bool GetEventobjectBillboardedLockY(HANDLE  eventobjecthandle);
+	void SetEventobjectBillboardedLockY(HANDLE  eventobjecthandle, bool value);
+	bool GetEventobjectBillboardedLockZ(HANDLE  eventobjecthandle);
+	void SetEventobjectBillboardedLockZ(HANDLE  eventobjecthandle, bool value);
+	bool GetEventobjectCameraAnchored(HANDLE  eventobjecthandle);
+	void SetEventobjectCameraAnchored(HANDLE  eventobjecthandle, bool value);
+	VECTOR3* GetEventobjectPivotPoint(HANDLE  eventobjecthandle);
+	void SetEventobjectPivotPoint(HANDLE  eventobjecthandle, VECTOR3* value);
+	int GetEventobjectType(HANDLE  eventobjecthandle);
+	void SetEventobjectType(HANDLE  eventobjecthandle, int value);
+
+
+
+
+
+	int GetEventTrackByEventobject(HANDLE eventobjecthandle, int index);
+	int GetEventobjectEventTrackSize(HANDLE eventobjecthandle);
+	bool AddEventobjectEventTrack(HANDLE eventobjecthandle, int value);
+	bool RemoveEventobjectEventTrack(HANDLE eventobjecthandle, int index);
+
+
+
+
+
+	HANDLE CreateHelper();
+	HANDLE CopyHelper(HANDLE helperhandle);
+	void CloseHelper(HANDLE helperhandle, bool del);
+	HANDLE GetHelperByModel(HANDLE modelhandle, int index);
+	int GetModelHelperSize(HANDLE modelhandle);
+	bool AddModelHelper(HANDLE modelhandle, HANDLE helperhandle);
+	bool RemoveModelHelper(HANDLE modelhandle, HANDLE  helperhandle);
+
+
+	const char* GetHelperName(HANDLE  helperhandle);
+	void SetHelperName(HANDLE  helperhandle, const char* name);
+	int GetHelperObjectId(HANDLE  helperhandle);
+	void SetHelperObjectId(HANDLE  helperhandle, int value);
+	int GetHelperParentId(HANDLE  helperhandle);
+	void SetHelperParentId(HANDLE  helperhandle, int value);
+	INTERPOLATOR_HANDLE GetHelperTranslation(HANDLE  helperhandle);
+	void SetHelperTranslation(HANDLE camhandle, INTERPOLATOR_HANDLE helperhandle);
+	INTERPOLATOR_HANDLE GetHelperRotation(HANDLE  helperhandle);
+	void SetHelperRotation(HANDLE camhandle, INTERPOLATOR_HANDLE helperhandle);
+	INTERPOLATOR_HANDLE GetHelperScaling(HANDLE  helperhandle);
+	void SetHelperScaling(HANDLE camhandle, INTERPOLATOR_HANDLE helperhandle);
+	bool GetHelperDontInheritTranslation(HANDLE  helperhandle);
+	void SetHelperDontInheritTranslation(HANDLE  helperhandle, bool value);
+	bool GetHelperDontInheritRotation(HANDLE  helperhandle);
+	void SetHelperDontInheritRotation(HANDLE  helperhandle, bool value);
+	bool GetHelperDontInheritScaling(HANDLE  helperhandle);
+	void SetHelperDontInheritScaling(HANDLE  helperhandle, bool value);
+	bool GetHelperBillboarded(HANDLE  helperhandle);
+	void SetHelperBillboarded(HANDLE  helperhandle, bool value);
+	bool GetHelperBillboardedLockX(HANDLE  helperhandle);
+	void SetHelperBillboardedLockX(HANDLE  helperhandle, bool value);
+	bool GetHelperBillboardedLockY(HANDLE  helperhandle);
+	void SetHelperBillboardedLockY(HANDLE  helperhandle, bool value);
+	bool GetHelperBillboardedLockZ(HANDLE  helperhandle);
+	void SetHelperBillboardedLockZ(HANDLE  helperhandle, bool value);
+	bool GetHelperCameraAnchored(HANDLE  helperhandle);
+	void SetHelperCameraAnchored(HANDLE  helperhandle, bool value);
+	VECTOR3* GetHelperPivotPoint(HANDLE  helperhandle);
+	void SetHelperPivotPoint(HANDLE  helperhandle, VECTOR3* value);
+	int GetHelperType(HANDLE  helperhandle);
+	void SetHelperType(HANDLE  helperhandle, int value);
+
+
+
+
+
+	HANDLE CreateLight();
+	HANDLE CopyLight(HANDLE lighthandle);
+	void CloseLight(HANDLE lighthandle, bool del);
+	HANDLE GetLightByModel(HANDLE modelhandle, int index);
+	int GetModelLightSize(HANDLE modelhandle);
+	bool AddModelLight(HANDLE modelhandle, HANDLE lighthandle);
+	bool RemoveModelLight(HANDLE modelhandle, HANDLE  lighthandle);
+
+
+	const char* GetLightName(HANDLE  lighthandle);
+	void SetLightName(HANDLE  lighthandle, const char* name);
+	int GetLightObjectId(HANDLE  lighthandle);
+	void SetLightObjectId(HANDLE  lighthandle, int value);
+	int GetLightParentId(HANDLE  lighthandle);
+	void SetLightParentId(HANDLE  lighthandle, int value);
+	INTERPOLATOR_HANDLE GetLightTranslation(HANDLE  lighthandle);
+	void SetLightTranslation(HANDLE camhandle, INTERPOLATOR_HANDLE lighthandle);
+	INTERPOLATOR_HANDLE GetLightRotation(HANDLE  lighthandle);
+	void SetLightRotation(HANDLE camhandle, INTERPOLATOR_HANDLE lighthandle);
+	INTERPOLATOR_HANDLE GetLightScaling(HANDLE  lighthandle);
+	void SetLightScaling(HANDLE camhandle, INTERPOLATOR_HANDLE lighthandle);
+	bool GetLightDontInheritTranslation(HANDLE  lighthandle);
+	void SetLightDontInheritTranslation(HANDLE  lighthandle, bool value);
+	bool GetLightDontInheritRotation(HANDLE  lighthandle);
+	void SetLightDontInheritRotation(HANDLE  lighthandle, bool value);
+	bool GetLightDontInheritScaling(HANDLE  lighthandle);
+	void SetLightDontInheritScaling(HANDLE  lighthandle, bool value);
+	bool GetLightBillboarded(HANDLE  lighthandle);
+	void SetLightBillboarded(HANDLE  lighthandle, bool value);
+	bool GetLightBillboardedLockX(HANDLE  lighthandle);
+	void SetLightBillboardedLockX(HANDLE  lighthandle, bool value);
+	bool GetLightBillboardedLockY(HANDLE  lighthandle);
+	void SetLightBillboardedLockY(HANDLE  lighthandle, bool value);
+	bool GetLightBillboardedLockZ(HANDLE  lighthandle);
+	void SetLightBillboardedLockZ(HANDLE  lighthandle, bool value);
+	bool GetLightCameraAnchored(HANDLE  lighthandle);
+	void SetLightCameraAnchored(HANDLE  lighthandle, bool value);
+	VECTOR3* GetLightPivotPoint(HANDLE  lighthandle);
+	void SetLightPivotPoint(HANDLE  lighthandle, VECTOR3* value);
+	int GetLightType(HANDLE  lighthandle);
+	void SetLightType(HANDLE  lighthandle, int value);
+
+
+	INTERPOLATOR_HANDLE GetLightAttenuationStart(HANDLE  lighthandle);
+	void SetLightAttenuationStart(HANDLE  lighthandle, INTERPOLATOR_HANDLE interpolatorhandle);
+	INTERPOLATOR_HANDLE GetLightAttenuationEnd(HANDLE  lighthandle);
+	void SetLightAttenuationEnd(HANDLE  lighthandle, INTERPOLATOR_HANDLE interpolatorhandle);
+	INTERPOLATOR_HANDLE GetLightColor(HANDLE  lighthandle);
+	void SetLightColor(HANDLE  lighthandle, INTERPOLATOR_HANDLE interpolatorhandle);
+	INTERPOLATOR_HANDLE GetLightIntensity(HANDLE  lighthandle);
+	void SetLightIntensity(HANDLE  lighthandle, INTERPOLATOR_HANDLE interpolatorhandle);
+	INTERPOLATOR_HANDLE GetLightAmbientColor(HANDLE  lighthandle);
+	void SetLightAmbientColor(HANDLE  lighthandle, INTERPOLATOR_HANDLE interpolatorhandle);
+	INTERPOLATOR_HANDLE GetLightAmbientIntensity(HANDLE  lighthandle);
+	void SetLightAmbientIntensity(HANDLE  lighthandle, INTERPOLATOR_HANDLE interpolatorhandle);
+	INTERPOLATOR_HANDLE GetLightVisibility(HANDLE  lighthandle);
+	void SetLightVisibility(HANDLE  lighthandle, INTERPOLATOR_HANDLE interpolatorhandle);
+
+
+
+
+
+	HANDLE CreateParticle();
+	HANDLE CopyParticle(HANDLE particlehandle);
+	void CloseParticle(HANDLE particlehandle, bool del);
+	HANDLE GetParticleByModel(HANDLE modelhandle, int index);
+	int GetModelParticleSize(HANDLE modelhandle);
+	bool AddModelParticle(HANDLE modelhandle, HANDLE particlehandle);
+	bool RemoveModelParticle(HANDLE modelhandle, HANDLE  particlehandle);
+
+
+	const char* GetParticleName(HANDLE  particlehandle);
+	void SetParticleName(HANDLE  particlehandle, const char* name);
+	int GetParticleObjectId(HANDLE  particlehandle);
+	void SetParticleObjectId(HANDLE  particlehandle, int value);
+	int GetParticleParentId(HANDLE  particlehandle);
+	void SetParticleParentId(HANDLE  particlehandle, int value);
+	INTERPOLATOR_HANDLE GetParticleTranslation(HANDLE  particlehandle);
+	void SetParticleTranslation(HANDLE camhandle, INTERPOLATOR_HANDLE particlehandle);
+	INTERPOLATOR_HANDLE GetParticleRotation(HANDLE  particlehandle);
+	void SetParticleRotation(HANDLE camhandle, INTERPOLATOR_HANDLE particlehandle);
+	INTERPOLATOR_HANDLE GetParticleScaling(HANDLE  particlehandle);
+	void SetParticleScaling(HANDLE camhandle, INTERPOLATOR_HANDLE particlehandle);
+	bool GetParticleDontInheritTranslation(HANDLE  particlehandle);
+	void SetParticleDontInheritTranslation(HANDLE  particlehandle, bool value);
+	bool GetParticleDontInheritRotation(HANDLE  particlehandle);
+	void SetParticleDontInheritRotation(HANDLE  particlehandle, bool value);
+	bool GetParticleDontInheritScaling(HANDLE  particlehandle);
+	void SetParticleDontInheritScaling(HANDLE  particlehandle, bool value);
+	bool GetParticleBillboarded(HANDLE  particlehandle);
+	void SetParticleBillboarded(HANDLE  particlehandle, bool value);
+	bool GetParticleBillboardedLockX(HANDLE  particlehandle);
+	void SetParticleBillboardedLockX(HANDLE  particlehandle, bool value);
+	bool GetParticleBillboardedLockY(HANDLE  particlehandle);
+	void SetParticleBillboardedLockY(HANDLE  particlehandle, bool value);
+	bool GetParticleBillboardedLockZ(HANDLE  particlehandle);
+	void SetParticleBillboardedLockZ(HANDLE  particlehandle, bool value);
+	bool GetParticleCameraAnchored(HANDLE  particlehandle);
+	void SetParticleCameraAnchored(HANDLE  particlehandle, bool value);
+	VECTOR3* GetParticlePivotPoint(HANDLE  particlehandle);
+	void SetParticlePivotPoint(HANDLE  particlehandle, VECTOR3* value);
+	int GetParticleType(HANDLE  particlehandle);
+	void SetParticleType(HANDLE  particlehandle, int value);
+
+	INTERPOLATOR_HANDLE GetParticleEmissionRate(HANDLE  particlehandle);
+	void SetParticleEmissionRate(HANDLE  particlehandle, INTERPOLATOR_HANDLE interpolatorhandle);
+	INTERPOLATOR_HANDLE GetParticleGravity(HANDLE  particlehandle);
+	void SetParticleGravity(HANDLE  particlehandle, INTERPOLATOR_HANDLE interpolatorhandle);
+	INTERPOLATOR_HANDLE GetParticleLongitude(HANDLE  particlehandle);
+	void SetParticleLongitude(HANDLE  particlehandle, INTERPOLATOR_HANDLE interpolatorhandle);
+	INTERPOLATOR_HANDLE GetParticleLatitude(HANDLE  particlehandle);
+	void SetParticleLatitude(HANDLE  particlehandle, INTERPOLATOR_HANDLE interpolatorhandle);
+	INTERPOLATOR_HANDLE GetParticleVisibility(HANDLE  particlehandle);
+	void SetParticleVisibility(HANDLE  particlehandle, INTERPOLATOR_HANDLE interpolatorhandle);
+	INTERPOLATOR_HANDLE GetParticleParticleLifeSpan(HANDLE  particlehandle);
+	void SetParticleParticleLifeSpan(HANDLE  particlehandle, INTERPOLATOR_HANDLE interpolatorhandle);
+	INTERPOLATOR_HANDLE GetParticleParticleInitialVelocity(HANDLE  particlehandle);
+	void SetParticleParticleInitialVelocity(HANDLE  particlehandle, INTERPOLATOR_HANDLE interpolatorhandle);
+	const char* GetParticleParticleFileName(HANDLE  particlehandle);
+	void SetParticleParticleFileName(HANDLE  particlehandle, const char* name);
+	bool GetParticleEmitterUsesMdl(HANDLE  particlehandle);
+	void SetParticleEmitterUsesMdl(HANDLE  particlehandle, bool value);
+	bool GetParticleEmitterUsesTga(HANDLE  particlehandle);
+	void SetParticleEmitterUsesTga(HANDLE  particlehandle, bool value);
+
+
+
+
+
+	HANDLE CreateParticle2();
+	HANDLE CopyParticle2(HANDLE particle2handle);
+	void CloseParticle2(HANDLE particle2handle, bool del);
+	HANDLE GetParticle2ByModel(HANDLE modelhandle, int index);
+	int GetModelParticle2Size(HANDLE modelhandle);
+	bool AddModelParticle2(HANDLE modelhandle, HANDLE particle2handle);
+	bool RemoveModelParticle2(HANDLE modelhandle, HANDLE  particle2handle);
+
+
+	const char* GetParticle2Name(HANDLE  particle2handle);
+	void SetParticle2Name(HANDLE  particle2handle, const char* name);
+	int GetParticle2ObjectId(HANDLE  particle2handle);
+	void SetParticle2ObjectId(HANDLE  particle2handle, int value);
+	int GetParticle2ParentId(HANDLE  particle2handle);
+	void SetParticle2ParentId(HANDLE  particle2handle, int value);
+	INTERPOLATOR_HANDLE GetParticle2Translation(HANDLE  particle2handle);
+	void SetParticle2Translation(HANDLE camhandle, INTERPOLATOR_HANDLE particle2handle);
+	INTERPOLATOR_HANDLE GetParticle2Rotation(HANDLE  particle2handle);
+	void SetParticle2Rotation(HANDLE camhandle, INTERPOLATOR_HANDLE particle2handle);
+	INTERPOLATOR_HANDLE GetParticle2Scaling(HANDLE  particle2handle);
+	void SetParticle2Scaling(HANDLE camhandle, INTERPOLATOR_HANDLE particle2handle);
+	bool GetParticle2DontInheritTranslation(HANDLE  particle2handle);
+	void SetParticle2DontInheritTranslation(HANDLE  particle2handle, bool value);
+	bool GetParticle2DontInheritRotation(HANDLE  particle2handle);
+	void SetParticle2DontInheritRotation(HANDLE  particle2handle, bool value);
+	bool GetParticle2DontInheritScaling(HANDLE  particle2handle);
+	void SetParticle2DontInheritScaling(HANDLE  particle2handle, bool value);
+	bool GetParticle2Billboarded(HANDLE  particle2handle);
+	void SetParticle2Billboarded(HANDLE  particle2handle, bool value);
+	bool GetParticle2BillboardedLockX(HANDLE  particle2handle);
+	void SetParticle2BillboardedLockX(HANDLE  particle2handle, bool value);
+	bool GetParticle2BillboardedLockY(HANDLE  particle2handle);
+	void SetParticle2BillboardedLockY(HANDLE  particle2handle, bool value);
+	bool GetParticle2BillboardedLockZ(HANDLE  particle2handle);
+	void SetParticle2BillboardedLockZ(HANDLE  particle2handle, bool value);
+	bool GetParticle2CameraAnchored(HANDLE  particle2handle);
+	void SetParticle2CameraAnchored(HANDLE  particle2handle, bool value);
+	VECTOR3* GetParticle2PivotPoint(HANDLE  particle2handle);
+	void SetParticle2PivotPoint(HANDLE  particle2handle, VECTOR3* value);
+	int GetParticle2Type(HANDLE  particle2handle);
+	void SetParticle2Type(HANDLE  particle2handle, int value);
+
+
+
+	int GetParticle2FilterMode(HANDLE  particle2handle);
+	void SetParticle2FilterMode(HANDLE  particle2handle, int filter_mode);
+	INTERPOLATOR_HANDLE GetParticle2Speed(HANDLE  particle2handle);
+	void SetParticle2Speed(HANDLE  particle2handle, INTERPOLATOR_HANDLE interpolatorhandle);
+	INTERPOLATOR_HANDLE GetParticle2Variation(HANDLE  particle2handle);
+	void SetParticle2Variation(HANDLE  particle2handle, INTERPOLATOR_HANDLE interpolatorhandle);
+	INTERPOLATOR_HANDLE GetParticle2Latitude(HANDLE  particle2handle);
+	void SetParticle2Latitude(HANDLE  particle2handle, INTERPOLATOR_HANDLE interpolatorhandle);
+	INTERPOLATOR_HANDLE GetParticle2Gravity(HANDLE  particle2handle);
+	void SetParticle2Gravity(HANDLE  particle2handle, INTERPOLATOR_HANDLE interpolatorhandle);
+	INTERPOLATOR_HANDLE GetParticle2Visibility(HANDLE  particle2handle);
+	void SetParticle2Visibility(HANDLE  particle2handle, INTERPOLATOR_HANDLE interpolatorhandle);
+	INTERPOLATOR_HANDLE GetParticle2EmissionRate(HANDLE  particle2handle);
+	void SetParticle2EmissionRate(HANDLE  particle2handle, INTERPOLATOR_HANDLE interpolatorhandle);
+	INTERPOLATOR_HANDLE GetParticle2Width(HANDLE  particle2handle);
+	void SetParticle2Width(HANDLE  particle2handle, INTERPOLATOR_HANDLE interpolatorhandle);
+	INTERPOLATOR_HANDLE GetParticle2Length(HANDLE  particle2handle);
+	void SetParticle2Length(HANDLE  particle2handle, INTERPOLATOR_HANDLE interpolatorhandle);
+	VECTOR3* GetParticle2SegmentColor1(HANDLE  particle2handle);
+	void SetParticle2SegmentColor1(HANDLE  particle2handle, VECTOR3* value);
+	VECTOR3* GetParticle2SegmentColor2(HANDLE  particle2handle);
+	void SetParticle2SegmentColor2(HANDLE  particle2handle, VECTOR3* value);
+	VECTOR3* GetParticle2SegmentColor3(HANDLE  particle2handle);
+	void SetParticle2SegmentColor3(HANDLE  particle2handle, VECTOR3* value);
+	VECTOR3* GetParticle2Alpha(HANDLE  particle2handle);
+	void SetParticle2Alpha(HANDLE  particle2handle, VECTOR3* value);
+	VECTOR3* GetParticle2ParticleScaling(HANDLE  particle2handle);
+	void SetParticle2ParticleScaling(HANDLE  particle2handle, VECTOR3* value);
+	VECTOR3* GetParticle2HeadLifeSpan(HANDLE  particle2handle);
+	void SetParticle2HeadLifeSpan(HANDLE  particle2handle, VECTOR3* value);
+	VECTOR3* GetParticle2HeadDecay(HANDLE  particle2handle);
+	void SetParticle2HeadDecay(HANDLE  particle2handle, VECTOR3* value);
+	VECTOR3* GetParticle2TailLifeSpan(HANDLE  particle2handle);
+	void SetParticle2TailLifeSpan(HANDLE  particle2handle, VECTOR3* value);
+	VECTOR3* GetParticle2TailDecay(HANDLE  particle2handle);
+	void SetParticle2TailDecay(HANDLE  particle2handle, VECTOR3* value);
+	int GetParticle2Rows(HANDLE  particle2handle);
+	void SetParticle2Rows(HANDLE  particle2handle, int value);
+	int GetParticle2Columns(HANDLE  particle2handle);
+	void SetParticle2Columns(HANDLE  particle2handle, int value);
+	int GetParticle2TextureId(HANDLE  particle2handle);
+	void SetParticle2TextureId(HANDLE  particle2handle, int value);
+	int GetParticle2PriorityPlane(HANDLE  particle2handle);
+	void SetParticle2PriorityPlane(HANDLE  particle2handle, int value);
+	int GetParticle2ReplaceableId(HANDLE  particle2handle);
+	void SetParticle2ReplaceableId(HANDLE  particle2handle, int value);
+	float GetParticle2Time(HANDLE  particle2handle);
+	void SetParticle2Time(HANDLE  particle2handle, float value);
+	float GetParticle2LifeSpan(HANDLE  particle2handle);
+	void SetParticle2LifeSpan(HANDLE  particle2handle, float value);
+	float GetParticle2TailLength(HANDLE  particle2handle);
+	void SetParticle2TailLength(HANDLE  particle2handle, float value);
+	bool GetParticle2SortPrimitivesFarZ(HANDLE  particle2handle);
+	void SetParticle2SortPrimitivesFarZ(HANDLE  particle2handle, bool value);
+	bool GetParticle2LineEmitter(HANDLE  particle2handle);
+	void SetParticle2LineEmitter(HANDLE  particle2handle, bool value);
+	bool GetParticle2ModelSpace(HANDLE  particle2handle);
+	void SetParticle2ModelSpace(HANDLE  particle2handle, bool value);
+	bool GetParticle2AlphaKey(HANDLE  particle2handle);
+	void SetParticle2AlphaKey(HANDLE  particle2handle, bool value);
+	bool GetParticle2Unshaded(HANDLE  particle2handle);
+	void SetParticle2Unshaded(HANDLE  particle2handle, bool value);
+	bool GetParticle2Unfogged(HANDLE  particle2handle);
+	void SetParticle2Unfogged(HANDLE  particle2handle, bool value);
+	bool GetParticle2XYQuad(HANDLE  particle2handle);
+	void SetParticle2XYQuad(HANDLE  particle2handle, bool value);
+	bool GetParticle2Squirt(HANDLE  particle2handle);
+	void SetParticle2Squirt(HANDLE  particle2handle, bool value);
+	bool GetParticle2Head(HANDLE  particle2handle);
+	void SetParticle2Head(HANDLE  particle2handle, bool value);
+	bool GetParticle2Tail(HANDLE  particle2handle);
+	void SetParticle2Tail(HANDLE  particle2handle, bool value);
+	float GetParticle2CurrentEmission(HANDLE  particle2handle);
+	void SetParticle2CurrentEmission(HANDLE  particle2handle, float value);
 }

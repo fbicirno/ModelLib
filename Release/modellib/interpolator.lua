@@ -39,14 +39,32 @@ local modellib = require 'modellib.modellib'
 
 local interpolator = modellib.register_class('interpolator', cdef)
 
+interpolator._name = ""
 
-function interpolator.open(owner, handle)
+local new = interpolator.new 
+
+--@name: string 例如 对象为 .color 的属性时 名字应该为 Color 
+function interpolator.new(name)
+    if name == nil then 
+        print("构造新的插值器必须填名字, 名字必须是所属对象 属性名的 大驼峰格式", debug.traceback())
+        return 
+    end
+
+    local object = new()
+    object._name = name 
+    return object
+end 
+
+function interpolator.open(owner, handle, name)
+ 
     local object = interpolator.all_interpolator_map[tonumber(handle)]
     if object then 
         return object
     end 
 
     object = setmetatable({handle = handle, owner = model}, interpolator)
+
+    object._name = name
 
     interpolator.all_interpolator_map[tonumber(handle)] = object
     return object
@@ -129,21 +147,6 @@ function interpolator:get_scalar(time)
     return lib.GetInterpolatorStaticScalar(self.handle, modellib.object2c['SEQUENCE_TIME*'](time))
 end
 
---设置缩放倍率
---@vaule: number
---@time: nil | SEQUENCE_TIME对象 | table{ time:integer, intervalStart:integer, intervalEnd:ingeger}
---@return number 缩放
-function interpolator:set_scalar(value, time)
-    lib.SetInterpolatorStaticScalar(self.handle, value, modellib.object2c['SEQUENCE_TIME*'](time))
-end
-
---设置缩放倍率
---@vaule: number
---@time: nil | SEQUENCE_TIME对象 | table{ time:integer, intervalStart:integer, intervalEnd:ingeger}
---@return number 缩放
-function interpolator:set_scalar_int(value, time)
-    lib.SetInterpolatorStaticScalarInt(self.handle, value, modellib.object2c['SEQUENCE_TIME*'](time))
-end
 
 --获取数据
 --@time: nil | SEQUENCE_TIME对象 | table{ time:integer, intervalStart:integer, intervalEnd:ingeger}
@@ -175,29 +178,50 @@ function interpolator:get_vec4(time)
 end
 
 
+--设置缩放倍率
+--@vaule: number
+--@name: string  不用填 封装层自动填入该参数
+--@return number 缩放
+function interpolator:set_scalar(value, name)
+    self._name = name or self._name
+    lib.SetInterpolatorStaticScalar(self.handle, value, self._name)
+end
+
+--设置缩放倍率
+--@vaule: number
+--@name: string 不用填 封装层自动填入该参数
+--@return number 缩放
+function interpolator:set_scalar_int(value, name)
+    self._name = name or self._name
+    lib.SetInterpolatorStaticScalarInt(self.handle, value, self._name)
+end
+
 
 --设置静态数据
 --@vec2: VECTOR2 | array[2] | {x, y}
 --@name: string
 --@return bool 是否设置成功 只有静态插值器 才可以设置数值
-function interpolator:set_vec3(vec2, name)
-    return lib.SetInterpolatorStaticVector2(self.handle, modellib.object2c['VECTOR2*'](vec2), name)
+function interpolator:set_vec2(vec2, name)
+    self._name = name or self._name
+    return lib.SetInterpolatorStaticVector2(self.handle, modellib.object2c['VECTOR2*'](vec2), self._name)
 end
 
 --设置静态数据
 --@vec3: VECTOR3 | array[3] | {x, y, z}
---@name: string
+--@name: string 不用填 封装层自动填入该参数
 --@return bool 是否设置成功 只有静态插值器 才可以设置数值
 function interpolator:set_vec3(vec3, name)
-    return lib.SetInterpolatorStaticVector3(self.handle, modellib.object2c['VECTOR3*'](vec3), name)
+    self._name = name or self._name
+    return lib.SetInterpolatorStaticVector3(self.handle, modellib.object2c['VECTOR3*'](vec3), self._name)
 end
 
 --设置静态数据
 --@vec4: VECTOR4 | array[4] | {x, y, z, w}
---@name: string
+--@name: string 不用填 封装层自动填入该参数
 --@return bool 是否设置成功 只有静态插值器 才可以设置数值
 function interpolator:set_vec4(vec4, name)
-    return lib.SetInterpolatorStaticVector4(self.handle, modellib.object2c['VECTOR4*'](vec4), name)
+    self._name = name or self._name
+    return lib.SetInterpolatorStaticVector4(self.handle, modellib.object2c['VECTOR4*'](vec4), self._name)
 end
 
 

@@ -294,7 +294,7 @@ function modellib.register_class(class_name, cdef)
                         if handle == 0 then 
                             return 
                         end 
-                        return modellib[ret_class_name].open(self, handle)
+                        return modellib[ret_class_name].open(self, handle, api:sub(4 + class_name:len(), api:len()))
                     end
                 else 
                     --否则从根据相应规则进行转换
