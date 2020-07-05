@@ -55,7 +55,7 @@ extern "C" {
 	HANDLE OpenModel(const char* path);
 	bool SaveModel(HANDLE handle, const char* path);
 	void CloseModel(HANDLE handle, bool del);
-	HANDLE CopyModel(HANDLE handle)
+	HANDLE CopyModel(HANDLE handle);
 
 	void ModelCalculateBoundsRadius(HANDLE handle);
 

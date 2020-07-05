@@ -43,25 +43,25 @@ LPD3DXFONT FONT::GetFont()
 //+-----------------------------------------------------------------------------
 BOOL FONT::Setup()
 {
-	D3DXFONT_DESC FontDescription;
-	LPDIRECT3DDEVICE9 Direct3DDevice;
-
-	Direct3DDevice = Graphics.GetDevice();
-	if(Direct3DDevice == NULL)
-	{
-		Error.SetMessage("Unable to create font, unable to retrieve the Direct3D device!");
-		return FALSE;
-	}
-
-	FontDescription.Width = 0;
-	FontDescription.Height = 20;
-	FontDescription.Weight = FW_NORMAL;
-	FontDescription.MipLevels = D3DX_DEFAULT;
-	FontDescription.Italic = FALSE;
-	FontDescription.CharSet = DEFAULT_CHARSET;
-	FontDescription.OutputPrecision = OUT_DEFAULT_PRECIS;
-	FontDescription.Quality = DEFAULT_QUALITY;
-	FontDescription.PitchAndFamily = DEFAULT_PITCH;
+	//D3DXFONT_DESC FontDescription;
+	//LPDIRECT3DDEVICE9 Direct3DDevice;
+	//
+	//Direct3DDevice = Graphics.GetDevice();
+	//if(Direct3DDevice == NULL)
+	//{
+	//	Error.SetMessage("Unable to create font, unable to retrieve the Direct3D device!");
+	//	return FALSE;
+	//}
+	//
+	//FontDescription.Width = 0;
+	//FontDescription.Height = 20;
+	//FontDescription.Weight = FW_NORMAL;
+	//FontDescription.MipLevels = D3DX_DEFAULT;
+	//FontDescription.Italic = FALSE;
+	//FontDescription.CharSet = DEFAULT_CHARSET;
+	//FontDescription.OutputPrecision = OUT_DEFAULT_PRECIS;
+	//FontDescription.Quality = DEFAULT_QUALITY;
+	//FontDescription.PitchAndFamily = DEFAULT_PITCH;
 	//strcpy(FontDescription.FaceName, "Fixedsys");
 
 	/*
