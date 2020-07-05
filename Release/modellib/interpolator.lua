@@ -1,4 +1,3 @@
-local ffi = require 'ffi'
 
 local cdef = [[
 	INTERPOLATOR_HANDLE CreateInterpolator();
@@ -28,10 +27,8 @@ local cdef = [[
 	bool SetInterpolatorStaticVector4(INTERPOLATOR_HANDLE interhandle, VECTOR4* value, const char* name);
 ]]
 
-ffi.cdef(cdef)
 
-
-local lib = ffi.load("modellib")
+local module = require 'modellib.module'
 
 
 local modellib = require 'modellib.modellib'
@@ -72,19 +69,19 @@ end
 
 
 function interpolator:clear_node()
-    lib.InterpolatorClear(self.handle)
+    module.InterpolatorClear(self.handle)
 end
 
 function interpolator:get_nodes_size()
-    return lib.GetInterpolatorSize(self.handle)
+    return module.GetInterpolatorSize(self.handle)
 end
 
 function interpolator:get_node(index)
-    return modellib.c2object['INTERPOLATOR_NODE*'](lib.GetInterpolatorNode(self.handle, index))
+    return module.c2object['INTERPOLATOR_NODE*'](module.GetInterpolatorNode(self.handle, index))
 end
 
 function interpolator:is_static()
-    return lib.GetInterpolatorIsStatic(self.handle)
+    return module.GetInterpolatorIsStatic(self.handle)
 end
 
 local type_map = { 
@@ -93,14 +90,14 @@ local type_map = {
 }
 --获取该插值器储存的数据类型 
 function interpolator:get_data_type()
-    local type_index = lib.GetInterpolatorDataType(self.handle)
+    local type_index = module.GetInterpolatorDataType(self.handle)
     return type_map[type_index + 1]
 end
 
 --设置插值器的储存数据类型
 function interpolator:set_data_type(name)
     local index = type_map[name] or type_map['NONE']
-    lib.SetInterpolatorDataType(index - 1)
+    module.SetInterpolatorDataType(index - 1)
 end 
 
 local interpolator_type = {
@@ -110,41 +107,41 @@ local interpolator_type = {
 
 --获取该插值器储存的类型 
 function interpolator:get_type()
-    local type_index = lib.GetInterpolatorType(self.handle)
+    local type_index = module.GetInterpolatorType(self.handle)
     return interpolator_type[type_index + 1]
 end
 
 --设置插值器的类型
 function interpolator:set_type(name)
     local index = interpolator_type[name] or interpolator_type['NONE']
-    lib.SetInterpolatorType(index - 1)
+    module.SetInterpolatorType(index - 1)
 end 
 
 
 --获取全局动画id
 function interpolator:get_global_sequence_id()
-    return lib.GetInterpolatorGlobalSequenceId(self.handle)
+    return module.GetInterpolatorGlobalSequenceId(self.handle)
 end
 
 --设置全局动画id
 function interpolator:set_global_sequence_id(id)
-    lib.SetInterpolatorGlobalSequenceId(self.handle, id)
+    module.SetInterpolatorGlobalSequenceId(self.handle, id)
 end
 
 --将插值器转换为字符串 只有非静态插值器才可以转换
 function interpolator:to_string()
-    return ffi.string(lib.GetInterpolatorString(self.handle))
+    return module.c2object['string'](module.GetInterpolatorString(self.handle))
 end
 --给插值器设置字符串 设置了之后 改变为 非静态插值器
 function interpolator:from_string(string)
-    return lib.SetInterpolatorString(self.handle, tostring(string))
+    return module.SetInterpolatorString(self.handle, tostring(string))
 end
 
 --获取缩放倍率
 --@time: nil | SEQUENCE_TIME对象 | table{ time:integer, intervalStart:integer, intervalEnd:ingeger}
 --@return number 缩放
 function interpolator:get_scalar(time)
-    return lib.GetInterpolatorStaticScalar(self.handle, modellib.object2c['SEQUENCE_TIME*'](time))
+    return module.GetInterpolatorStaticScalar(self.handle, module.object2c['SEQUENCE_TIME*'](time))
 end
 
 
@@ -152,8 +149,8 @@ end
 --@time: nil | SEQUENCE_TIME对象 | table{ time:integer, intervalStart:integer, intervalEnd:ingeger}
 --@return VECTOR2 包含2值
 function interpolator:get_vec2(time)
-    local vec2 = modellib.object2c['VECTOR2*']({})
-    lib.GetInterpolatorVector2(self.handle, modellib.object2c['SEQUENCE_TIME*'](time), vec2)
+    local vec2 = module.object2c['VECTOR2*']({})
+    module.GetInterpolatorVector2(self.handle, module.object2c['SEQUENCE_TIME*'](time), vec2)
     return vec2
 end
 
@@ -162,8 +159,8 @@ end
 --@time: nil | SEQUENCE_TIME对象 | table{ time:integer, intervalStart:integer, intervalEnd:ingeger}
 --@return VECTOR3 包含3值
 function interpolator:get_vec3(time)
-    local vec3 = modellib.object2c['VECTOR3*']({})
-    lib.GetInterpolatorVector3(self.handle, modellib.object2c['SEQUENCE_TIME*'](time), vec3)
+    local vec3 = module.object2c['VECTOR3*']({})
+    module.GetInterpolatorVector3(self.handle, module.object2c['SEQUENCE_TIME*'](time), vec3)
     return vec3
 end
 
@@ -172,8 +169,8 @@ end
 --@time: nil | SEQUENCE_TIME对象 | table{ time:integer, intervalStart:integer, intervalEnd:ingeger}
 --@return VECTOR4 包含3值
 function interpolator:get_vec4(time)
-    local vec4 = modellib.object2c['VECTOR4*']({})
-    lib.GetInterpolatorVector4(self.handle, modellib.object2c['SEQUENCE_TIME*'](time), vec4)
+    local vec4 = module.object2c['VECTOR4*']({})
+    module.GetInterpolatorVector4(self.handle, module.object2c['SEQUENCE_TIME*'](time), vec4)
     return vec4
 end
 
@@ -184,7 +181,7 @@ end
 --@return number 缩放
 function interpolator:set_scalar(value, name)
     self._name = name or self._name
-    lib.SetInterpolatorStaticScalar(self.handle, value, self._name)
+    module.SetInterpolatorStaticScalar(self.handle, value, self._name)
 end
 
 --设置缩放倍率
@@ -193,7 +190,7 @@ end
 --@return number 缩放
 function interpolator:set_scalar_int(value, name)
     self._name = name or self._name
-    lib.SetInterpolatorStaticScalarInt(self.handle, value, self._name)
+    module.SetInterpolatorStaticScalarInt(self.handle, value, self._name)
 end
 
 
@@ -203,7 +200,7 @@ end
 --@return bool 是否设置成功 只有静态插值器 才可以设置数值
 function interpolator:set_vec2(vec2, name)
     self._name = name or self._name
-    return lib.SetInterpolatorStaticVector2(self.handle, modellib.object2c['VECTOR2*'](vec2), self._name)
+    return module.SetInterpolatorStaticVector2(self.handle, module.object2c['VECTOR2*'](vec2), self._name)
 end
 
 --设置静态数据
@@ -212,7 +209,7 @@ end
 --@return bool 是否设置成功 只有静态插值器 才可以设置数值
 function interpolator:set_vec3(vec3, name)
     self._name = name or self._name
-    return lib.SetInterpolatorStaticVector3(self.handle, modellib.object2c['VECTOR3*'](vec3), self._name)
+    return module.SetInterpolatorStaticVector3(self.handle, module.object2c['VECTOR3*'](vec3), self._name)
 end
 
 --设置静态数据
@@ -221,7 +218,7 @@ end
 --@return bool 是否设置成功 只有静态插值器 才可以设置数值
 function interpolator:set_vec4(vec4, name)
     self._name = name or self._name
-    return lib.SetInterpolatorStaticVector4(self.handle, modellib.object2c['VECTOR4*'](vec4), self._name)
+    return module.SetInterpolatorStaticVector4(self.handle, module.object2c['VECTOR4*'](vec4), self._name)
 end
 
 

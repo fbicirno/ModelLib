@@ -1,7 +1,11 @@
-
-#include "stdafx.h"
+//--[[
+#ifdef MODELLIB_EXPORTS 
+	#include "stdafx.h"
+#endif // MODELLIB_EXPORTS
 
 extern "C" {
+//]]
+
 	typedef void* HANDLE;
 	typedef void* INTERPOLATOR_HANDLE;
 
@@ -16,6 +20,39 @@ extern "C" {
 	struct VECTOR4 {
 		float x, y, z, w;
 	};
+
+//--[[
+#ifdef MODELLIB_EXPORTS 
+#else
+//]]
+	struct EXTENT
+	{
+		float radius;
+		VECTOR3 min;
+		VECTOR3 max;
+	};
+
+	struct SEQUENCE_TIME
+	{
+		int time;
+		int interval_start;
+		int interval_end;
+	};
+
+
+	struct INTERPOLATOR_NODE
+	{
+		int time;
+		VECTOR4 vector;
+		VECTOR4 in_tan;
+		VECTOR4 out_tan;
+	};
+
+//--[[
+#endif // MODELLIB_EXPORTS
+//]]
+
+
 
 
 	//config
@@ -718,4 +755,7 @@ extern "C" {
 	void SetParticle2Tail(HANDLE  particle2handle, bool value);
 	float GetParticle2CurrentEmission(HANDLE  particle2handle);
 	void SetParticle2CurrentEmission(HANDLE  particle2handle, float value);
+
+//--[[
 }
+//]]

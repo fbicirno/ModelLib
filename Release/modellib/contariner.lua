@@ -89,11 +89,8 @@ local cdef = [[
 
 ]]
 
-local ffi = require 'ffi'
 
-ffi.cdef(cdef)
-
-local lib = ffi.load("modellib")
+local module = require 'modellib.module'
 
 local modellib = require 'modellib.modellib'
 
@@ -128,7 +125,7 @@ function modellib.contariner(class, child_name)
 
     --查询容器尺寸
     class[get_child_size] = function (self)
-        return lib['Get'.. name .. 'Size'](self.handle)
+        return module['Get'.. name .. 'Size'](self.handle)
     end 
 
     --获取容器指定索引元素
@@ -147,7 +144,7 @@ function modellib.contariner(class, child_name)
         end 
         object.owner = self
 
-        local bool = lib['Add'.. name](self.handle, object.handle)
+        local bool = module['Add'.. name](self.handle, object.handle)
 
         if bool then 
             local index = self[get_child_size](self) - 1
@@ -161,7 +158,7 @@ function modellib.contariner(class, child_name)
         if object.owner ~= self then 
             return 
         end 
-        local bool = lib['Remove'.. name](self.handle, object.handle)
+        local bool = module['Remove'.. name](self.handle, object.handle)
         self:contariner_remove(object)
     end
 

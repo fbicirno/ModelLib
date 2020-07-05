@@ -48,28 +48,27 @@ local cdef = [[
 
 local modellib = require 'modellib.modellib'
 
-local ffi = require 'ffi'
-local lib = ffi.load("modellib")
+local module = require 'modellib.module'
 local modellib = require 'modellib.modellib'
 
 local class = modellib.register_class('eventobject', cdef)
 
 
 function class:get_event_track_size()
-    return lib.GetEventobjectEventTrackSize(self.handle)
+    return module.GetEventobjectEventTrackSize(self.handle)
 end
 
 --@return vec3
 function class:get_event_track(index)
-    return modellib.c2object['VECTOR3*'](lib.GetEventTrackByEventobject(self.handle, index))
+    return module.c2object['VECTOR3*'](module.GetEventTrackByEventobject(self.handle, index))
 end
 
 function class:remove_event_track(index)
-    return lib.RemoveEventobjectEventTrack(self.handle, index)
+    return module.RemoveEventobjectEventTrack(self.handle, index)
 end
 
 function class:add_event_track(vec3)
-    lib.AddEventobjectEventTrack(self.handle,  modellib.object2c['VECTOR3*'](vec3 or {}))
+    module.AddEventobjectEventTrack(self.handle,  module.object2c['VECTOR3*'](vec3 or {}))
 end
 
 function class:each_event_track()

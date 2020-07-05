@@ -53,28 +53,28 @@ local cdef = [[
     
 ]] 
 
-local ffi = require 'ffi'
-local lib = ffi.load("modellib")
+
+local module = require 'modellib.module'
 local modellib = require 'modellib.modellib'
 
 local class = modellib.register_class('collisionshape', cdef)
 
 
 function class:get_vertex_size()
-    return lib.GetCollisionshapeVertexSize(self.handle)
+    return module.GetCollisionshapeVertexSize(self.handle)
 end
 
 --@return vec3
 function class:get_vertex(index)
-    return modellib.c2object['VECTOR3*'](lib.GetVertexByCollisionshape(self.handle, index))
+    return module.c2object['VECTOR3*'](module.GetVertexByCollisionshape(self.handle, index))
 end
 
 function class:remove_vertex(index)
-    return lib.RemoveCollisionshapVertex(self.handle, index)
+    return module.RemoveCollisionshapVertex(self.handle, index)
 end
 
 function class:add_vertex(vec3)
-    lib.AddCollisionshapVertex(self.handle,  modellib.object2c['VECTOR3*'](vec3 or {}))
+    module.AddCollisionshapVertex(self.handle,  module.object2c['VECTOR3*'](vec3 or {}))
 end
 
 function class:each_vertex()

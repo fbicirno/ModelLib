@@ -1,187 +1,6 @@
 local modellib = {}
 
-local ffi = require 'ffi'
-local lib = ffi.load("modellib")
---基本的数据
-ffi.cdef [[
-    typedef void* HANDLE;
-    typedef void* INTERPOLATOR_HANDLE;
-
-    struct VECTOR2 {
-		float x, y;
-    };
-    
-    struct VECTOR3 {
-		float x, y, z;
-    };
-
-    struct VECTOR4 {
-		float x, y, z, w;
-    };
-    
-    struct EXTENT
-    {
-    	float radius;
-    	VECTOR3 min;
-    	VECTOR3 max;
-    };
-
-    struct SEQUENCE_TIME
-    {
-    	int time;
-    	int interval_start;
-    	int interval_end;
-    };
-
-    
-    struct INTERPOLATOR_NODE
-    {
-        int time;
-        VECTOR4 vector;
-        VECTOR4 in_tan;
-        VECTOR4 out_tan;
-    }
-]]
-
---lua参数转换为 c 参数
-modellib.object2c = {
-    ['string'] = function (value)
-        return tostring(value)
-    end,
-
-    ['VECTOR2*'] = function (v)
-        if v == nil then 
-            v = ffi.NULL
-        elseif type(v) == 'table' then 
-            local vec2 = ffi.new('struct VECTOR2')
-            vec2.x = v.x or v[1] or 0
-            vec2.y = v.y or v[2] or 0
-            return vec2
-        end
-        return v
-    end,
-
-
-    ['VECTOR3*'] = function (v)
-        if v == nil then 
-            v = ffi.NULL
-        elseif type(v) == 'table' then 
-            local vec3 = ffi.new('struct VECTOR3')
-            vec3.x = v.x or v[1] or 0
-            vec3.y = v.y or v[2] or 0
-            vec3.z = v.z or v[3] or 0
-            return vec3
-        end
-        return v
-    end,
-
-    ['VECTOR4*'] = function (v)
-        if v == nil then 
-            v = ffi.NULL
-        elseif type(v) == 'table' then 
-            local vec4 = ffi.new('struct VECTOR4')
-            vec4.x = v.x or v[1] or 0
-            vec4.y = v.y or v[2] or 0
-            vec4.z = v.z or v[3] or 0
-            vec4.w = v.w or v[4] or 0
-            return vec4
-        end
-        return v
-    end,
-
-    ['EXTENT*'] = function (v)
-        if v == nil then 
-            v = ffi.NULL
-        else
-            local extent = v 
-            if type(v) == 'table' then 
-                extent = ffi.new('struct EXTENT')
-            end
-            extent.min = modellib.object2c['VECTOR3*'](v.min or {0, 0, 0})
-            extent.max = modellib.object2c['VECTOR3*'](v.max or {0, 0, 0})
-            return extent
-        end
-        return v
-    end,
-
-
-    ['INTERPOLATOR_NODE*'] = function (v)
-        local extent = v 
-        if type(v) == 'table' then 
-            extent = ffi.new('struct INTERPOLATOR_NODE')
-        end
-        extent.vector = modellib.object2c['VECTOR4*'](v.vector or {})
-        extent.in_tan = modellib.object2c['VECTOR4*'](v.in_tan or {})
-        extent.out_tan = modellib.object2c['VECTOR4*'](v.out_tan or {})
-        return v
-    end,
-    
-
-    ['SEQUENCE_TIME*'] = function (v)
-        if v == nil then 
-            return ffi.NULL 
-        elseif type(v) == 'table' then 
-            local time = ffi.new('struct SEQUENCE_TIME')
-            time.time = v.time or v[1] or 0
-            time.interval_start = v.interval_start or v[2] or 0
-            time.interval_end = v.interval_end or v[3] or 0
-            return v
-        end
-
-        return v
-    end,
-
-
-    ['INTERPOLATOR_HANDLE'] = function (v)
-        if type(v) == 'table' then 
-            return v.handle or 0 
-        end 
-        return v
-    end,
-}
---c参数 转换为lua参数
-modellib.c2object = {
-    ['string'] = function (value)
-        return ffi.string(value)
-    end,
-
-    ['VECTOR2*'] = function (v)
-        if v == ffi.NULL then 
-            return nil 
-        end
-        return v
-    end,
-
-    ['VECTOR3*'] = function (v)
-        if v == ffi.NULL then 
-            return nil 
-        end
-        return v
-    end,
-
-    ['EXTENT*'] = function (v)
-        if v == ffi.NULL then 
-            return nil 
-        end
-        return v
-    end,
-
-    ['SEQUENCE_TIME*'] = function (v)
-        if v == ffi.NULL then 
-            return nil 
-        end
-        return v
-    end,
-
-    ['INTERPOLATOR_NODE*'] = function (v)
-        if v == ffi.NULL then 
-            return nil 
-        end
-        return v
-    end,
-
-}
-
+local module = require 'modellib.module'
 
 local function capi_parser(class_name, cdef)
     local func_map = {}
@@ -256,7 +75,6 @@ function modellib.register_class(class_name, cdef)
 
     class[map_name] = {}
 
-    ffi.cdef(cdef)
 
     for api, info in pairs(func_map) do 
         local name = info.name
@@ -266,7 +84,7 @@ function modellib.register_class(class_name, cdef)
         local function convert_param(param, count)
             for i = 1, count do 
                 local v = param[i]
-                local func = modellib.object2c[args[i]]
+                local func = module.object2c[args[i]]
                 if func then 
                     param[i] = func(v)
                 end 
@@ -282,7 +100,7 @@ function modellib.register_class(class_name, cdef)
                     local param = {...}
                     local count = select('#', ...)
                     local p = table.unpack(convert_param(param, count))
-                    lib[api](self.handle, p)
+                    module[api](self.handle, p)
                 end
             elseif info.type == 'get' then
                 --注册所有get属性的方法
@@ -290,7 +108,7 @@ function modellib.register_class(class_name, cdef)
                 if pos then 
                     local ret_class_name = ret:sub(1, pos - 1):lower()
                     class[name] = function (self)
-                        local handle = lib[api](self.handle)
+                        local handle = module[api](self.handle)
                         if handle == 0 then 
                             return 
                         end 
@@ -299,8 +117,8 @@ function modellib.register_class(class_name, cdef)
                 else 
                     --否则从根据相应规则进行转换
                     class[name] = function (self)
-                        local value = lib[api](self.handle)
-                        local func = modellib.c2object[ret]
+                        local value = module[api](self.handle)
+                        local func = module.c2object[ret]
                         if func then 
                             value = func(value)
                         end
@@ -311,7 +129,7 @@ function modellib.register_class(class_name, cdef)
                 --构造函数
                 if name == 'new' then 
                     class[name] = function ()
-                        local handle = lib[api]()
+                        local handle = module[api]()
                         local object = setmetatable({handle = handle}, class)
                         class[map_name][tonumber(handle)] = object
                         return object
@@ -323,7 +141,7 @@ function modellib.register_class(class_name, cdef)
                         if self.handle == nil then 
                             return 
                         end 
-                        local handle = lib[api](self.handle)
+                        local handle = module[api](self.handle)
                         local object = setmetatable({handle = handle}, class)
                         class[map_name][tonumber(handle)] = object
                         return object
@@ -331,7 +149,7 @@ function modellib.register_class(class_name, cdef)
                 elseif name == 'open' then 
                     --从指定对象 上 读取
                     class[name] = function (owner, index)
-                        local handle = lib[api](owner.handle, index)
+                        local handle = module[api](owner.handle, index)
                         if handle == nil then 
                             return 
                         end 
@@ -350,7 +168,7 @@ function modellib.register_class(class_name, cdef)
                         if self.handle == nil then 
                             return 
                         end 
-                        lib[api](self.handle, self.owner == nil)
+                        module[api](self.handle, self.owner == nil)
                         class[map_name][tonumber(self.handle)] = nil
                         self.handle = nil
                     end 

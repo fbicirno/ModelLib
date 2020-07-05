@@ -1,4 +1,3 @@
-local ffi = require 'ffi'
 
 local cdef = [[
 
@@ -15,31 +14,31 @@ local cdef = [[
 
 ]]
 
-ffi.cdef(cdef)
 
-local lib = ffi.load("modellib")
-
-lib.InitMpqResource()
-lib.LoadAllReplaceableTextures()
 
 local modellib = require 'modellib.modellib'
 
+local module = require("modellib.module")
+
 local model = modellib.register_class('model', cdef)
+module.InitMpqResource()
+
+module.LoadAllReplaceableTextures()
 
 function model.open(path)
-	local handle = lib.OpenModel(path)
-    if handle == ffi.NULL then
+	local handle = module.OpenModel(path)
+    if handle == module.object2c['nil']() then
         local file_type = path:sub(path:len() - 3,path:len()):lower()
         if file_type == '.mdl' then
             path = path:sub(1,path:len() - 4) .. '.mdx'
-            handle = lib.OpenModel(path)
+            handle = module.OpenModel(path)
         elseif file_type == '.mdx' then
             path = path:sub(1,path:len() - 4) .. '.mdl'
-            handle = lib.OpenModel(path)
+            handle = module.OpenModel(path)
         end
     end
 
-	if handle == ffi.NULL then
+	if handle == module.object2c['nil']() then
 		return
 	end
 
@@ -47,11 +46,11 @@ function model.open(path)
 end
 
 function model:calculate_bounds_radius()
-    lib.ModelCalculateBoundsRadius(self.handle)
+    module.ModelCalculateBoundsRadius(self.handle)
 end 
 --保存模型
 function model:save(path)
-    lib.SaveModel(self.handle, path)
+    module.SaveModel(self.handle, path)
 end 
 
 --另存为ui模型
