@@ -90,6 +90,10 @@ extern "C" {
 	//model
 	HANDLE CreateModel();
 	HANDLE OpenModel(const char* path);
+	HANDLE OpenModelByMemory(const char* name, const char* moemory, int size);
+	const char* SaveModelToMemory(HANDLE handle, const char* path);
+	void ClearReturnBuffer();
+
 	bool SaveModel(HANDLE handle, const char* path);
 	void CloseModel(HANDLE handle, bool del);
 	HANDLE CopyModel(HANDLE handle);

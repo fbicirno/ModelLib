@@ -7,6 +7,10 @@ local lib = require 'modellib'
 local model = lib.model.open("Units\\Human\\Jaina\\Jaina.mdx")
 
 
-model:save_ui_model("ui.mdx") --内存另存为mdx文件
+local ui_model = model:make_ui_model()
+
+ui_model:save("ui.mdx") --内存另存为mdx文件
+
+ui_model:close()
 
 model:close() --关闭模型 回收内存

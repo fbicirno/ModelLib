@@ -10,6 +10,7 @@
 #include "modellib.h"
 
 std::map<HANDLE, void*> handle_map;
+std::string return_buffer;
 
 HANDLE convert_handle(void* object)
 {
@@ -558,6 +559,45 @@ HANDLE OpenModel(const char* path)
 	return convert_handle(model);
 }
 
+HANDLE OpenModelByMemory(const char* name, const char* moemory, int size)
+{
+	BUFFER Buffer;
+
+	Buffer.Resize(size);
+	memcpy(Buffer.GetData(), moemory, size);
+
+	MODEL* model = new MODEL;
+	if (!ResourceLoader.LoadModel(*model, name, Buffer))
+	{
+		delete model;
+		return nullptr;
+	}
+
+	return convert_handle(model);
+}
+
+const char* SaveModelToMemory(HANDLE handle, const char* path)
+{
+	MODEL* model = (MODEL*)convert_object(handle);
+	if (!model)
+	{
+		return 0;
+	}
+
+	BUFFER Buffer;
+	if (!ResourceLoader.SaveModel(*model, path, Buffer))
+	{
+		return 0;
+	}
+	return_buffer = std::string(Buffer.GetData(), Buffer.GetSize());
+
+	return return_buffer.c_str();
+}
+
+void ClearReturnBuffer()
+{
+	return_buffer.clear();
+}
 bool SaveModel(HANDLE handle, const char* path)
 {
 	MODEL* model = (MODEL*)convert_object(handle);

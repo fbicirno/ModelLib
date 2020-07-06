@@ -35,7 +35,9 @@ OpenModel
 SaveModel
 CloseModel
 CopyModel
-
+OpenModelByMemory
+SaveModelToMemory
+ClearReturnBuffer
 ModelCalculateBoundsRadius
 
 CreateTexture

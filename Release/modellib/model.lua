@@ -11,7 +11,9 @@ local cdef = [[
     HANDLE CopyModel(HANDLE handle);
 
     void ModelCalculateBoundsRadius(HANDLE handle);
-
+    
+    HANDLE OpenModelByMemory(const char* path, const char* moemory, int size);
+    const char* SaveModelToMemory(HANDLE handle, const char* path);
 ]]
 
 
@@ -45,16 +47,36 @@ function model.open(path)
 	return setmetatable({handle = handle, path = path}, model)
 end
 
+--@path: string 'namme.mdx' | 'name.mdl'
+--@memory: string  model data
+function model.open_by_memory(path, memory)
+    local handle = module.OpenModelByMemory(name, memory, memory:len())
+    if handle == module.object2c['nil']() then
+		return
+	end
+	return setmetatable({handle = handle, path = path}, model)
+end
+
 function model:calculate_bounds_radius()
     module.ModelCalculateBoundsRadius(self.handle)
 end 
+
 --保存模型
 function model:save(path)
     module.SaveModel(self.handle, path)
 end 
 
+--@path: string 'name.mdx' | 'name.mdl'
+--@return string  当后缀是mdx 时 返回的是二进制数据  后缀是mdl 时 返回的是文本模型数据
+function model:save_to_memory(path)
+    local moemory = module.c2object['string'](module.SaveModelToMemory(self.handle, path))
+
+    module.ClearReturnBuffer()
+    return moemory
+end 
+
 --另存为ui模型
-function model:save_ui_model(path)
+function model:make_ui_model()
     local object = self:copy() --复制一个模型对象
 
     --遍历所有材质图层 将图层改为无阴影
@@ -86,11 +108,7 @@ function model:save_ui_model(path)
     --重算点范围
     object:calculate_bounds_radius()
 
-    --输出文件
-    object:save(path)
-
-    --关闭
-    object:close()
+    return object
 end
 
 modellib.contariner(model, 'texture') --注册贴图容器
