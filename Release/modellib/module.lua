@@ -1,7 +1,7 @@
 
 local ffi = require 'ffi'
 
-local file = io.open([[F:\ModelLib_git\ModelLib\modellib.h]], "rb")
+local file = io.open([[D:\test_projects\modellib\ModelLib\modellib.h]], "rb")
 if file == nil then 
     error("缺少头文件modellib.h")
 end 
@@ -27,6 +27,10 @@ end
 module.object2c = {
     ['nil'] = function (value)
         return ffi.NULL
+    end,
+
+    ['int*'] = function (value)
+        return ffi.cast('int*', ffi.new('unsigned char[?]', 4))
     end,
 
     ['string'] = function (value)
@@ -130,8 +134,14 @@ module.c2object = {
         return nil
     end,
 
-    ['string'] = function (value)
-        return ffi.string(value)
+    ['int*'] = function (v)
+        local ptr = ffi.cast('unsigned char*', v)
+        local int = ptr[3] * 0x1000000 + ptr[2] * 0x10000 + ptr[1] * 0x100 + ptr[0]
+        return int
+    end,
+
+    ['string'] = function (value, length)
+        return ffi.string(value, length)
     end,
 
     ['VECTOR2*'] = function (v)

@@ -12,8 +12,8 @@ local cdef = [[
 
     void ModelCalculateBoundsRadius(HANDLE handle);
     
-    HANDLE OpenModelByMemory(const char* path, const char* moemory, int size);
-    const char* SaveModelToMemory(HANDLE handle, const char* path);
+    HANDLE OpenModelByMemory(const char* path, const char* memory, int size);
+    const char* SaveModelToMemory(HANDLE handle, const char* path, int* size);
 ]]
 
 
@@ -50,7 +50,7 @@ end
 --@path: string 'namme.mdx' | 'name.mdl'
 --@memory: string  model data
 function model.open_by_memory(path, memory)
-    local handle = module.OpenModelByMemory(name, memory, memory:len())
+    local handle = module.OpenModelByMemory(path, memory, memory:len())
     if handle == module.object2c['nil']() then
 		return
 	end
@@ -69,10 +69,11 @@ end
 --@path: string 'name.mdx' | 'name.mdl'
 --@return string  当后缀是mdx 时 返回的是二进制数据  后缀是mdl 时 返回的是文本模型数据
 function model:save_to_memory(path)
-    local moemory = module.c2object['string'](module.SaveModelToMemory(self.handle, path))
-
+    local int = module.object2c['int*'](0)
+    local buffer = module.SaveModelToMemory(self.handle, path, int)
+    local memory = module.c2object['string'](buffer, module.c2object['int*'](int))
     module.ClearReturnBuffer()
-    return moemory
+    return memory
 end 
 
 --另存为ui模型

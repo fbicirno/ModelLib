@@ -91,7 +91,7 @@ extern "C" {
 	HANDLE CreateModel();
 	HANDLE OpenModel(const char* path);
 	HANDLE OpenModelByMemory(const char* name, const char* moemory, int size);
-	const char* SaveModelToMemory(HANDLE handle, const char* path);
+	const char* SaveModelToMemory(HANDLE handle, const char* path, int* size);
 	void ClearReturnBuffer();
 
 	bool SaveModel(HANDLE handle, const char* path);

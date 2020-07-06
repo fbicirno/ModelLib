@@ -576,7 +576,7 @@ HANDLE OpenModelByMemory(const char* name, const char* moemory, int size)
 	return convert_handle(model);
 }
 
-const char* SaveModelToMemory(HANDLE handle, const char* path)
+const char* SaveModelToMemory(HANDLE handle, const char* path, int* size)
 {
 	MODEL* model = (MODEL*)convert_object(handle);
 	if (!model)
@@ -590,6 +590,8 @@ const char* SaveModelToMemory(HANDLE handle, const char* path)
 		return 0;
 	}
 	return_buffer = std::string(Buffer.GetData(), Buffer.GetSize());
+
+	*size = return_buffer.length();
 
 	return return_buffer.c_str();
 }
@@ -613,7 +615,6 @@ bool SaveModel(HANDLE handle, const char* path)
 	{
 		return false;
 	}
-
 	if (!FileLoader.SaveToFile(path, Buffer))
 	{
 		return false;
