@@ -6,9 +6,8 @@
         {
             "label": "测试",
             "type": "shell",
-            "command": "lua.exe",
+            "command": "run.bat",
             "args": [
-                "main.lua"
             ],
             "group": {
                 "kind": "build",

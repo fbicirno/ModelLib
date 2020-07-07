@@ -581,7 +581,7 @@
     <ClInclude Include="ModelEditor\Texture.h">
       <Filter>ModelEditor\Render</Filter>
     </ClInclude>
-    <ClInclude Include="modellib.h">
+    <ClInclude Include="..\lua-model\bin\modellib.h">
       <Filter>源文件</Filter>
     </ClInclude>
   </ItemGroup>

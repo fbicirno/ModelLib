@@ -1,7 +1,7 @@
 
 local ffi = require 'ffi'
 
-local file = io.open([[D:\test_projects\modellib\ModelLib\modellib.h]], "rb")
+local file = io.open([[bin\modellib.h]], "rb")
 if file == nil then 
     error("缺少头文件modellib.h")
 end 

@@ -1568,7 +1568,7 @@ BOOL MODEL_LOADER_MDX::SaveCameras(MODEL& Model, DATA_OUT_STREAM& DataStream)
 		{
 			if(!SaveCamera(*(Model.Data().CameraContainer[i]), DataStream)) return FALSE;
 		}
-	}
+	} 
 
 	return TRUE;
 }

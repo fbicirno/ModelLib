@@ -94,7 +94,7 @@ function model:make_ui_model()
     end
 
     --所有动画的最小最大范围改为0
-    for sequence in object:each_sequence() do 
+    for sequence in self:each_sequence() do 
         sequence.extent = {
             min = {0, 0, 0},
             max = {0, 0, 0}
