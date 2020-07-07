@@ -88,9 +88,9 @@ function model:make_ui_model()
     --粒子发射器缩小1000倍
     for particle2 in self:each_particle2() do 
         local scaling = particle2.particle_scaling
-        scaling.x = scaling.x / 1000
-        scaling.y = scaling.y / 1000
-        scaling.z = scaling.z / 1000
+        scaling.x = scaling.x / 2000
+        scaling.y = scaling.y / 2000
+        scaling.z = scaling.z / 2000
     end
 
     --所有动画的最小最大范围改为0
