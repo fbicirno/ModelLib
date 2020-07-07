@@ -160,6 +160,7 @@ function modellib.contariner(class, child_name)
         end 
         local bool = module['Remove'.. name](self.handle, object.handle)
         self:contariner_remove(object)
+        object:close()
     end
 
 

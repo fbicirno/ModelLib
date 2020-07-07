@@ -2,12 +2,10 @@
 local lib = require 'modellib'
 
 --打开模型 --支持mdx mdl 路径
-local model = lib.model.open("units\\other\\DranaiAkama\\DranaiAkama.mdx")
-
+local model = lib.model.open("Units\\Creeps\\tuskarLord\\tuskarLord.mdl")
 
 
 local model2 = model:copy() -- 复制构造
-
 
 model2:close() --关闭模型 回收内存
 

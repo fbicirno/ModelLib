@@ -85,6 +85,7 @@ module.object2c = {
             if type(v) == 'table' then 
                 extent = ffi.new('struct EXTENT')
             end
+            extent.radius = v.radius or 0
             extent.min = module.object2c['VECTOR3*'](v.min or {0, 0, 0})
             extent.max = module.object2c['VECTOR3*'](v.max or {0, 0, 0})
             return extent

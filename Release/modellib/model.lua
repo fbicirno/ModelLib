@@ -78,17 +78,15 @@ end
 
 --另存为ui模型
 function model:make_ui_model()
-    local object = self:copy() --复制一个模型对象
-
     --遍历所有材质图层 将图层改为无阴影
-    for material in object:each_material() do 
+    for material in self:each_material() do 
         for layer in material:each_layer() do 
             layer.unshaded = true
         end
     end 
 
     --粒子发射器缩小1000倍
-    for particle2 in object:each_particle2() do 
+    for particle2 in self:each_particle2() do 
         local scaling = particle2.particle_scaling
         scaling.x = scaling.x / 1000
         scaling.y = scaling.y / 1000
@@ -104,12 +102,12 @@ function model:make_ui_model()
     end
 
     --删除所有镜头
-    object:clear_camera()
+    self:clear_camera()
 
     --重算点范围
-    object:calculate_bounds_radius()
+    self:calculate_bounds_radius()
 
-    return object
+    return self
 end
 
 modellib.contariner(model, 'texture') --注册贴图容器
